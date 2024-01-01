@@ -4,11 +4,26 @@ Game::Game() {
 	MENU = new RenderWindow(VideoMode(960, 720), "MAIN MENU");
 	mainMenu = new MainMenu(MENU->getSize().x, MENU->getSize().y);
 
+	mike = new Mike(MENU->getSize().x, MENU->getSize().y);
+	mike->SetPosition(Vector2f(700.0f, 580.0f));
+
+	wheelTx.loadFromFile("Asset/Images/neumatico.png");
+	wheelSp.setTexture(wheelTx);
+	wheelSp.setPosition(0.0f, 600.0f);
+
+	fondoPlayTx.loadFromFile("Asset/Images/Taller.png");
+	fondoPlaySp.setTexture(fondoPlayTx);
+	fondoPlaySp.setPosition(0.0f, 240.0f);
+
 	MENU->setFramerateLimit(60);
 	MENU->setMouseCursorVisible(false);
+
+	music.openFromFile("Asset/Audio/rock.ogg");
 }
 
 void Game::ProcessEvents() {
+	music.setLoop(true);
+	music.play();
 	while (MENU->isOpen()) {
 		Event event;
 		while (MENU->pollEvent(event)) {
@@ -31,6 +46,7 @@ void Game::ProcessEvents() {
 
 					int x = mainMenu->MainMenuPressed();
 					if (x == 0) {
+						music.stop();
 						while (Play.isOpen()) {
 							Event aevent;
 							while (Play.pollEvent(aevent)) {
@@ -46,6 +62,8 @@ void Game::ProcessEvents() {
 							OPTIONS.close();
 							ABOUT.close();
 							Play.clear();
+							Play.draw(fondoPlaySp);
+							Play.draw(wheelSp);
 							Play.display();
 						}
 					}
@@ -93,18 +111,44 @@ void Game::ProcessEvents() {
 					}
 				}
 			}
-			MENU->clear();
+			MENU->clear(Color::Black);
 			mainMenu->Draw(MENU);
+			mike->Draw(MENU);
 			MENU->display();
 		}
 	}
 }
 
 void Game::UpdateGame(float deltaTime) {
-
+	//Actualizamos posicion y movimientos de Mike
+	if (Keyboard::isKeyPressed(Keyboard::D)) {
+		mike->AddAcceleration(Vector2f(30.0, 0.0f));
+	}
+	if (Keyboard::isKeyPressed(Keyboard::A)) {
+		mike->AddAcceleration(Vector2f(-30.0, 0.0f));
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+		mike->AddAcceleration(Vector2f(0.0f, -90.0f));
+	}
+	if (mike->GetPosition().y < 350.0f) {
+		mike->SetVelocity(Vector2f(0.0f, 60.0f));
+	}
+	if (mike->GetPosition().y > 580.0f) {
+		mike->SetVelocity(Vector2f(0.0f, -10.0f));
+	}
+	if (mike->GetPosition().y > 450.0f) {
+		mike->SetPosition(Vector2f(mike->GetPosition().x, 450.0f));
+	}
+	if (mike->GetPosition().x > 725.0f) {
+		mike->SetPosition(Vector2f(725.0f, mike->GetPosition().y));
+	}
+	if (mike->GetPosition().x < 0.0f) {
+		mike->SetPosition(Vector2f(0.0f, mike->GetPosition().y));
+	}
+	mike->UpdateMike(deltaTime);
 }
 
-void Game::Play() {
+void Game::Go() {
 	//Loop
 	Clock clock;
 	clock.restart();
@@ -118,7 +162,9 @@ void Game::Play() {
 }
 
 void Game::DrawGame() {
-	
+	MENU->clear();
+	mike->Draw(MENU);
+	MENU->display();
 }
 
 Game::~Game() {
