@@ -1,2 +1,0 @@
-﻿  Main.cpp
-LINK : fatal error LNK1181: no se puede abrir el archivo de entrada 'sfml-system-d-lib.obj'

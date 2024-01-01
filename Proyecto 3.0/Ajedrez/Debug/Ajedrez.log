@@ -1,0 +1,4 @@
+﻿  Ajedrez.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Ajedrez\Ajedrez.cpp(21,41): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Ajedrez\Ajedrez.cpp(21,32): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  Ajedrez.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Ajedrez\Debug\Ajedrez.exe
