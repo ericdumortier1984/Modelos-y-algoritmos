@@ -1,0 +1,8 @@
+﻿  Crosshair.cpp
+  Enemy.cpp
+  Game.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Proyecto 4.0\Clickale\Game.cpp(43,54): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Proyecto 4.0\Clickale\Game.cpp(43,37): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+  PlayerCrosshair.cpp
+  Generando código...
+  Clickale.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Proyecto 4.0\Clickale\Debug\Clickale.exe
