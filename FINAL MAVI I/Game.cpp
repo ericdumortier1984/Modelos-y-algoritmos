@@ -2,10 +2,14 @@
 
 Game::Game() {
 	MENU = new RenderWindow(VideoMode(960, 720), "MAIN MENU");
+	MENU->setFramerateLimit(60);
+
 	mainMenu = new MainMenu(MENU->getSize().x, MENU->getSize().y);
 
-	mike = new Mike(MENU->getSize().x, MENU->getSize().y);
-	mike->SetPosition(Vector2f(700.0f, 580.0f));
+	mikeTx.loadFromFile("Asset/Images/Mike.png");
+	mikeTx.setSmooth(true);
+	mikeSp.setTexture(mikeTx);
+	mikeSp.setPosition(200.0f, 300.0f);
 
 	wheelTx.loadFromFile("Asset/Images/neumatico.png");
 	wheelSp.setTexture(wheelTx);
@@ -41,6 +45,7 @@ void Game::ProcessEvents() {
 				}
 				if (event.key.code == Keyboard::Enter) {
 					RenderWindow Play(VideoMode(960, 720), "GAME");
+					Play.setFramerateLimit(60);
 					RenderWindow OPTIONS(VideoMode(960, 720), "OPTIONS");
 					RenderWindow ABOUT(VideoMode(960, 720), "ABOUT");
 
@@ -64,6 +69,7 @@ void Game::ProcessEvents() {
 							Play.clear();
 							Play.draw(fondoPlaySp);
 							Play.draw(wheelSp);
+							Play.draw(mikeSp);
 							Play.display();
 						}
 					}
@@ -113,15 +119,14 @@ void Game::ProcessEvents() {
 			}
 			MENU->clear(Color::Black);
 			mainMenu->Draw(MENU);
-			mike->Draw(MENU);
 			MENU->display();
 		}
 	}
 }
 
-void Game::UpdateGame(float deltaTime) {
+//void Game::UpdateGame(float deltaTime) {
 	//Actualizamos posicion y movimientos de Mike
-	if (Keyboard::isKeyPressed(Keyboard::D)) {
+	/*if (Keyboard::isKeyPressed(Keyboard::D)) {
 		mike->AddAcceleration(Vector2f(30.0, 0.0f));
 	}
 	if (Keyboard::isKeyPressed(Keyboard::A)) {
@@ -145,8 +150,8 @@ void Game::UpdateGame(float deltaTime) {
 	if (mike->GetPosition().x < 0.0f) {
 		mike->SetPosition(Vector2f(0.0f, mike->GetPosition().y));
 	}
-	mike->UpdateMike(deltaTime);
-}
+	mike->UpdateMike(deltaTime);*/
+//}
 
 void Game::Go() {
 	//Loop
@@ -156,15 +161,13 @@ void Game::Go() {
 	while (MENU->isOpen()) {
 		float deltaTime = clock.restart().asSeconds();
 		ProcessEvents();
-		UpdateGame(deltaTime);
+		//UpdateGame(deltaTime);
 		DrawGame();
 	}
 }
 
 void Game::DrawGame() {
-	MENU->clear();
-	mike->Draw(MENU);
-	MENU->display();
+
 }
 
 Game::~Game() {

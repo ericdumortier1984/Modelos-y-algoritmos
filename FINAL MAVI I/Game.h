@@ -1,13 +1,14 @@
 #include "stdafx.h"
 #include "Menu.h"
-#include "Mike.h"
+//#include "Mike.h"
 
 class Game {
 private:
 	RenderWindow* MENU; 
 	MainMenu* mainMenu;
 
-	Mike* mike;
+	Sprite mikeSp;
+	Texture mikeTx;
 
 	Sprite fondoMenuSp;
 	Texture fondoMenuTx;
@@ -21,7 +22,7 @@ private:
 	Music music;
 
 	void ProcessEvents();
-	void UpdateGame(float deltaTime);
+	//void UpdateGame(float deltaTime);
 	void DrawGame();
 public:
 	Game();
