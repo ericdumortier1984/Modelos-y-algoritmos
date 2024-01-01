@@ -3,105 +3,85 @@
 
 using namespace sf;
 
-Sprite _cuadrado_amarillo;
-Sprite _circulo_rojo;
-Texture _mat_cuadrado_amarillo;
-Texture _mat_circulo_rojo;
+int main()
+{
+    RenderWindow window(VideoMode(800, 600), "Cuadrado y Círculo");
+    // Limitamos el número de frames por segundos de nuestra aplicación
+    window.setFramerateLimit(30);
+    // Texturas del círculo y del cuadrado
+    Texture squareTexture, circleTexture;
+    squareTexture.loadFromFile("cuad_yellow.png");
+    circleTexture.loadFromFile("rcircleg.png");
+    // Seteamos suvizado de bordes a las texturas
+    squareTexture.setSmooth(true);
+    circleTexture.setSmooth(true);
+    // Escalas elegidas para unificar el tamaño de los sprites, en este caso lo fijamos en 64px.
+    float circleScale = 0.5f;
+    float squareScale = 0.125f;
+    float shapeSize = 64.f;
 
-float _escala_x;
-float _escala_y;
-float height_cuadrado_amarillo;
-float width_cuadrado_amarillo;
-float height_circulo_rojo;
-float width_circulo_rojo;
-
-bool _barra_espaciadora = false;
-bool _es_circulo;
-
-int main() {
-    RenderWindow App(VideoMode(800, 600, 32), "4- Atrapado");
-    App.setMouseCursorVisible(false);
-
-    _mat_cuadrado_amarillo.loadFromFile("cuad_yellow.png");
-    _cuadrado_amarillo.setTexture(_mat_cuadrado_amarillo);
-    _cuadrado_amarillo.setPosition(350, 0);
-
-    _mat_circulo_rojo.loadFromFile("rcircle.png");
-    _circulo_rojo.setTexture(_mat_circulo_rojo);
-
-    height_cuadrado_amarillo = (float)_mat_cuadrado_amarillo.getSize().y;
-    height_circulo_rojo = (float)_mat_circulo_rojo.getSize().y;
-    width_cuadrado_amarillo = (float)_mat_cuadrado_amarillo.getSize().x;
-    width_circulo_rojo = (float)_mat_circulo_rojo.getSize().x;
-    _escala_y = height_circulo_rojo / height_cuadrado_amarillo;
-    _escala_x = width_circulo_rojo / width_cuadrado_amarillo;
-    _cuadrado_amarillo.setScale(_escala_x, _escala_y);
-
-    Event evt;
-    while (App.isOpen()) {
-        while (App.pollEvent(evt)) {
-            switch (evt.type) {
-            case Event::KeyPressed:
-                if (evt.key.code == Keyboard::Escape) {
-                    App.close();
+    // Declaramos un único sprite que alternará las texturas del círculo y del cuadrado según corresponda
+    Sprite shapeOnScreen;
+    shapeOnScreen.setTexture(squareTexture);
+    shapeOnScreen.setScale(squareScale, squareScale);
+    shapeOnScreen.setOrigin(squareTexture.getSize().x / 2, squareTexture.getSize().y / 2);
+    shapeOnScreen.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+    const float speed = 12.f;
+    bool isCircle = false;
+    while (window.isOpen())
+    {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::closed)
+                window.close();
+            if (event.type == Event::KeyPressed)
+            {
+                switch (event.key.code)
+                {
+                case Keyboard::Space:
+                    isCircle = !isCircle;
+                    break;
+                default:
                     break;
                 }
-                if (evt.key.code == Keyboard::Space) {
-                    _barra_espaciadora = true;
-                    break;
-                }
-                if (evt.key.code == Keyboard::Left) {
-                    // Obtener la posición actual del cuadrado//
-                    Vector2f pos = _cuadrado_amarillo.getPosition();
-                    // Calcular la nueva posición//
-                    Vector2f newPos = pos + Vector2f(-10.0f, 0.0f);
-                    // Verificar si la nueva posición está dentro de los límites de la ventana//
-                    if (newPos.x >= 0) {
-                        _cuadrado_amarillo.setPosition(newPos);
-                    }
-                }
-                else if (evt.key.code == Keyboard::Right) {
-                    Vector2f pos = _cuadrado_amarillo.getPosition();
-                    Vector2f newPos = pos + Vector2f(10.0f, 0.0f);
-                    if (newPos.x <= 672) {
-                        _cuadrado_amarillo.setPosition(newPos);
-                    }
-                }
-                else if (evt.key.code == Keyboard::Up) {
-                    Vector2f pos = _cuadrado_amarillo.getPosition();
-                    Vector2f newPos = pos + Vector2f(0.0f, -10.0f);
-                    if (newPos.y >= 0) {
-                        _cuadrado_amarillo.setPosition(newPos);
-                    }
-                }
-                else if (evt.key.code == Keyboard::Down) {
-                    Vector2f pos = _cuadrado_amarillo.getPosition();
-                    Vector2f newPos = pos + Vector2f(0.0f, 10.0f);
-                    if (newPos.y <= 472) {
-                        _cuadrado_amarillo.setPosition(newPos);
-                    }
-                }
-                break;
             }
         }
-        if (_barra_espaciadora) {
-            if (_es_circulo) {
-                _cuadrado_amarillo.setTexture(_mat_circulo_rojo);
-                _barra_espaciadora = false;
-                _cuadrado_amarillo.setScale(_escala_x, _escala_y);
-                _es_circulo = false;
+        // Procesamiento de inputs de teclado
+        if (sf::Keyboard::isKeyPressed(Keyboard::Left))
+        {
+            if (shapeOnScreen.getPosition().x - shapeSize / 2 > 5)
+                shapeOnScreen.move(-speed, 0);
         }
-            else {
-                _circulo_rojo.setScale(_escala_x, _escala_y);
-                _es_circulo = true;
-            }
+        if (sf::Keyboard::isKeyPressed(Keyboard::Right))
+        {
+            if (shapeOnScreen.getPosition().x + shapeSize / 2 < window.getSize().x - 5)
+                shapeOnScreen.move(speed, 0);
         }
-
-        App.clear();
-        App.draw(_cuadrado_amarillo);
-        App.draw(_circulo_rojo);
-        App.display();
+        if (sf::Keyboard::isKeyPressed(Keyboard::Up))
+        {
+            if (shapeOnScreen.getPosition().y - shapeSize / 2 > 5)
+                shapeOnScreen.move(0, -speed);
+        }
+        if (sf::Keyboard::isKeyPressed(Keyboard::Down))
+        {
+            if (shapeOnScreen.getPosition().y + shapeSize / 2 < window.getSize().y - 5)
+                shapeOnScreen.move(0, speed);
+        }
+        // Chequeamos si debe ser un círculo o un cuadrado y cambiamos solo la textura del mismo sprite
+        if (isCircle) {
+            shapeOnScreen.setTexture(circleTexture);
+            shapeOnScreen.setScale(circleScale, circleScale);
+            shapeOnScreen.setOrigin(circleTexture.getSize().x / 2, circleTexture.getSize().y / 2);
+        }
+        else {
+            shapeOnScreen.setTexture(squareTexture);
+            shapeOnScreen.setScale(squareScale, squareScale);
+            shapeOnScreen.setOrigin(squareTexture.getSize().x / 2, squareTexture.getSize().y / 2);
+        }
+        window.clear();
+        window.draw(shapeOnScreen);
+        window.display();
     }
-
     return 0;
 }
