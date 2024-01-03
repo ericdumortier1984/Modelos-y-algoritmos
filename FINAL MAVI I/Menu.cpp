@@ -48,7 +48,7 @@ void MainMenu::MoveUp() {
 		if (MainMenuSelected == -1) {
 			MainMenuSelected == 2;
 		}
-		mainMenu[MainMenuSelected].setFillColor(Color::Yellow);
+		mainMenu[MainMenuSelected].setFillColor(Color::Black);
 	}
 }
 
@@ -59,6 +59,6 @@ void MainMenu::MoveDown() {
 		if (MainMenuSelected == 4) {
 			MainMenuSelected == 0;
 		}
-		mainMenu[MainMenuSelected].setFillColor(Color::Yellow);
+		mainMenu[MainMenuSelected].setFillColor(Color::Black);
 	}
 }
