@@ -35,11 +35,17 @@ Game::Game() {
 	cavermanOneSp.setPosition(500.0f, 560.0f);
 	//Musica y sonidos
 	music.openFromFile("Asset/Audio/rock.ogg");
+
+	position.x = 0.0f;
+	position.y = 0.0f;
+	velocity.x = 0.0f;
+	velocity.y = 0.0f;
 }
 
 void Game::ProcessEvents() {
 	music.setLoop(true);
 	music.play();
+	float deltaTime = 1.0f / 60.0f;
 	while (MENU->isOpen()) {
 		Event event;
 		while (MENU->pollEvent(event)) {
@@ -73,6 +79,17 @@ void Game::ProcessEvents() {
 								if (aevent.type == Event::KeyPressed) {
 									if (aevent.key.code == Keyboard::Escape) {
 										Play.close();
+									}
+								}
+								if (aevent.type == Event::KeyPressed) {
+									if (aevent.key.code == Keyboard::D) {
+										mikeSp.move(5.0f, 0.0f);
+									}
+									if (aevent.key.code == Keyboard::A) {
+										mikeSp.move(-5.0f, 0.0f);
+									}
+									if (aevent.key.code == Keyboard::Space) {
+									
 									}
 								}
 							}
@@ -149,17 +166,7 @@ void Game::Go() {
 	while (MENU->isOpen()) {
 		float deltaTime = clock.restart().asSeconds();
 		ProcessEvents();
-		Update(deltaTime);
-		DrawGame();
 	}
-}
-
-void Game::Update(float deltaTime) {
-
-}
-
-void Game::DrawGame() {
-
 }
 
 Game::~Game() {
