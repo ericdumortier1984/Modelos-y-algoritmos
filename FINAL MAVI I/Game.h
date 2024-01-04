@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Menu.h"
 #include "Backgrounds.h"
+#include "Mike.h"
 
 class Game {
 private:
@@ -9,9 +10,7 @@ private:
 	//Opciones de Menu
 	MainMenu* mainMenu;
 	//Personaje
-	Sprite mikeSp;
-	Texture mikeTx;
-	int lifes;
+	Mike* mike;
 	//Obstaculos
 	Sprite wheelSp;
 	Texture wheelTx;

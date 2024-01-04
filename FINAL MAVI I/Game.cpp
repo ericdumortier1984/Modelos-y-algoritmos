@@ -8,10 +8,7 @@ Game::Game() {
 	//Opciones de menu
 	mainMenu = new MainMenu(MENU->getSize().x, MENU->getSize().y);
 	//Personaje
-	mikeTx.loadFromFile("Asset/Images/cavernicola.png");
-	mikeTx.setSmooth(true);
-	mikeSp.setTexture(mikeTx);
-	mikeSp.setPosition(50.0f, 650.0f);
+	mike = new Mike;
 	//Obstaculos
 	wheelTx.loadFromFile("Asset/Images/rueda.png");
 	wheelSp.setTexture(wheelTx);
@@ -73,19 +70,19 @@ void Game::ProcessEvents() {
 								}
 								if (aevent.type == Event::KeyPressed) {
 									if (aevent.key.code == Keyboard::D) {
-										mikeSp.move(5.0f, 0.0f);
+										mike->mikeSp.move(5.0f, 0.0f);
 									}
 									if (aevent.key.code == Keyboard::A) {
-										mikeSp.move(-5.0f, 0.0f);
+										mike->mikeSp.move(-5.0f, 0.0f);
 									}
 									if (aevent.key.code == Keyboard::Space) {
 									
 									}
-									if (mikeSp.getPosition().x < 0.0f) {
-										mikeSp.setPosition(Vector2f(0.0f, mikeSp.getPosition().y));
+									if (mike->mikeSp.getPosition().x < 0.0f) {
+										mike->mikeSp.setPosition(Vector2f(0.0f, mike->mikeSp.getPosition().y));
 									}
-									if (mikeSp.getPosition().x > 850.0f) {
-										mikeSp.setPosition(Vector2f(850.0f, mikeSp.getPosition().y));
+									if (mike->mikeSp.getPosition().x > 850.0f) {
+										mike->mikeSp.setPosition(Vector2f(850.0f, mike->mikeSp.getPosition().y));
 									}
 								}
 							}
@@ -98,7 +95,7 @@ void Game::ProcessEvents() {
 							Play.draw(camino->caminoSp);
 							Play.draw(fondoPlay->fondoPlaySp);
 							Play.draw(wheelSp);
-							Play.draw(mikeSp);
+							Play.draw(mike->mikeSp);
 							Play.display();
 						}
 					}
