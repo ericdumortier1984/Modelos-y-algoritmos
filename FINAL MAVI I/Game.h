@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Menu.h"
+#include "Backgrounds.h"
 
 class Game {
 private:
@@ -15,18 +16,12 @@ private:
 	Sprite wheelSp;
 	Texture wheelTx;
 	//Fondos
-	Sprite fondoPlaySp;
-	Texture fondoPlayTx;
-	Sprite moonSp;
-	Texture moonTx;
-	Sprite caminoSp;
-	Texture caminoTx;
-	Sprite pastoSp;
-	Texture pastoTx;
-	Sprite paisajeSp;
-	Texture paisajeTx;
-	Sprite cavermanOneSp;
-	Texture cavermanOneTx;
+	Backgrounds* fondoPlay;
+	Backgrounds* moon;
+	Backgrounds* camino;
+	Backgrounds* pasto;
+	Backgrounds* paisaje;
+	Backgrounds* cavermanOne;
 	//Musica y Sonidos
 	Music music;
 
