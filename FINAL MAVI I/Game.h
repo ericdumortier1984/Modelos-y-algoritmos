@@ -2,6 +2,7 @@
 #include "Menu.h"
 #include "Backgrounds.h"
 #include "Mike.h"
+#include "Obstacles.h"
 
 class Game {
 private:
@@ -12,8 +13,7 @@ private:
 	//Personaje
 	Mike* mike;
 	//Obstaculos
-	Sprite wheelSp;
-	Texture wheelTx;
+	Obstacles* wheel;
 	//Fondos
 	Backgrounds* fondoPlay;
 	Backgrounds* moon;

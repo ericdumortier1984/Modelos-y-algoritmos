@@ -10,9 +10,7 @@ Game::Game() {
 	//Personaje
 	mike = new Mike;
 	//Obstaculos
-	wheelTx.loadFromFile("Asset/Images/rueda.png");
-	wheelSp.setTexture(wheelTx);
-	wheelSp.setPosition(20.0f, 650.0f);
+	wheel = new Obstacles;
 	// Inicializar fondos
 	fondoPlay = new Backgrounds;
 	moon = new Backgrounds;
@@ -94,7 +92,7 @@ void Game::ProcessEvents() {
 							Play.draw(cavermanOne->cavermanOneSp);
 							Play.draw(camino->caminoSp);
 							Play.draw(fondoPlay->fondoPlaySp);
-							Play.draw(wheelSp);
+							Play.draw(wheel->wheelSp);
 							Play.draw(mike->mikeSp);
 							Play.display();
 						}
