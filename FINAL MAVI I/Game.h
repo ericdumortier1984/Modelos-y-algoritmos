@@ -14,6 +14,7 @@ private:
 	Mike* mike;
 	//Obstaculos
 	Obstacles* wheel;
+	Obstacles* pinche;
 	//Fondos
 	Backgrounds* fondoPlay;
 	Backgrounds* moon;
@@ -24,18 +25,11 @@ private:
 	//Musica y Sonidos
 	Music music;
 
-	Vector2f position;
-	Vector2f velocity;
-	const float acceleration = 10.0f;
-
 	void ProcessEvents();
+	void Update(float deltaTime);
 public:
 	Game();
 	~Game();
 
-	void SetPosition(Vector2f pos) { position = pos; };
-	void SetVelocity(Vector2f vel) { velocity = vel; }
-	Vector2f GetPosition() { return position; };
-	Vector2f GetVelocity() { return velocity; };
 	void Go();
 };

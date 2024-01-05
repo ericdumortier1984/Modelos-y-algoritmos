@@ -1,5 +1,4 @@
-﻿  Final Mavi I.cpp
-  Game.cpp
+﻿  Game.cpp
 C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\FINAL MAVI I\Game.cpp(9,60): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
@@ -10,7 +9,5 @@ C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORIT
           [
               T=unsigned int
           ]
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\FINAL MAVI I\Game.cpp(156,8): warning C4101: 'deltaTime': variable local sin referencia
-  Obstacles.cpp
-  Generando código...
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\FINAL MAVI I\Game.cpp(150,8): warning C4101: 'deltaTime': variable local sin referencia
   FINAL MAVI I.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\FINAL MAVI I\Debug\FINAL MAVI I.exe
