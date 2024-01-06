@@ -4,9 +4,6 @@ Backgrounds::Backgrounds() {
 	//Fondos
 	fondoPlayTx.loadFromFile("Asset/Images/cueva.png");
 	fondoPlaySp.setTexture(fondoPlayTx);
-	moonTx.loadFromFile("Asset/Images/lunavioleta.png");
-	moonSp.setTexture(moonTx);
-	moonSp.setPosition(180.0f, 280.0f);
 	caminoTx.loadFromFile("Asset/Images/camino.png");
 	caminoSp.setTexture(caminoTx);
 	caminoSp.setPosition(50.0f, 650.0f);

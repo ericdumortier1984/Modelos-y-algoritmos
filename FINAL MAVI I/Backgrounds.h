@@ -6,8 +6,6 @@ public:
 	//Fondos
 	Sprite fondoPlaySp;
 	Texture fondoPlayTx;
-	Sprite moonSp;
-	Texture moonTx;
 	Sprite caminoSp;
 	Texture caminoTx;
 	Sprite pastoSp;

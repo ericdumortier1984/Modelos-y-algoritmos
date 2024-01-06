@@ -13,11 +13,9 @@ private:
 	//Personaje
 	Mike* mike;
 	//Obstaculos
-	Obstacles* wheel;
 	Obstacles* pinche;
 	//Fondos
 	Backgrounds* fondoPlay;
-	Backgrounds* moon;
 	Backgrounds* camino;
 	Backgrounds* pasto;
 	Backgrounds* paisaje;

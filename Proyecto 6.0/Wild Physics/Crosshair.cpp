@@ -4,7 +4,6 @@ Crosshair::Crosshair() {
 	crosshair_tx.loadFromFile("Asset/crosshair.png");
 	crosshair_tx.setSmooth(true);
 	crosshair.setTexture(crosshair_tx);
-	crosshair.setScale(0.10f, 0.10f);
 }
 
 Crosshair::~Crosshair() {

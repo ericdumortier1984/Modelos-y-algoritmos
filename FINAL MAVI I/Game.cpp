@@ -10,23 +10,21 @@ Game::Game() {
 	//Personaje
 	mike = new Mike();
 	//Obstaculos
-	wheel = new Obstacles();
 	pinche = new Obstacles();
+	pinche->SetPosition(Vector2f(100.0f, 20.0f));
 	// Inicializar fondos
 	fondoPlay = new Backgrounds();
-	moon = new Backgrounds();
 	camino = new Backgrounds();
 	pasto = new Backgrounds();
 	paisaje = new Backgrounds();
 	cavermanOne = new Backgrounds();
 	//Musica y sonidos
-	music.openFromFile("Asset/Audio/rock.ogg");
+	music.openFromFile("Asset/Audio/Musica_principal.ogg");
 }
 
 void Game::ProcessEvents() {
 	music.setLoop(true);
 	music.play();
-	float deltaTime = 1.0f / 60.0f;
 	while (MENU->isOpen()) {
 		Event event;
 		while (MENU->pollEvent(event)) {
@@ -81,11 +79,9 @@ void Game::ProcessEvents() {
 							ABOUT.close();
 							Play.clear(Color::Cyan);
 							Play.draw(pasto->pastoSp);
-							Play.draw(moon->moonSp);
 							Play.draw(cavermanOne->cavermanOneSp);
 							Play.draw(camino->caminoSp);
 							Play.draw(fondoPlay->fondoPlaySp);
-							Play.draw(wheel->wheelSp);
 							Play.draw(mike->mikeSp);
 							Play.draw(pinche->pincheSp);
 							Play.display();
@@ -137,6 +133,7 @@ void Game::ProcessEvents() {
 			}
 			MENU->clear();
 			MENU->draw(paisaje->paisajeSp);
+			MENU->draw(pinche->pincheSp);
 			mainMenu->Draw(MENU);
 			MENU->display();
 		}
@@ -156,7 +153,7 @@ void Game::Go() {
 }
 
 void Game::Update(float deltaTime) {
-	pinche->AddAcceleration(Vector2f(0.0f, 300.0f));
+	pinche->AddAcceleration(Vector2f(0.0f, 200.0f));
 	pinche->Update(deltaTime);
 }
 
