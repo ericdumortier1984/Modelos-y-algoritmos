@@ -50,10 +50,10 @@ void Game::ProcessEvents() {
 				if (evt.key.code == Keyboard::Up) {
 					menu->MoveUp();
 				}
-				else if (evt.key.code == Keyboard::Down) {
+				if (evt.key.code == Keyboard::Down) {
 					menu->MoveDown();
 				}
-				else if (evt.key.code == Keyboard::Enter) {
+				if (evt.key.code == Keyboard::Enter) {
 					_gameStarted = true;
 				}
 			}
@@ -63,31 +63,7 @@ void Game::ProcessEvents() {
 
 
 void Game::UpdateGame(float deltaTime) {
-	//Actualizamos posicion y movimiento Player
-	if (Keyboard::isKeyPressed(Keyboard::D)) {
-		mike->AddAcceleration(Vector2f(80.0f, 0.0f));
-	}
-	if (Keyboard::isKeyPressed(Keyboard::A)) {
-		mike->AddAcceleration(Vector2f(-80.0, 0.0f));
-	}
-	if (Keyboard::isKeyPressed(Keyboard::Space)) {
-		mike->AddAcceleration(Vector2f(0.0f, -90.0f));
-	}
-	if (mike->GetPosition().y < 350.0f) {
-		mike->SetVelocity(Vector2f(0.0f, 100.0f));
-	}
-	if (mike->GetPosition().y > 580.0f) {
-		mike->SetVelocity(Vector2f(0.0f, -100.0f));
-	}
-	if (mike->GetPosition().y > 450.0f) {
-		mike->SetPosition(Vector2f(mike->GetPosition().x, 450.0f));
-	}
-	if (mike->GetPosition().x > 725.0f) {
-		mike->SetPosition(Vector2f(725.0f, mike->GetPosition().y));
-	}
-	if (mike->GetPosition().x < 0.0f) {
-		mike->SetPosition(Vector2f(0.0f, mike->GetPosition().y));
-	}
+
 	mike->UpdatePlayer(deltaTime);
 }
 
@@ -96,7 +72,11 @@ void Game::DrawGame() {
 		paisaje->Draw(wnd);
 		menu->Draw(wnd);
 	}
-	else {
+	if (_gameStarted) {
+		fondoPlay->Draw(wnd);
+		pasto->Draw(wnd);
+		cavermanOne->Draw(wnd);
+		camino->Draw(wnd);
 		mike->Draw(wnd);
 	}
 		
