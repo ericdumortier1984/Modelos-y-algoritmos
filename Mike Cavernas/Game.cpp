@@ -33,15 +33,22 @@ void Game::ProcessEvents() {
 	}
 }
 
-void Game::Update() {
+void Game::Update(float deltaTime) {
+
+	_estala->AddAcceleration(Vector2f(0.0f, 10.0f));
+	_estala->Update(deltaTime);
 
 }
 
 void Game::Go() {
 
+	Clock clock;
+	clock.restart();
+	float deltaTime;
 	while (_wnd->isOpen()) {
+		float deltaTime = clock.restart().asSeconds();
 		ProcessEvents();
-		Update();
+		Update(deltaTime);
 		Draw();
 	}
 }

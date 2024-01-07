@@ -10,7 +10,7 @@ private:
 	Obstacles* _estala;
 
 	void ProcessEvents();
-	void Update();
+	void Update(float deltaTime);
 	void Draw();
 public:
 
