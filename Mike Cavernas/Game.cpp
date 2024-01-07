@@ -9,10 +9,14 @@ Game::Game() {
 	_cave = new Backgrounds();
 
 	_estala = new Obstacles();
+
+	_mike = new Mike();
+	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 }
 
 Game::~Game() {
 
+	delete _mike;
 	delete _estala;
 	delete _cave;
 	delete _wnd;
@@ -38,6 +42,17 @@ void Game::Update(float deltaTime) {
 	_estala->AddAcceleration(Vector2f(0.0f, 10.0f));
 	_estala->Update(deltaTime);
 
+	if (Keyboard::isKeyPressed(Keyboard::D)) {
+		_mike->SetVelocity(Vector2f(50.0f, 0.0f));
+	}
+	else if
+		(Keyboard::isKeyPressed(Keyboard::A)) {
+			_mike->SetVelocity(Vector2f(-50.0f, 0.0f));
+	}
+	else {
+		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
+	}
+	_mike->Update(deltaTime);
 }
 
 void Game::Go() {
@@ -58,5 +73,6 @@ void Game::Draw() {
 	_wnd->clear();
 	_cave->Draw(_wnd);
 	_estala->Draw(_wnd);
+	_mike->Draw(_wnd);
 	_wnd->display();
 }

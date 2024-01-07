@@ -27,7 +27,6 @@ void Obstacles::Update(float deltaTime) {
 	_velocity.y += _acceleration.y * deltaTime;
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
-
 }
 
 void Obstacles::AddAcceleration(Vector2f acc) {
