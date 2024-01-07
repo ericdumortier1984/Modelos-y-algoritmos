@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#define Max_main_menu 4
+#define Max_main_menu 2
 
 class MainMenu {
 private:
@@ -8,7 +8,7 @@ private:
 	Font font;
 	Text mainMenu[Max_main_menu];
 public:
-	MainMenu(float width, float height);
+	MainMenu();
 
 	void Draw(RenderWindow* window);
 	void MoveUp();

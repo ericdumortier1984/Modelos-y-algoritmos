@@ -9,13 +9,14 @@ class Game {
 private:
 	RenderWindow* wnd;
 	Player* mike;
-	Audio* music;
 	MainMenu* menu;
 	Background* fondoPlay;
 	Background* camino;
 	Background* pasto;
 	Background* paisaje;
 	Background* cavermanOne;
+
+	Music music;
 
 	void ProcessEvents();
 	void UpdateGame(float deltaTime);
@@ -25,9 +26,9 @@ private:
 	bool _gameOver = false;
 
 public:
-	//constructor y deconstructor
+
 	Game();
 	~Game();
 
-	void Play();
+	void Go();
 };
