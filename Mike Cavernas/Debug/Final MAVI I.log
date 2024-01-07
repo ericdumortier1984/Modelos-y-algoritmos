@@ -1,0 +1,12 @@
+﻿  Background.cpp
+  Game.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(26,8): warning C4101: 'deltaTime': variable local sin referencia
+  Main.cpp
+  Menu.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Menu.cpp(49,21): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Menu.cpp(60,21): warning C4553: "==": el resultado de la expresión no se usa. ¿Quiso decir "="?
+  Obstacle.cpp
+  Player.cpp
+  Audio.cpp
+  Generando código...
+  Final MAVI I.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Debug\Final MAVI I.exe
