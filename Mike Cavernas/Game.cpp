@@ -3,20 +3,18 @@
 Game::Game() {
 	wnd = new RenderWindow(VideoMode(960, 960), "Final MAVI");
 	wnd->setFramerateLimit(60);
+	wnd->setMouseCursorVisible(false);
+
 	mike = new Player(3);
-	_music = new Audio();
-	_menu = new MainMenu(960, 960);
+	mike->SetPosition(Vector2f(50.0f, 650.0f));
+
+	music = new Audio();
+	menu = new MainMenu(960, 960);
 	fondoPlay = new Background();
 	camino = new Background();
 	pasto = new Background();
 	paisaje = new Background();
 	cavermanOne = new Background();
-
-	wnd->setFramerateLimit(60);
-	wnd->setMouseCursorVisible(false);
-	
-	mike->SetPosition(Vector2f(50.0f, 650.0f));
-	
 }
 
 void Game::Play() {
@@ -35,19 +33,25 @@ void Game::Play() {
 }
 
 void Game::ProcessEvents() {
-	_music->PlayMusicGame();
+	//music.setLoop(true);
+	//music.play();
 	Event evt;
 	while (wnd->pollEvent(evt)) {
 		if (evt.type == Event::Closed) {
 			wnd->close();
 		}
+		if (evt.type == Event::KeyPressed) {
+			if (evt.key.code == Keyboard::Escape) {
+				wnd->close();
+			}
+		}
 		if (!_gameStarted) {
 			if (evt.type == Event::KeyPressed) {
 				if (evt.key.code == Keyboard::Up) {
-					_menu->MoveUp();
+					menu->MoveUp();
 				}
 				else if (evt.key.code == Keyboard::Down) {
-					_menu->MoveDown();
+					menu->MoveDown();
 				}
 				else if (evt.key.code == Keyboard::Enter) {
 					_gameStarted = true;
@@ -90,7 +94,7 @@ void Game::UpdateGame(float deltaTime) {
 void Game::DrawGame() {
 	if (!_gameStarted) {
 		paisaje->Draw(wnd);
-		_menu->Draw(wnd);
+		menu->Draw(wnd);
 	}
 	else {
 		mike->Draw(wnd);

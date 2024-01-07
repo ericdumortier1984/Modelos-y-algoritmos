@@ -9,8 +9,8 @@ class Game {
 private:
 	RenderWindow* wnd;
 	Player* mike;
-	Audio* _music;
-	MainMenu* _menu;
+	Audio* music;
+	MainMenu* menu;
 	Background* fondoPlay;
 	Background* camino;
 	Background* pasto;
