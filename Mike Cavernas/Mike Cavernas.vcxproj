@@ -133,12 +133,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Backgrounds.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Obstacles.h" />
     <ClInclude Include="Stadx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Backgrounds.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Mike Cavernas.cpp" />
+    <ClCompile Include="Obstacles.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,11 +2,19 @@
 
 Game::Game() {
 
-	_wnd = new RenderWindow(VideoMode(960, 720), "Mike Cavernas");
+	_wnd = new RenderWindow(VideoMode(800, 600), "Mike Cavernas");
+	_wnd->setFramerateLimit(60);
+	_wnd->setMouseCursorVisible(false);
+
+	_cave = new Backgrounds();
+
+	_estala = new Obstacles();
 }
 
 Game::~Game() {
 
+	delete _estala;
+	delete _cave;
 	delete _wnd;
 }
 
@@ -41,5 +49,7 @@ void Game::Go() {
 void Game::Draw() {
 
 	_wnd->clear();
+	_cave->Draw(_wnd);
+	_estala->Draw(_wnd);
 	_wnd->display();
 }
