@@ -65,8 +65,11 @@ void Game::Update(float deltaTime) {
 void Game::CheckCollision() {
 
 	Vector2f estalaPos = _estala->GetPosition();
-	if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
-		_mike->Pricked();
+	if (_estala->isActive()){
+		if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
+			_mike->Pricked();
+			_estala->SetVisible(false);
+		}
 	}
 }
 

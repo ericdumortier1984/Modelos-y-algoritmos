@@ -40,6 +40,11 @@ void Obstacles::Draw(RenderWindow* _wnd) {
 	_wnd->draw(_estalaSp);
 }
 
+void Obstacles::SetVisible(bool visible) {
+
+	isVisible = visible;
+}
+
 void Obstacles::SetPosition(Vector2f pos) {
 
 	_position = pos;
@@ -70,3 +75,7 @@ Vector2f Obstacles::GetAcceleration() {
 	return _acceleration;
 }
 
+bool Obstacles::isActive() {
+
+	return isVisible;
+}

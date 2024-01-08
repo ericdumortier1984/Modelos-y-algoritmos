@@ -11,6 +11,7 @@ private:
 	Vector2f _velocity;
 	Vector2f _acceleration;
 
+	bool isVisible;
 public:
 
 	Obstacles();
@@ -18,6 +19,7 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(RenderWindow* _wnd);
+	void SetVisible(bool visible);
 	void SetPosition(Vector2f pos);
 	void SetVelocity(Vector2f vel);
 	void SetAcceleration(Vector2f acc);
@@ -26,4 +28,6 @@ public:
 	Vector2f GetPosition();
 	Vector2f GetVelocity();
 	Vector2f GetAcceleration();
+
+	bool isActive();
 };
