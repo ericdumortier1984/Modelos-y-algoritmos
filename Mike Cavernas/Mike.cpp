@@ -1,9 +1,11 @@
 #include "Mike.h"
 
-Mike::Mike() {
+Mike::Mike(int lifes) {
 
 	_mikeTx.loadFromFile("Asset/Images/Mike.png");
 	_mikeSp.setTexture(_mikeTx);
+
+	_lifes = lifes;
 
 	_position.x = 0.0f;
 	_position.y = 0.0f;
@@ -39,6 +41,16 @@ void Mike::Draw(RenderWindow* _wnd) {
 	_wnd->draw(_mikeSp);
 }
 
+void Mike::Pricked() {
+
+	float x = _mikeSp.getPosition().x;
+	float y = _mikeSp.getPosition().y;
+
+	if (GetPricked(x, y)) {
+		_lifes--;
+	}
+}
+
 void Mike::SetPosition(Vector2f pos) {
 
 	_position = pos;
@@ -67,4 +79,15 @@ Vector2f Mike::GetVelocity() {
 Vector2f Mike::GetAcceleration() {
 
 	return _acceleration;
+}
+
+bool Mike::GetPricked(float x, float y) {
+
+	FloatRect bounds = _mikeSp.getGlobalBounds();
+	return bounds.contains(x, y);
+}
+
+int Mike::GetLifes() {
+
+	return _lifes;
 }

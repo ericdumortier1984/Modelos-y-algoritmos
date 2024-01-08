@@ -10,8 +10,15 @@ Game::Game() {
 
 	_estala = new Obstacles();
 
-	_mike = new Mike();
+	_mike = new Mike(3);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_lifesText.setFont(_font);
+	_lifesText.setCharacterSize(20);
+	_lifesText.setFillColor(Color::White);
+	_lifesText.setString("MIKE: 3");
+	_lifesText.setPosition(200.0f, 200.0f);
 }
 
 Game::~Game() {
@@ -55,6 +62,21 @@ void Game::Update(float deltaTime) {
 	_mike->Update(deltaTime);
 }
 
+void Game::CheckCollision() {
+
+	Vector2f estalaPos = _estala->GetPosition();
+	if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
+		_mike->Pricked();
+	}
+}
+
+int Game::UpdateLifes() {
+
+	int _mikeLifes = _mike->GetLifes();
+	_lifesText.setString("MIKE: " + to_string(_mikeLifes));
+	return _mikeLifes;
+}
+
 void Game::Go() {
 
 	Clock clock;
@@ -64,6 +86,8 @@ void Game::Go() {
 		float deltaTime = clock.restart().asSeconds();
 		ProcessEvents();
 		Update(deltaTime);
+		CheckCollision();
+		UpdateLifes();
 		Draw();
 	}
 }
@@ -74,5 +98,6 @@ void Game::Draw() {
 	_cave->Draw(_wnd);
 	_estala->Draw(_wnd);
 	_mike->Draw(_wnd);
+	_wnd->draw(_lifesText);
 	_wnd->display();
 }

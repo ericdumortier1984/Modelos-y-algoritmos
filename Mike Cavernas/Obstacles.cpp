@@ -69,3 +69,4 @@ Vector2f Obstacles::GetAcceleration() {
 
 	return _acceleration;
 }
+

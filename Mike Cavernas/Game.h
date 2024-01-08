@@ -11,14 +11,19 @@ private:
 	Obstacles* _estala;
 	Mike* _mike;
 
+	Font _font;
+	Text _lifesText;
+
 	void ProcessEvents();
 	void Update(float deltaTime);
 	void Draw();
+	int UpdateLifes();
 public:
 
 	Game();
 	~Game();
 
+	void CheckCollision();
 	void Go();
 
 };
