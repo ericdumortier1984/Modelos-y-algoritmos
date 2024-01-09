@@ -13,17 +13,27 @@ Game::Game() {
 	_mike = new Mike(3);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
+	_chicken = new PointUp(0);
+
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
 	_lifesText.setCharacterSize(20);
 	_lifesText.setFillColor(Color::White);
 	_lifesText.setString("MIKE: 3");
 	_lifesText.setPosition(200.0f, 200.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_pointsText.setFont(_font);
+	_pointsText.setCharacterSize(20);
+	_pointsText.setFillColor(Color::White);
+	_pointsText.setString("MIKE: 0");
+	_pointsText.setPosition(300.0f, 200.0f);
 }
 
 Game::~Game() {
 
 	delete _mike;
+	delete _chicken;
 	delete _estala;
 	delete _cave;
 	delete _wnd;
@@ -100,7 +110,9 @@ void Game::Draw() {
 	_wnd->clear();
 	_cave->Draw(_wnd);
 	_estala->Draw(_wnd);
+	_chicken->Draw(_wnd);
 	_mike->Draw(_wnd);
 	_wnd->draw(_lifesText);
+	_wnd->draw(_pointsText);
 	_wnd->display();
 }

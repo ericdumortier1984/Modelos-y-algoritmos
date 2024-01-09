@@ -11,7 +11,7 @@ private:
 	Vector2f _velocity;
 	Vector2f _acceleration;
 
-	bool isVisible;
+	bool _isVisible;
 public:
 
 	Obstacles();

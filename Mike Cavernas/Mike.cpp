@@ -6,7 +6,7 @@ Mike::Mike(int lifes) {
 	_mikeSp.setTexture(_mikeTx);
 
 	_lifes = lifes;
-
+	
 	_position.x = 0.0f;
 	_position.y = 0.0f;
 	_velocity.x = 0.0f;

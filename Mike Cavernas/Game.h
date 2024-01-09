@@ -2,6 +2,7 @@
 #include "Backgrounds.h"
 #include "Obstacles.h"
 #include "Mike.h"
+#include "PointUp.h"
 
 class Game {
 private:
@@ -10,9 +11,11 @@ private:
 	Backgrounds* _cave;
 	Obstacles* _estala;
 	Mike* _mike;
+	PointUp* _chicken;
 
 	Font _font;
 	Text _lifesText;
+	Text _pointsText;
 
 	void ProcessEvents();
 	void Update(float deltaTime);

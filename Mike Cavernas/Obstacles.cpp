@@ -42,7 +42,7 @@ void Obstacles::Draw(RenderWindow* _wnd) {
 
 void Obstacles::SetVisible(bool visible) {
 
-	isVisible = visible;
+	_isVisible = visible;
 }
 
 void Obstacles::SetPosition(Vector2f pos) {
@@ -77,5 +77,5 @@ Vector2f Obstacles::GetAcceleration() {
 
 bool Obstacles::isActive() {
 
-	return isVisible;
+	return _isVisible;
 }
