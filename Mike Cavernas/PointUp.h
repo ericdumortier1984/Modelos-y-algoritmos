@@ -20,13 +20,13 @@ public:
 	~PointUp();
 
 	void Draw(RenderWindow* _wnd);
-	void SetPointUpVisible(bool chicken_visible);
+	void SetVisible(bool chicken_visible);
 	void SetPointUp();
 	void SetPosition(Vector2f pos);
 	
 	Vector2f GetPosition();
 
-	bool GetPointUp(float x, float y);
-	bool IsPointUpActive();
+	bool GetChicken(float x, float y);
+	bool IsActive();
 	int GetPoints();
 };

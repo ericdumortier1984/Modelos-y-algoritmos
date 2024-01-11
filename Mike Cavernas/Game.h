@@ -21,6 +21,7 @@ private:
 	void Update(float deltaTime);
 	void Draw();
 	int UpdateLifes();
+	int UpdatePoints();
 public:
 
 	Game();
@@ -28,5 +29,6 @@ public:
 
 	void CheckCollision();
 	void Go();
+	void RestartGame();
 
 };

@@ -1,6 +1,7 @@
 #include "Mike.h"
 
-Mike::Mike(int lifes) {
+Mike::Mike(int lifes) 
+{
 
 	_mikeTx.loadFromFile("Asset/Images/Mike.png");
 	_mikeSp.setTexture(_mikeTx);
@@ -15,13 +16,16 @@ Mike::Mike(int lifes) {
 	_acceleration.y = 0.0f;
 }
 
-Mike::~Mike() {
+Mike::~Mike() 
+{
 
 }
 
-void Mike::Update(float deltaTime) {
+void Mike::Update(float deltaTime) 
+{
 
 	_mikeSp.setPosition(_position);
+
 	_position.x += _velocity.x * deltaTime;
 	_position.y += _velocity.y * deltaTime;
 	_velocity.x += _acceleration.x * deltaTime;
@@ -30,18 +34,21 @@ void Mike::Update(float deltaTime) {
 	_acceleration.y = 0.0f;
 }
 
-void Mike::AddAcceleration(Vector2f acc) {
+void Mike::AddAcceleration(Vector2f acc) 
+{
 
 	_acceleration.x += acc.x;
 	_acceleration.y += acc.y;
 }
 
-void Mike::Draw(RenderWindow* _wnd) {
+void Mike::Draw(RenderWindow* _wnd) 
+{
 
 	_wnd->draw(_mikeSp);
 }
 
-void Mike::Pricked() {
+void Mike::Pricked() 
+{
 
 	float x = _mikeSp.getPosition().x;
 	float y = _mikeSp.getPosition().y;
@@ -51,43 +58,51 @@ void Mike::Pricked() {
 	}
 }
 
-void Mike::SetPosition(Vector2f pos) {
+void Mike::SetPosition(Vector2f pos) 
+{
 
 	_position = pos;
 }
 
-void Mike::SetVelocity(Vector2f vel) {
+void Mike::SetVelocity(Vector2f vel) 
+{
 
 	_velocity = vel;
 }
 
-void Mike::SetAcceleration(Vector2f acc) {
+void Mike::SetAcceleration(Vector2f acc) 
+{
 
 	_acceleration = acc;
 }
 
-Vector2f Mike::GetPosition() {
+Vector2f Mike::GetPosition() 
+{
 
 	return _position;
 }
 
-Vector2f Mike::GetVelocity() {
+Vector2f Mike::GetVelocity()
+{
 
 	return _velocity;
 }
 
-Vector2f Mike::GetAcceleration() {
+Vector2f Mike::GetAcceleration()
+{
 
 	return _acceleration;
 }
 
-bool Mike::GetPricked(float x, float y) {
+bool Mike::GetPricked(float x, float y)
+{
 
 	FloatRect bounds = _mikeSp.getGlobalBounds();
 	return bounds.contains(x, y);
 }
 
-int Mike::GetLifes() {
+int Mike::GetLifes() 
+{
 
 	return _lifes;
 }

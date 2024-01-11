@@ -1,6 +1,7 @@
 #include "Stadx.h"
 
-class Mike {
+class Mike 
+{
 private:
 
 	Sprite _mikeSp;
