@@ -7,7 +7,12 @@ Game::Game()
 	_wnd->setFramerateLimit(60);
 	_wnd->setMouseCursorVisible(false);
 
+	_gameOver = false;
+	_restartGame = false;
+
 	_cave = new Backgrounds();
+	_landscape = new Backgrounds();
+	_rockPath = new Backgrounds();
 
 	_estala = new Obstacles();
 
@@ -16,19 +21,27 @@ Game::Game()
 
 	_chicken = new PointUp(0);
 
+	_starTx.loadFromFile("Asset/Images/Start.png");
+	_startSp.setTexture(_starTx);
+	_startSp.setPosition(300.0f, 0.0f);
+
+	_resetTx.loadFromFile("Asset/Images/reset.png");
+	_resetSp.setTexture(_resetTx);
+	_resetSp.setPosition(400.0f, 0.0f);
+
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
 	_lifesText.setCharacterSize(20);
 	_lifesText.setFillColor(Color::White);
 	_lifesText.setString("MIKE: 3");
-	_lifesText.setPosition(200.0f, 200.0f);
+	_lifesText.setPosition(0.0f, 0.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_pointsText.setFont(_font);
 	_pointsText.setCharacterSize(20);
 	_pointsText.setFillColor(Color::White);
 	_pointsText.setString("POINTS: 0");
-	_pointsText.setPosition(300.0f, 200.0f);
+	_pointsText.setPosition(700.0f, 0.0f);
 }
 
 Game::~Game() 
@@ -37,7 +50,9 @@ Game::~Game()
 	delete _mike;
 	delete _chicken;
 	delete _estala;
+	delete _rockPath;
 	delete _cave;
+	delete _landscape;
 	delete _wnd;
 }
 
@@ -142,10 +157,19 @@ void Game::Go()
 	}
 }
 
+void Game::GameOver() 
+{
+	if (_mike->GetLifes() <= 0) {
+		_gameOver = true;
+		_wnd->setMouseCursorVisible(true);
+	}
+}
+
 void Game::RestartGame()
 {
 
 	if (_mike->GetLifes() <= 0) {
+		_restartGame = true;
 		_mike->SetPosition(Vector2f(30.0f, 500.0f));
 	}
 }
@@ -154,11 +178,15 @@ void Game::Draw()
 {
 
 	_wnd->clear();
+	_landscape->Draw(_wnd);
 	_cave->Draw(_wnd);
+	_rockPath->Draw(_wnd);
 	_estala->Draw(_wnd);
 	_chicken->Draw(_wnd);
 	_mike->Draw(_wnd);
 	_wnd->draw(_lifesText);
 	_wnd->draw(_pointsText);
+	_wnd->draw(_startSp);
+	_wnd->draw(_resetSp);
 	_wnd->display();
 }
