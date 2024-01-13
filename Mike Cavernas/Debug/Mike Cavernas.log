@@ -1,8 +1,8 @@
-﻿  Select.cpp
-  Game.cpp
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(77,64): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(77,47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(151,8): warning C4101: 'deltaTime': variable local sin referencia
+﻿  Game.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(71,64): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(71,47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(145,8): warning C4101: 'deltaTime': variable local sin referencia
   Mike Cavernas.cpp
+  Select.cpp
   Generando código...
   Mike Cavernas.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Debug\Mike Cavernas.exe

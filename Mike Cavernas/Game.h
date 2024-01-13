@@ -17,14 +17,13 @@ private:
 	Mike* _mike;
 	PointUp* _chicken;
 	Select* _cursor;
-
-	Sprite _startSp, _resetSp;
-	Texture _starTx, _resetTx;
+	Select* _start;
+	Select* _reset;
 
 	Font _font;
 	Text _lifesText;
 	Text _pointsText;
-
+	
 	void ProcessEvents();
 	void Update(float deltaTime);
 	void Draw();
@@ -44,6 +43,4 @@ public:
 	~Game();
 
 	void Go();
-	bool GetStartPressed(float x, float y);
-	bool GetResetPressed(float x, float y);
 };

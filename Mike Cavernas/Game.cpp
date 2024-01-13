@@ -7,10 +7,6 @@ Game::Game()
 	_wnd->setFramerateLimit(60);
 	_wnd->setMouseCursorVisible(false);
 
-	_gameStarted = false;
-	_gameOver = false;
-	_restartGame = false;
-
 	_cave = new Backgrounds();
 	_landscape = new Backgrounds();
 	_rockPath = new Backgrounds();
@@ -23,14 +19,12 @@ Game::Game()
 	_chicken = new PointUp(0);
 
 	_cursor = new Select();
+	_start = new Select();
+	_reset = new Select();
 
-	_starTx.loadFromFile("Asset/Images/Start.png");
-	_startSp.setTexture(_starTx);
-	_startSp.setPosition(300.0f, 0.0f);
-
-	_resetTx.loadFromFile("Asset/Images/reset.png");
-	_resetSp.setTexture(_resetTx);
-	_resetSp.setPosition(400.0f, 0.0f);
+	_gameStarted = false;
+	_gameOver = false;
+	_restartGame = false;
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
@@ -50,10 +44,10 @@ Game::Game()
 Game::~Game() 
 {
 
-	delete _cursor;
 	delete _mike;
 	delete _chicken;
 	delete _estala;
+	delete _cursor;
 	delete _rockPath;
 	delete _cave;
 	delete _landscape;
@@ -160,20 +154,6 @@ void Game::Go()
 	}
 }
 
-bool Game::GetStartPressed(float x, float y)
-{
-
-	FloatRect bounds_startSp = _startSp.getGlobalBounds();
-	return bounds_startSp.contains(x, y);
-}
-
-bool Game::GetResetPressed(float x, float y)
-{
-
-	FloatRect bounds_resetSp = _resetSp.getGlobalBounds();
-	return bounds_resetSp.contains(x, y);
-}
-
 void Game::GameOver() 
 {
 	if (_mike->GetLifes() <= 0) {
@@ -195,16 +175,20 @@ void Game::Draw()
 {
 
 	_wnd->clear();
-	_landscape->Draw(_wnd);
-	_cave->Draw(_wnd);
-	_rockPath->Draw(_wnd);
-	_estala->Draw(_wnd);
-	_chicken->Draw(_wnd);
-	_mike->Draw(_wnd);
-	_wnd->draw(_lifesText);
-	_wnd->draw(_pointsText);
-	_wnd->draw(_startSp);
-	_wnd->draw(_resetSp);
-	_cursor->Draw(_wnd);
+	if (!_gameStarted) {
+		_landscape->Draw(_wnd);
+		_cave->Draw(_wnd);
+		_rockPath->Draw(_wnd);
+		_start->Draw(_wnd);
+		_reset->Draw(_wnd);
+		_cursor->Draw(_wnd);
+	}
+	else {
+		_wnd->draw(_lifesText);
+		_wnd->draw(_pointsText);
+		_estala->Draw(_wnd);
+		_chicken->Draw(_wnd);
+		_mike->Draw(_wnd);
+	}
 	_wnd->display();
 }
