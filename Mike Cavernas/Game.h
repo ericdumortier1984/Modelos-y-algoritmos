@@ -20,6 +20,8 @@ private:
 	Select* _start;
 	Select* _reset;
 
+	Music _music;
+
 	Font _font;
 	Text _lifesText;
 	Text _pointsText;

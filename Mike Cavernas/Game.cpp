@@ -26,6 +26,10 @@ Game::Game()
 	_gameOver = false;
 	_restartGame = false;
 
+	_music.openFromFile("Asset/Audio/Musica_principal.ogg");
+	_music.setLoop(true);
+	_music.play();
+
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
 	_lifesText.setCharacterSize(20);
@@ -69,6 +73,14 @@ void Game::ProcessEvents()
 		}
 		if (evt.type == Event::MouseMoved) {
 		    _cursor->CursorSetPosition(evt.mouseMove.x, evt.mouseMove.y);
+		}
+		if (evt.type == Event::MouseButtonPressed) {
+			if (evt.mouseButton.button == Mouse::Left) {
+				if (!_gameStarted && _start->GetStartPressed(evt.mouseButton.x, evt.mouseButton.y)) {
+					_gameStarted = true;
+					_music.stop();
+				}
+			}
 		}
 	}
 }
@@ -184,6 +196,9 @@ void Game::Draw()
 		_cursor->Draw(_wnd);
 	}
 	else {
+		_landscape->Draw(_wnd);
+		_cave->Draw(_wnd);
+		_rockPath->Draw(_wnd);
 		_wnd->draw(_lifesText);
 		_wnd->draw(_pointsText);
 		_estala->Draw(_wnd);
