@@ -7,6 +7,7 @@ Game::Game()
 	_wnd->setFramerateLimit(60);
 	_wnd->setMouseCursorVisible(false);
 
+	_gameStarted = false;
 	_gameOver = false;
 	_restartGame = false;
 
@@ -20,6 +21,8 @@ Game::Game()
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
 	_chicken = new PointUp(0);
+
+	_cursor = new Select();
 
 	_starTx.loadFromFile("Asset/Images/Start.png");
 	_startSp.setTexture(_starTx);
@@ -47,6 +50,7 @@ Game::Game()
 Game::~Game() 
 {
 
+	delete _cursor;
 	delete _mike;
 	delete _chicken;
 	delete _estala;
@@ -60,18 +64,17 @@ void Game::ProcessEvents()
 {
 
 	Event evt;
-	while (_wnd->pollEvent(evt)) 
-	{
-		if (evt.type == Event::Closed) 
-		{
+	while (_wnd->pollEvent(evt)) {
+		if (evt.type == Event::Closed) {
 			_wnd->close();
 		}
-		if (evt.type == Event::KeyPressed) 
-		{
-			if (evt.key.code == Keyboard::Escape)
-			{
+		if (evt.type == Event::KeyPressed) {
+			if (evt.key.code == Keyboard::Escape) {
 				_wnd->close();
 			}
+		}
+		if (evt.type == Event::MouseMoved) {
+		    _cursor->CursorSetPosition(evt.mouseMove.x, evt.mouseMove.y);
 		}
 	}
 }
@@ -157,6 +160,20 @@ void Game::Go()
 	}
 }
 
+bool Game::GetStartPressed(float x, float y)
+{
+
+	FloatRect bounds_startSp = _startSp.getGlobalBounds();
+	return bounds_startSp.contains(x, y);
+}
+
+bool Game::GetResetPressed(float x, float y)
+{
+
+	FloatRect bounds_resetSp = _resetSp.getGlobalBounds();
+	return bounds_resetSp.contains(x, y);
+}
+
 void Game::GameOver() 
 {
 	if (_mike->GetLifes() <= 0) {
@@ -188,5 +205,6 @@ void Game::Draw()
 	_wnd->draw(_pointsText);
 	_wnd->draw(_startSp);
 	_wnd->draw(_resetSp);
+	_cursor->Draw(_wnd);
 	_wnd->display();
 }

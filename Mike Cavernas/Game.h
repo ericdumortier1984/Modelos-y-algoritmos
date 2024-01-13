@@ -3,6 +3,7 @@
 #include "Obstacles.h"
 #include "Mike.h"
 #include "PointUp.h"
+#include "Select.h"
 
 class Game 
 {
@@ -15,6 +16,7 @@ private:
 	Obstacles* _estala;
 	Mike* _mike;
 	PointUp* _chicken;
+	Select* _cursor;
 
 	Sprite _startSp, _resetSp;
 	Texture _starTx, _resetTx;
@@ -42,4 +44,6 @@ public:
 	~Game();
 
 	void Go();
+	bool GetStartPressed(float x, float y);
+	bool GetResetPressed(float x, float y);
 };
