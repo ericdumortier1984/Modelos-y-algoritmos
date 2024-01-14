@@ -92,24 +92,25 @@ void Game::ProcessEvents()
 void Game::Update(float deltaTime)
 {
 
-	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
-	_estala->Update(deltaTime);
-
 	if (Keyboard::isKeyPressed(Keyboard::D)) {
-		if (_mike->GetPosition().x >= 700.0f)
-		_mike->SetPosition(Vector2f(700.0f, _mike->GetPosition().y));
+		if (_mike->GetPosition().x >= 750.0f)
+		_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
 		_mike->SetVelocity(Vector2f(100.0f, 0.0f));
 	}
 	else if
 		(Keyboard::isKeyPressed(Keyboard::A)) {
-		if (_mike->GetPosition().x <= 0.0f)
-			_mike->SetPosition(Vector2f(0.0f, _mike->GetPosition().y));
+		if (_mike->GetPosition().x <= 50.0f)
+			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
 			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
 	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
+
+	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
+	_estala->Update(deltaTime);
 	_mike->Update(deltaTime);
+	_mike->UpdateOrientation();
 	_chicken->Update(deltaTime);
 }
 

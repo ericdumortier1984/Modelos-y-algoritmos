@@ -4,11 +4,8 @@ class Menu
 {
 private:
 
-	Sprite _cursorSp;
-	Texture _cursorTx;
-
-	Sprite _startSp, _resetSp;
-	Texture _startTx, _resetTx;
+	Sprite _cursorSp, _startSp, _resetSp;
+	Texture _cursorTx, _startTx, _resetTx;
 public:
 
 	Menu();
@@ -20,5 +17,4 @@ public:
 
 	bool GetStartPressed(float x, float y);
 	bool GetResetPressed(float x, float y);
-
 };

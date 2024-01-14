@@ -4,6 +4,7 @@ Obstacles::Obstacles() {
 
 	_estalaTx.loadFromFile("Asset/Images/Estala.png");
 	_estalaSp.setTexture(_estalaTx);
+	_estalaSp.setOrigin(_estalaTx.getSize().x / 2, _estalaTx.getSize().y / 2);
 
 	_position.x = 0.0f;
 	_position.y = 0.0f;

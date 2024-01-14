@@ -21,6 +21,7 @@ public:
 	~Mike();
 
 	void Update(float deltaTime);
+	void UpdateOrientation();
 	void Draw(RenderWindow* _wnd);
 	void Pricked();
 	void SetPosition(Vector2f pos);

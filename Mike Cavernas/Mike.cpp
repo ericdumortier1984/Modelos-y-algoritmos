@@ -5,6 +5,7 @@ Mike::Mike(int lifes)
 
 	_mikeTx.loadFromFile("Asset/Images/Mike.png");
 	_mikeSp.setTexture(_mikeTx);
+	_mikeSp.setOrigin(_mikeTx.getSize().x / 2, 0);
 
 	_lifes = lifes;
 	
@@ -34,12 +35,23 @@ void Mike::Update(float deltaTime)
 	_acceleration.y = 0.0f;
 }
 
+void Mike::UpdateOrientation()
+{
+	if (_velocity.x > 0) {
+		_mikeSp.setScale(1, 1);
+	}
+	if (_velocity.x < 0) {
+		_mikeSp.setScale(-1, 1);
+	}
+}
+
 void Mike::AddAcceleration(Vector2f acc) 
 {
 
 	_acceleration.x += acc.x;
 	_acceleration.y += acc.y;
 }
+
 
 void Mike::Draw(RenderWindow* _wnd) 
 {
@@ -106,3 +118,5 @@ int Mike::GetLifes()
 
 	return _lifes;
 }
+
+
