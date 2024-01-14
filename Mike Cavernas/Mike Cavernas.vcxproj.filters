@@ -30,10 +30,10 @@
     <ClInclude Include="Mike.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="PointUp.h">
+    <ClInclude Include="Item.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Select.h">
+    <ClInclude Include="Menu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,10 +53,10 @@
     <ClCompile Include="Mike.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="PointUp.cpp">
+    <ClCompile Include="Item.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Select.cpp">
+    <ClCompile Include="Menu.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

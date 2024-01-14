@@ -2,8 +2,8 @@
 #include "Backgrounds.h"
 #include "Obstacles.h"
 #include "Mike.h"
-#include "PointUp.h"
-#include "Select.h"
+#include "Item.h"
+#include "Menu.h"
 
 class Game 
 {
@@ -15,10 +15,10 @@ private:
 	Backgrounds* _rockPath;
 	Obstacles* _estala;
 	Mike* _mike;
-	PointUp* _chicken;
-	Select* _cursor;
-	Select* _start;
-	Select* _reset;
+	Item* _chicken;
+	Menu* _cursor;
+	Menu* _start;
+	Menu* _reset;
 
 	Music _music;
 

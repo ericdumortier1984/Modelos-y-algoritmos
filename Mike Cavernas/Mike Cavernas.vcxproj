@@ -134,21 +134,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Backgrounds.h" />
-    <ClInclude Include="Select.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Mike.h" />
     <ClInclude Include="Obstacles.h" />
-    <ClInclude Include="PointUp.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Stadx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Backgrounds.cpp" />
-    <ClCompile Include="Select.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Mike Cavernas.cpp" />
     <ClCompile Include="Mike.cpp" />
     <ClCompile Include="Obstacles.cpp" />
-    <ClCompile Include="PointUp.cpp" />
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

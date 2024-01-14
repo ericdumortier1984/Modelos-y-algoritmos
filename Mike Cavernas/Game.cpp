@@ -19,12 +19,12 @@ Game::Game()
 	_mike = new Mike(1);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
-	_chicken = new PointUp(0);
+	_chicken = new Item(0);
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
-	_cursor = new Select();
-	_start = new Select();
-	_reset = new Select();
+	_cursor = new Menu();
+	_start = new Menu();
+	_reset = new Menu();
 
 	_gameStarted = false;
 	_gameOver = false;
