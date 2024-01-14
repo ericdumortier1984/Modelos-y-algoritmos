@@ -8,6 +8,8 @@ private:
 	Texture _mikeTx;
 
 	int _lifes;
+	int _points;
+
 	float x;
 	float y;
 
@@ -17,13 +19,14 @@ private:
 
 public:
 
-	Mike(int lifes);
+	Mike(int lifes, int points);
 	~Mike();
 
 	void Update(float deltaTime);
 	void UpdateOrientation();
 	void Draw(RenderWindow* _wnd);
 	void Pricked();
+	void PointUp();
 	void SetPosition(Vector2f pos);
 	void SetVelocity(Vector2f vel);
 	void SetAcceleration(Vector2f acc);
@@ -34,5 +37,7 @@ public:
 	Vector2f GetAcceleration();
 
 	bool GetPricked(float x, float y);
+	bool GetItem(float x, float y);
 	int GetLifes();
+	int GetPoints();
 };

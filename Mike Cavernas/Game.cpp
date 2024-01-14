@@ -16,10 +16,10 @@ Game::Game()
 	_estala = new Obstacles();
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
 
-	_mike = new Mike(1);
+	_mike = new Mike(1, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
-	_chicken = new Item(0);
+	_chicken = new Item();
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_cursor = new Menu();
@@ -46,7 +46,7 @@ Game::Game()
 	_pointsText.setCharacterSize(20);
 	_pointsText.setFillColor(Color::White);
 	_pointsText.setString("POINTS: 0");
-	_pointsText.setPosition(700.0f, 0.0f);
+	_pointsText.setPosition(650.0f, 0.0f);
 }
 
 Game::~Game() 
@@ -125,13 +125,22 @@ void Game::CheckCollision()
 		}
 	}
 
-	Vector2f mikePos = _mike->GetPosition();
+	Vector2f chickenPos = _chicken->GetPosition();
 	if (_chicken->IsActive()) {
-		if (_chicken->GetChicken(mikePos.x, mikePos.y)) {
-			_chicken->SetPointUp();
+		if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
+			_mike->PointUp();
 			_chicken->SetVisible(false);
+			RespawnChicken();
 		}
 	}
+}
+
+void Game::RespawnChicken()
+{
+
+	float _randomX = rand() % 700;
+	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
+	_chicken->SetVisible(true);
 }
 
 int Game::UpdateLifes() 
@@ -150,7 +159,7 @@ int Game::UpdateLifes()
 int Game::UpdatePoints() 
 {
 
-	int _mikePoints = _chicken->GetPoints();
+	int _mikePoints = _mike->GetPoints();
 	_pointsText.setString("POINTS: " + to_string(_mikePoints));
 	return _mikePoints;
 }

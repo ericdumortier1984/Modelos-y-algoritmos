@@ -30,6 +30,7 @@ private:
 	void Update(float deltaTime);
 	void Draw();
 	void CheckCollision();
+	void RespawnChicken();
 	void GameOver();
 	void RestartGame();
 

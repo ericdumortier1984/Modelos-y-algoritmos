@@ -1,6 +1,6 @@
 #include "Mike.h"
 
-Mike::Mike(int lifes) 
+Mike::Mike(int lifes, int points) 
 {
 
 	_mikeTx.loadFromFile("Asset/Images/Mike.png");
@@ -8,6 +8,7 @@ Mike::Mike(int lifes)
 	_mikeSp.setOrigin(_mikeTx.getSize().x / 2, 0);
 
 	_lifes = lifes;
+	_points = points;
 	
 	_position.x = 0.0f;
 	_position.y = 0.0f;
@@ -70,6 +71,17 @@ void Mike::Pricked()
 	}
 }
 
+void Mike::PointUp()
+{
+
+	float x = _mikeSp.getPosition().x;
+	float y = _mikeSp.getPosition().y;
+
+	if (GetItem(x, y)) {
+		_points += 50;
+	}
+}
+
 void Mike::SetPosition(Vector2f pos) 
 {
 
@@ -113,10 +125,23 @@ bool Mike::GetPricked(float x, float y)
 	return bounds.contains(x, y);
 }
 
+bool Mike::GetItem(float x, float y)
+{
+
+	FloatRect bounds = _mikeSp.getGlobalBounds();
+	return bounds.contains(x, y);
+}
+
 int Mike::GetLifes() 
 {
 
 	return _lifes;
+}
+
+int Mike::GetPoints()
+{
+
+	return _points;
 }
 
 
