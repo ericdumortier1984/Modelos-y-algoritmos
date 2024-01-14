@@ -1,6 +1,7 @@
 #include "Stadx.h"
 
-class PointUp {
+class PointUp
+{
 private:
 
 	Sprite _chickenSp;
@@ -19,6 +20,7 @@ public:
 	PointUp(int points);
 	~PointUp();
 
+	void Update(float deltaTime);
 	void Draw(RenderWindow* _wnd);
 	void SetVisible(bool chicken_visible);
 	void SetPointUp();

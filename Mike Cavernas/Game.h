@@ -36,6 +36,8 @@ private:
 	int UpdateLifes();
 	int UpdatePoints();
 
+	float _randomX;
+
 	bool _gameStarted;
 	bool _gameOver;
 	bool _restartGame;

@@ -2,6 +2,8 @@
 
 Game::Game() 
 {
+	srand(time(NULL));
+	_randomX = rand() % 700;
 
 	_wnd = new RenderWindow(VideoMode(800, 600), "Mike Cavernas");
 	_wnd->setFramerateLimit(60);
@@ -12,11 +14,13 @@ Game::Game()
 	_rockPath = new Backgrounds();
 
 	_estala = new Obstacles();
+	_estala->SetPosition(Vector2f(_randomX, -30.0f));
 
 	_mike = new Mike(1);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
 	_chicken = new PointUp(0);
+	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_cursor = new Select();
 	_start = new Select();
@@ -88,24 +92,25 @@ void Game::ProcessEvents()
 void Game::Update(float deltaTime)
 {
 
-	_estala->AddAcceleration(Vector2f(0.0f, 10.0f));
+	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
 	_estala->Update(deltaTime);
 
 	if (Keyboard::isKeyPressed(Keyboard::D)) {
 		if (_mike->GetPosition().x >= 700.0f)
 		_mike->SetPosition(Vector2f(700.0f, _mike->GetPosition().y));
-		_mike->SetVelocity(Vector2f(250.0f, 0.0f));
+		_mike->SetVelocity(Vector2f(100.0f, 0.0f));
 	}
 	else if
 		(Keyboard::isKeyPressed(Keyboard::A)) {
 		if (_mike->GetPosition().x <= 0.0f)
 			_mike->SetPosition(Vector2f(0.0f, _mike->GetPosition().y));
-			_mike->SetVelocity(Vector2f(-50.0f, 0.0f));
+			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
 	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
 	_mike->Update(deltaTime);
+	_chicken->Update(deltaTime);
 }
 
 void Game::CheckCollision() 

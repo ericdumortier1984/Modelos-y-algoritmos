@@ -1,1 +1,9 @@
-﻿  Mike Cavernas.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Debug\Mike Cavernas.exe
+﻿  Game.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(5,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(6,20): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(79,64): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(79,47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(83,84): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(83,65): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(162,8): warning C4101: 'deltaTime': variable local sin referencia
+  Mike Cavernas.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Debug\Mike Cavernas.exe
