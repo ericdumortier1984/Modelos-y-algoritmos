@@ -18,7 +18,6 @@ private:
 	Item* _chicken;
 	Menu* _cursor;
 	Menu* _start;
-	Menu* _reset;
 
 	Music _music;
 
@@ -31,7 +30,6 @@ private:
 	void Draw();
 	void CheckCollision();
 	void RespawnChicken();
-	void GameOver();
 	void RestartGame();
 
 	int UpdateLifes();

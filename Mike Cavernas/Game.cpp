@@ -24,7 +24,6 @@ Game::Game()
 
 	_cursor = new Menu();
 	_start = new Menu();
-	_reset = new Menu();
 
 	_gameStarted = false;
 	_gameOver = false;
@@ -82,6 +81,7 @@ void Game::ProcessEvents()
 			if (evt.mouseButton.button == Mouse::Left) {
 				if (!_gameStarted && _start->GetStartPressed(evt.mouseButton.x, evt.mouseButton.y)) {
 					_gameStarted = true;
+					_wnd->setMouseCursorVisible(false);
 					_music.stop();
 				}
 			}
@@ -181,21 +181,19 @@ void Game::Go()
 	}
 }
 
-void Game::GameOver() 
-{
-	if (_mike->GetLifes() <= 0) {
-		_gameOver = true;
-		_wnd->setMouseCursorVisible(true);
-	}
-}
-
 void Game::RestartGame()
 {
 
-	if (_mike->GetLifes() <= 0) {
-		_restartGame = true;
-		_mike->SetPosition(Vector2f(30.0f, 500.0f));
-	}
+	_gameStarted = false;
+	_gameOver = false;
+	_restartGame = true;
+
+	_mike = new Mike(3, 0);
+	_mike->SetPosition(Vector2f(30.0f, 500.0f));
+	_estala->SetPosition(Vector2f(_randomX, -30.0f));
+	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
+
+	CheckCollision();
 }
 
 void Game::Draw() 
@@ -207,7 +205,6 @@ void Game::Draw()
 		_cave->Draw(_wnd);
 		_rockPath->Draw(_wnd);
 		_start->Draw(_wnd);
-		_reset->Draw(_wnd);
 		_cursor->Draw(_wnd);
 	}
 	else {

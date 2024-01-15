@@ -4,8 +4,8 @@ class Menu
 {
 private:
 
-	Sprite _cursorSp, _startSp, _resetSp;
-	Texture _cursorTx, _startTx, _resetTx;
+	Sprite _cursorSp, _startSp;
+	Texture _cursorTx, _startTx;
 public:
 
 	Menu();
@@ -16,5 +16,4 @@ public:
 	Vector2f CursorGetPosition();
 
 	bool GetStartPressed(float x, float y);
-	bool GetResetPressed(float x, float y);
 };

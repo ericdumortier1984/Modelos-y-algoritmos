@@ -11,12 +11,7 @@ Menu::Menu()
 	_startTx.loadFromFile("Asset/Images/Start.png");
 	_startTx.setSmooth(true);
 	_startSp.setTexture(_startTx);
-	_startSp.setPosition(300.0f, 0.0f);
-
-	_resetTx.loadFromFile("Asset/Images/reset.png");
-	_resetTx.setSmooth(true);
-	_resetSp.setTexture(_resetTx);
-	_resetSp.setPosition(400.0f, 0.0f);
+	_startSp.setPosition(400.0f, 0.0f);
 }
 
 Menu::~Menu()
@@ -27,7 +22,6 @@ Menu::~Menu()
 void Menu::Draw(RenderWindow* _wnd) 
 {
 
-	_wnd->draw(_resetSp);
 	_wnd->draw(_startSp);
 	_wnd->draw(_cursorSp);
 }
@@ -52,9 +46,3 @@ bool Menu::GetStartPressed(float x, float y)
 	return bounds_startSp.contains(x, y);
 }
 
-bool Menu::GetResetPressed(float x, float y)
-{
-
-	FloatRect bounds_resetSp = _resetSp.getGlobalBounds();
-	return bounds_resetSp.contains(x, y);
-}
