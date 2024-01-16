@@ -1,5 +1,4 @@
 #include "Stadx.h"
-#include "Backgrounds.h"
 #include "Obstacles.h"
 #include "Mike.h"
 #include "Item.h"
@@ -23,8 +22,7 @@ private:
 	Music _musicLevel;
 
 	Font _font;
-	Text _lifesText;
-	Text _pointsText;
+	Text _lifesText, _pointsText, _titleText; 
 	
 	void ProcessEvents();
 	void Update(float deltaTime);

@@ -47,6 +47,13 @@ Game::Game()
 	_musicLevel.setVolume(25);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_titleText.setFont(_font);
+	_titleText.setCharacterSize(50);
+	_titleText.setFillColor(Color::White);
+	_titleText.setString("MIKE CAVERNAS");
+	_titleText.setPosition(250.0f, 250.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
 	_lifesText.setCharacterSize(20);
 	_lifesText.setFillColor(Color::White);
@@ -221,6 +228,7 @@ void Game::Draw()
 
 	if (!_gameStarted) {
 		_wnd->draw(_landscape);
+		_wnd->draw(_titleText);
 		_start->Draw(_wnd);
 		_cursor->Draw(_wnd);
 	}
