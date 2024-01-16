@@ -10,16 +10,17 @@ class Game
 private:
 
 	RenderWindow* _wnd;
-	Backgrounds* _cave;
-	Backgrounds* _landscape;
-	Backgrounds* _rockPath;
 	Obstacles* _estala;
 	Mike* _mike;
 	Item* _chicken;
 	Menu* _cursor;
 	Menu* _start;
 
-	Music _music;
+	Sprite _cave, _path, _landscape;
+	Texture _caveTx, _pathTx, _landscapeTx;
+
+	Music _musicPrincipal;
+	Music _musicLevel;
 
 	Font _font;
 	Text _lifesText;

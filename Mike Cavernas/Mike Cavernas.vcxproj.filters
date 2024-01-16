@@ -21,9 +21,6 @@
     <ClInclude Include="Stadx.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Backgrounds.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Obstacles.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -42,9 +39,6 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Mike Cavernas.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Backgrounds.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Obstacles.cpp">

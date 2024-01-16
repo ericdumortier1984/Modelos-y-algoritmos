@@ -3,9 +3,7 @@
 Backgrounds::Backgrounds() 
 {
 
-	_caveTx.loadFromFile("Asset/Images/Cave.png");
-	_caveSp.setTexture(_caveTx);
-	_caveSp.setPosition(0.0f, 30.0f);
+	
 
 	_landscapeTx.loadFromFile("Asset/Images/Landscape.png");
 	_landscapeSp.setTexture(_landscapeTx);
@@ -25,6 +23,6 @@ void Backgrounds::Draw(RenderWindow* _wnd)
 {
 
 	_wnd->draw(_landscapeSp);
-	_wnd->draw(_caveSp);
+	//_wnd->draw(_caveSp);
 	_wnd->draw(_pathSp);
 }

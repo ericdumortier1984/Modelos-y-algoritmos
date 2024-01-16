@@ -9,14 +9,22 @@ Game::Game()
 	_wnd->setFramerateLimit(60);
 	_wnd->setMouseCursorVisible(false);
 
-	_cave = new Backgrounds();
-	_landscape = new Backgrounds();
-	_rockPath = new Backgrounds();
+	_pathTx.loadFromFile("Asset/Images/RockPath.png");
+	_path.setTexture(_pathTx);
+	_path.setPosition(0.0f, 190.0f);
 
-	_estala = new Obstacles();
+	_landscapeTx.loadFromFile("Asset/Images/Landscape.png");
+	_landscape.setTexture(_landscapeTx);
+	_landscape.setPosition(0.0f, 0.0f);
+
+	_caveTx.loadFromFile("Asset/Images/Cave.png");
+	_cave.setTexture(_caveTx);
+	_cave.setPosition(0.0f, 30.0f);
+
+	_estala = new Obstacles;
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
 
-	_mike = new Mike(1, 0);
+	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
 	_chicken = new Item();
@@ -29,9 +37,14 @@ Game::Game()
 	_gameOver = false;
 	_restartGame = false;
 
-	_music.openFromFile("Asset/Audio/Musica_principal.ogg");
-	_music.setLoop(true);
-	_music.play();
+	_musicPrincipal.openFromFile("Asset/Audio/Musica_principal.ogg");
+	_musicPrincipal.setLoop(true);
+	_musicPrincipal.setVolume(75);
+	_musicPrincipal.play();
+
+	_musicLevel.openFromFile("Asset/Audio/Musica_nivel.ogg");
+	_musicLevel.setLoop(true);
+	_musicLevel.setVolume(25);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
@@ -55,9 +68,6 @@ Game::~Game()
 	delete _chicken;
 	delete _estala;
 	delete _cursor;
-	delete _rockPath;
-	delete _cave;
-	delete _landscape;
 	delete _wnd;
 }
 
@@ -82,7 +92,8 @@ void Game::ProcessEvents()
 				if (!_gameStarted && _start->GetStartPressed(evt.mouseButton.x, evt.mouseButton.y)) {
 					_gameStarted = true;
 					_wnd->setMouseCursorVisible(false);
-					_music.stop();
+					_musicPrincipal.stop();
+					_musicLevel.play();
 				}
 			}
 		}
@@ -106,9 +117,16 @@ void Game::Update(float deltaTime)
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
+	if (Keyboard::isKeyPressed(Keyboard::Space)) {
+		_mike->SetVelocity(Vector2f(0.0f, -20.0f));	
+	}
 
 	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
 	_estala->Update(deltaTime);
+	if (_estala->GetPosition().y > 600) {
+		_estala->SetPosition(Vector2f(rand() % 700, -30.0f));
+	}
+
 	_mike->Update(deltaTime);
 	_mike->UpdateOrientation();
 	_chicken->Update(deltaTime);
@@ -118,13 +136,13 @@ void Game::CheckCollision()
 {
 
 	Vector2f estalaPos = _estala->GetPosition();
-	if (_estala->isActive()){
-		if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
-			_mike->Pricked();
-			_estala->SetVisible(false);
+		if (_estala->isActive()) {
+			if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
+				_mike->Pricked();
+				_estala->SetVisible(false);
+			}
 		}
-	}
-
+	
 	Vector2f chickenPos = _chicken->GetPosition();
 	if (_chicken->IsActive()) {
 		if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
@@ -200,22 +218,22 @@ void Game::Draw()
 {
 
 	_wnd->clear();
+
 	if (!_gameStarted) {
-		_landscape->Draw(_wnd);
-		_cave->Draw(_wnd);
-		_rockPath->Draw(_wnd);
+		_wnd->draw(_landscape);
 		_start->Draw(_wnd);
 		_cursor->Draw(_wnd);
 	}
 	else {
-		_landscape->Draw(_wnd);
-		_cave->Draw(_wnd);
-		_rockPath->Draw(_wnd);
+		_wnd->clear(Color::Cyan);
+		_wnd->draw(_cave);
+		_wnd->draw(_path);
 		_wnd->draw(_lifesText);
 		_wnd->draw(_pointsText);
 		_estala->Draw(_wnd);
 		_chicken->Draw(_wnd);
 		_mike->Draw(_wnd);
 	}
+
 	_wnd->display();
 }

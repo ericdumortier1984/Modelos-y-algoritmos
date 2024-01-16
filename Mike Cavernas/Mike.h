@@ -10,6 +10,7 @@ private:
 	int _lifes;
 	int _points;
 
+	bool _isOnGround;
 	float x;
 	float y;
 
