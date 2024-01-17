@@ -11,7 +11,7 @@ Menu::Menu()
 	_startTx.loadFromFile("Asset/Images/Start.png");
 	_startTx.setSmooth(true);
 	_startSp.setTexture(_startTx);
-	_startSp.setPosition(250.0f, 0.0f);
+	_startSp.setPosition(250.0f, 100.0f);
 }
 
 Menu::~Menu()

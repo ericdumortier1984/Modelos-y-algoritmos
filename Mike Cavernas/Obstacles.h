@@ -4,8 +4,8 @@ class Obstacles {
 
 private:
 
-	Sprite _estalaSp;
-	Texture _estalaTx;
+	Sprite _estalaSp, _pteroSp;
+	Texture _estalaTx, _pteroTx;
 
 	Vector2f _position;
 	Vector2f _velocity;

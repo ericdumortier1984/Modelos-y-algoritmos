@@ -6,6 +6,9 @@ Obstacles::Obstacles() {
 	_estalaSp.setTexture(_estalaTx);
 	_estalaSp.setOrigin(_estalaTx.getSize().x / 2, _estalaTx.getSize().y / 2);
 
+	_pteroTx.loadFromFile("Asset/Images/Ptero.png");
+	_pteroSp.setTexture(_pteroTx);
+
 	_position.x = 0.0f;
 	_position.y = 0.0f;
 	_velocity.x = 0.0f;
@@ -38,6 +41,7 @@ void Obstacles::AddAcceleration(Vector2f acc) {
 void Obstacles::Draw(RenderWindow* _wnd) {
 
 	_wnd->draw(_estalaSp);
+	_wnd->draw(_pteroSp);
 }
 
 void Obstacles::SetVisible(bool visible) {

@@ -9,20 +9,10 @@ Game::Game()
 	_wnd->setFramerateLimit(60);
 	_wnd->setMouseCursorVisible(false);
 
-	_pathTx.loadFromFile("Asset/Images/RockPath.png");
-	_path.setTexture(_pathTx);
-	_path.setPosition(0.0f, 190.0f);
-
-	_landscapeTx.loadFromFile("Asset/Images/Landscape.png");
-	_landscape.setTexture(_landscapeTx);
-	_landscape.setPosition(0.0f, 0.0f);
-
-	_caveTx.loadFromFile("Asset/Images/Cave.png");
-	_cave.setTexture(_caveTx);
-	_cave.setPosition(0.0f, 30.0f);
-
 	_estala = new Obstacles;
+	_ptero = new Obstacles;
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
+	_ptero->SetPosition(Vector2f(100.0f, 200.0f));
 
 	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
@@ -46,26 +36,54 @@ Game::Game()
 	_musicLevel.setLoop(true);
 	_musicLevel.setVolume(25);
 
+	_woohooBf.loadFromFile("Asset/Audio/Woo_hoo.wav");
+	_woohoo.setBuffer(_woohooBf);
+	_woohoo.setVolume(50);
+
+	_dohBf.loadFromFile("Asset/Audio/Doh.wav");
+	_doh.setBuffer(_dohBf);
+	_doh.setVolume(50);
+
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_titleText.setFont(_font);
 	_titleText.setCharacterSize(50);
-	_titleText.setFillColor(Color::White);
+	_titleText.setFillColor(Color::Black);
 	_titleText.setString("MIKE CAVERNAS");
-	_titleText.setPosition(250.0f, 250.0f);
+	_titleText.setPosition(250.0f, 100.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
 	_lifesText.setCharacterSize(20);
-	_lifesText.setFillColor(Color::White);
+	_lifesText.setFillColor(Color::Black);
 	_lifesText.setString("MIKE: 3");
 	_lifesText.setPosition(0.0f, 0.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_pointsText.setFont(_font);
 	_pointsText.setCharacterSize(20);
-	_pointsText.setFillColor(Color::White);
+	_pointsText.setFillColor(Color::Black);
 	_pointsText.setString("POINTS: 0");
 	_pointsText.setPosition(650.0f, 0.0f);
+
+	_pathTx.loadFromFile("Asset/Images/RockPath.png");
+	_path.setTexture(_pathTx);
+	_path.setPosition(0.0f, 190.0f);
+
+	_landscapeTx.loadFromFile("Asset/Images/Landscape.png");
+	_landscape.setTexture(_landscapeTx);
+	_landscape.setPosition(0.0f, 0.0f);
+
+	_caveTx.loadFromFile("Asset/Images/Cave.png");
+	_cave.setTexture(_caveTx);
+	_cave.setPosition(0.0f, 30.0f);
+
+	_stairTx.loadFromFile("Asset/Images/Stair_wood.png");
+	_stair.setTexture(_stairTx);
+	_stair.setPosition(250.0f, 390.0f);
+
+	_levelTx.loadFromFile("Asset/Images/Level.png");
+	_level.setTexture(_levelTx);
+	_level.setPosition(200.0f, 290.0f);
 }
 
 Game::~Game() 
@@ -112,22 +130,23 @@ void Game::Update(float deltaTime)
 
 	if (Keyboard::isKeyPressed(Keyboard::D)) {
 		if (_mike->GetPosition().x >= 750.0f)
-		_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
-		_mike->SetVelocity(Vector2f(100.0f, 0.0f));
+		    _mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
+		    _mike->SetVelocity(Vector2f(100.0f, 0.0f));
 	}
-	else if
-		(Keyboard::isKeyPressed(Keyboard::A)) {
+    else if (Keyboard::isKeyPressed(Keyboard::A)) {
 		if (_mike->GetPosition().x <= 50.0f)
 			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
 			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
 	}
+	else if (Keyboard::isKeyPressed(Keyboard::W)) {
+		_mike->SetVelocity(Vector2f(0.0f, -50.0f));	
+	}
+	else if (Keyboard::isKeyPressed(Keyboard::S)) {
+		_mike->SetVelocity(Vector2f(0.0f, 50.0f));
+	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Space)) {
-		_mike->SetVelocity(Vector2f(0.0f, -20.0f));	
-	}
-
 	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
 	_estala->Update(deltaTime);
 	if (_estala->GetPosition().y > 600) {
@@ -145,6 +164,7 @@ void Game::CheckCollision()
 	Vector2f estalaPos = _estala->GetPosition();
 		if (_estala->isActive()) {
 			if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
+				_doh.play();
 				_mike->Pricked();
 				_estala->SetVisible(false);
 			}
@@ -153,6 +173,7 @@ void Game::CheckCollision()
 	Vector2f chickenPos = _chicken->GetPosition();
 	if (_chicken->IsActive()) {
 		if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
+			_woohoo.play();
 			_mike->PointUp();
 			_chicken->SetVisible(false);
 			RespawnChicken();
@@ -236,9 +257,12 @@ void Game::Draw()
 		_wnd->clear(Color::Cyan);
 		_wnd->draw(_cave);
 		_wnd->draw(_path);
+		_wnd->draw(_level);
+		_wnd->draw(_stair);
 		_wnd->draw(_lifesText);
 		_wnd->draw(_pointsText);
 		_estala->Draw(_wnd);
+		_ptero->Draw(_wnd);
 		_chicken->Draw(_wnd);
 		_mike->Draw(_wnd);
 	}

@@ -10,16 +10,20 @@ private:
 
 	RenderWindow* _wnd;
 	Obstacles* _estala;
+	Obstacles* _ptero;
 	Mike* _mike;
 	Item* _chicken;
 	Menu* _cursor;
 	Menu* _start;
 
-	Sprite _cave, _path, _landscape;
-	Texture _caveTx, _pathTx, _landscapeTx;
+	Sprite _cave, _path, _landscape, _stair, _level;
+	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx;
 
 	Music _musicPrincipal;
 	Music _musicLevel;
+
+	SoundBuffer _woohooBf, _dohBf;
+	Sound _woohoo, _doh;
 
 	Font _font;
 	Text _lifesText, _pointsText, _titleText; 
