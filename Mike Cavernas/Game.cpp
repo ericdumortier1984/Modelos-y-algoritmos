@@ -9,10 +9,10 @@ Game::Game()
 	_wnd->setFramerateLimit(60);
 	_wnd->setMouseCursorVisible(false);
 
-	_estala = new Obstacles;
+	_estala = new Estalactita;
 	_ptero = new Obstacles;
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
-	_ptero->SetPosition(Vector2f(100.0f, 200.0f));
+	_ptero->SetPosition(Vector2f(680.0f, 200.0f));
 
 	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
@@ -92,6 +92,7 @@ Game::~Game()
 	delete _mike;
 	delete _chicken;
 	delete _estala;
+	delete _ptero;
 	delete _cursor;
 	delete _wnd;
 }
@@ -139,18 +140,28 @@ void Game::Update(float deltaTime)
 			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::W)) {
-		_mike->SetVelocity(Vector2f(0.0f, -50.0f));	
+		if (_mike->GetPosition().x >= 255.0f && _mike->GetPosition().x <= 260.0f) 
+			_mike->SetVelocity(Vector2f(0.0f, -50.0f));
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::S)) {
-		_mike->SetVelocity(Vector2f(0.0f, 50.0f));
+		if (_mike->GetPosition().y >= 500.0f)
+			_mike->SetPosition(Vector2f(_mike->GetPosition().x, 500.0f));
+		    _mike->SetVelocity(Vector2f(0.0f, 50.0f));
 	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
+
 	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
 	_estala->Update(deltaTime);
 	if (_estala->GetPosition().y > 600) {
 		_estala->SetPosition(Vector2f(rand() % 700, -30.0f));
+	}
+
+	_ptero->AddAcceleration(Vector2f(-20.0f, 00.0f));
+	_ptero->Update(deltaTime);
+	if (_ptero->GetPosition().x < 0.0f) {
+		_ptero->SetPosition(Vector2f(680.0f, 200.0f));
 	}
 
 	_mike->Update(deltaTime);
@@ -166,7 +177,16 @@ void Game::CheckCollision()
 			if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
 				_doh.play();
 				_mike->Pricked();
-				_estala->SetVisible(false);
+				RespawnEstala();
+			}
+		}
+
+		Vector2f pteroPos = _ptero->GetPosition();
+		if (_ptero->isActive()) {
+			if (_mike->GetPricked(pteroPos.x, pteroPos.y)) {
+				_doh.play();
+				_mike->Pricked();
+				RespawnPtero();
 			}
 		}
 	
@@ -175,7 +195,6 @@ void Game::CheckCollision()
 		if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
 			_woohoo.play();
 			_mike->PointUp();
-			_chicken->SetVisible(false);
 			RespawnChicken();
 		}
 	}
@@ -186,7 +205,21 @@ void Game::RespawnChicken()
 
 	float _randomX = rand() % 700;
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
-	_chicken->SetVisible(true);
+}
+
+void Game::RespawnEstala()
+{
+
+	float _randomX = rand() % 700;
+	_estala->SetPosition(Vector2f(_randomX, -30.0f));
+	_estala->AddAcceleration(Vector2f(0.0f, 0.5f));
+}
+
+void Game::RespawnPtero()
+{
+
+	_ptero->SetPosition(Vector2f(630.0f, 200.0f));
+	_ptero->AddAcceleration(Vector2f(20.0f, 0.0f));
 }
 
 int Game::UpdateLifes() 

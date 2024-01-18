@@ -2,10 +2,6 @@
 
 Obstacles::Obstacles() {
 
-	_estalaTx.loadFromFile("Asset/Images/Estala.png");
-	_estalaSp.setTexture(_estalaTx);
-	_estalaSp.setOrigin(_estalaTx.getSize().x / 2, _estalaTx.getSize().y / 2);
-
 	_pteroTx.loadFromFile("Asset/Images/Ptero.png");
 	_pteroSp.setTexture(_pteroTx);
 
@@ -23,7 +19,8 @@ Obstacles::~Obstacles() {
 
 void Obstacles::Update(float deltaTime) {
 
-	_estalaSp.setPosition(_position);
+	
+	_pteroSp.setPosition(_position);
 	_position.x += _velocity.x * deltaTime;
 	_position.y += _velocity.y * deltaTime;
 	_velocity.x += _acceleration.x * deltaTime;
@@ -40,7 +37,7 @@ void Obstacles::AddAcceleration(Vector2f acc) {
 
 void Obstacles::Draw(RenderWindow* _wnd) {
 
-	_wnd->draw(_estalaSp);
+	
 	_wnd->draw(_pteroSp);
 }
 

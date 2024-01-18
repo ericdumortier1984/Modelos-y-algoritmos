@@ -1,11 +1,11 @@
 #include "Stadx.h"
 
-class Obstacles {
-
+class Obstacles 
+{
 private:
 
-	Sprite _estalaSp, _pteroSp;
-	Texture _estalaTx, _pteroTx;
+	Sprite _pteroSp;
+	Texture _pteroTx;
 
 	Vector2f _position;
 	Vector2f _velocity;

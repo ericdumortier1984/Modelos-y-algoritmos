@@ -1,5 +1,6 @@
 #include "Stadx.h"
 #include "Obstacles.h"
+#include "Estalactita.h"
 #include "Mike.h"
 #include "Item.h"
 #include "Menu.h"
@@ -9,7 +10,7 @@ class Game
 private:
 
 	RenderWindow* _wnd;
-	Obstacles* _estala;
+	Estalactita* _estala;
 	Obstacles* _ptero;
 	Mike* _mike;
 	Item* _chicken;
@@ -33,6 +34,8 @@ private:
 	void Draw();
 	void CheckCollision();
 	void RespawnChicken();
+	void RespawnEstala();
+	void RespawnPtero();
 	void RestartGame();
 
 	int UpdateLifes();
