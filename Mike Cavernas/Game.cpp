@@ -22,10 +22,11 @@ Game::Game()
 
 	_cursor = new Menu();
 	_start = new Menu();
+	_game_over = new Menu();
 
 	_gameStarted = false;
-	_gameOver = false;
 	_restartGame = false;
+	_youWin = false;
 
 	_musicPrincipal.openFromFile("Asset/Audio/Musica_principal.ogg");
 	_musicPrincipal.setLoop(true);
@@ -35,6 +36,10 @@ Game::Game()
 	_musicLevel.openFromFile("Asset/Audio/Musica_nivel.ogg");
 	_musicLevel.setLoop(true);
 	_musicLevel.setVolume(25);
+
+	_musicGameOver.openFromFile("Asset/Audio/Musica_game_over.ogg");
+	_musicGameOver.setLoop(true);
+	_musicGameOver.setVolume(75);
 
 	_woohooBf.loadFromFile("Asset/Audio/Woo_hoo.wav");
 	_woohoo.setBuffer(_woohooBf);
@@ -94,6 +99,8 @@ Game::~Game()
 	delete _estala;
 	delete _ptero;
 	delete _cursor;
+	delete _game_over;
+	delete _start;
 	delete _wnd;
 }
 
@@ -119,6 +126,7 @@ void Game::ProcessEvents()
 					_gameStarted = true;
 					_wnd->setMouseCursorVisible(false);
 					_musicPrincipal.stop();
+					_musicGameOver.stop();
 					_musicLevel.play();
 				}
 			}
@@ -161,7 +169,7 @@ void Game::Update(float deltaTime)
 	_ptero->SetVelocity(Vector2f(-150.0f, 00.0f));
 	_ptero->Update(deltaTime);
 	if (_ptero->GetPosition().x < 0.0f) {
-		_ptero->SetPosition(Vector2f(830.0f, 230.0f));
+		_ptero->SetPosition(Vector2f(830.0f, 300.0f));
 	}
 
 	_mike->Update(deltaTime);
@@ -212,14 +220,14 @@ void Game::RespawnEstala()
 
 	float _randomX = rand() % 700;
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
-	_estala->AddAcceleration(Vector2f(0.0f, 0.5f));
+	_estala->SetVelocity(Vector2f(0.0f, -30.0f));
 }
 
 void Game::RespawnPtero()
 {
 
-	_ptero->SetPosition(Vector2f(630.0f, 200.0f));
-	_ptero->AddAcceleration(Vector2f(20.0f, 0.0f));
+	_ptero->SetPosition(Vector2f(630.0f, 300.0f));
+	_ptero->SetVelocity(Vector2f(20.0f, 0.0f));
 }
 
 int Game::UpdateLifes() 
@@ -240,6 +248,11 @@ int Game::UpdatePoints()
 
 	int _mikePoints = _mike->GetPoints();
 	_pointsText.setString("POINTS: " + to_string(_mikePoints));
+
+	if (_mikePoints == 100) {
+		WinGame();
+	}
+
 	return _mikePoints;
 }
 
@@ -264,7 +277,6 @@ void Game::RestartGame()
 {
 	
 	_gameStarted = false;
-	_gameOver = false;
 	_restartGame = true;
 
 	_mike = new Mike(3, 0);
@@ -274,8 +286,18 @@ void Game::RestartGame()
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_musicLevel.stop();
-
+	_musicGameOver.play();
+	
 	CheckCollision();
+}
+
+void Game::WinGame()
+{
+
+	_youWin = true;
+
+	_musicLevel.stop();
+
 }
 
 void Game::Draw() 
@@ -288,6 +310,9 @@ void Game::Draw()
 		_wnd->draw(_titleText);
 		_start->Draw(_wnd);
 		_cursor->Draw(_wnd);
+	}
+	else if (_youWin) {
+		_wnd->draw(_landscape);
 	}
 	else {
 		_wnd->clear(Color::Cyan);

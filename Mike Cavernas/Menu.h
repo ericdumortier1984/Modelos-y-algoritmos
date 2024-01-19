@@ -4,8 +4,8 @@ class Menu
 {
 private:
 
-	Sprite _cursorSp, _startSp;
-	Texture _cursorTx, _startTx;
+	Sprite _cursorSp, _startSp, _game_overSp;
+	Texture _cursorTx, _startTx, _game_overTx;
 public:
 
 	Menu();

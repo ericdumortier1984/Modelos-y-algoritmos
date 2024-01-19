@@ -16,12 +16,12 @@ private:
 	Item* _chicken;
 	Menu* _cursor;
 	Menu* _start;
+	Menu* _game_over;
 
 	Sprite _cave, _path, _landscape, _stair, _level;
 	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx;
 
-	Music _musicPrincipal;
-	Music _musicLevel;
+	Music _musicPrincipal, _musicLevel, _musicGameOver;
 
 	SoundBuffer _woohooBf, _dohBf;
 	Sound _woohoo, _doh;
@@ -37,6 +37,7 @@ private:
 	void RespawnEstala();
 	void RespawnPtero();
 	void RestartGame();
+	void WinGame();
 
 	int UpdateLifes();
 	int UpdatePoints();
@@ -44,8 +45,8 @@ private:
 	float _randomX;
 
 	bool _gameStarted;
-	bool _gameOver;
 	bool _restartGame;
+	bool _youWin;
 public:
 
 	Game();
