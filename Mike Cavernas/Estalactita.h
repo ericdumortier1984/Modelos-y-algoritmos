@@ -12,6 +12,7 @@ private:
 	Vector2f _acceleration;
 
 	bool _isVisible;
+
 public:
 
 	Estalactita();

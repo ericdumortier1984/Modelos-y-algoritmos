@@ -10,9 +10,9 @@ Game::Game()
 	_wnd->setMouseCursorVisible(false);
 
 	_estala = new Estalactita;
-	_ptero = new Obstacles;
+	_ptero = new Pterodactile;
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
-	_ptero->SetPosition(Vector2f(680.0f, 200.0f));
+	_ptero->SetPosition(Vector2f(830.0f, 230.0f));
 
 	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
@@ -152,16 +152,16 @@ void Game::Update(float deltaTime)
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
 
-	_estala->AddAcceleration(Vector2f(0.0f, 20.0f));
+	_estala->SetVelocity(Vector2f(0.0f, 150.0f));
 	_estala->Update(deltaTime);
 	if (_estala->GetPosition().y > 600) {
 		_estala->SetPosition(Vector2f(rand() % 700, -30.0f));
 	}
 
-	_ptero->AddAcceleration(Vector2f(-20.0f, 00.0f));
+	_ptero->SetVelocity(Vector2f(-150.0f, 00.0f));
 	_ptero->Update(deltaTime);
 	if (_ptero->GetPosition().x < 0.0f) {
-		_ptero->SetPosition(Vector2f(680.0f, 200.0f));
+		_ptero->SetPosition(Vector2f(830.0f, 230.0f));
 	}
 
 	_mike->Update(deltaTime);
@@ -262,7 +262,7 @@ void Game::Go()
 
 void Game::RestartGame()
 {
-
+	
 	_gameStarted = false;
 	_gameOver = false;
 	_restartGame = true;
@@ -270,7 +270,10 @@ void Game::RestartGame()
 	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
+	_ptero->SetPosition(Vector2f(830.0f, 200.0f));
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
+
+	_musicLevel.stop();
 
 	CheckCollision();
 }

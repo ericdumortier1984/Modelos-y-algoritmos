@@ -18,10 +18,9 @@ Estalactita::Estalactita()
 Estalactita::~Estalactita()
 {
 
-
 }
 
-void Estalactita::Update(float deltaTime)
+ void Estalactita::Update(float deltaTime)
 {
 
 	_estalaSp.setPosition(_position);
@@ -32,7 +31,6 @@ void Estalactita::Update(float deltaTime)
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
 }
-
 void Estalactita::AddAcceleration(Vector2f acc) {
 
 	_acceleration.x += acc.x;
@@ -40,7 +38,6 @@ void Estalactita::AddAcceleration(Vector2f acc) {
 }
 
 void Estalactita::Draw(RenderWindow* _wnd) {
-
 
 	_wnd->draw(_estalaSp);
 }

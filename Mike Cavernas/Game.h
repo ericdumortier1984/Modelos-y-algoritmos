@@ -1,5 +1,5 @@
 #include "Stadx.h"
-#include "Obstacles.h"
+#include "Pterodactile.h"
 #include "Estalactita.h"
 #include "Mike.h"
 #include "Item.h"
@@ -11,7 +11,7 @@ private:
 
 	RenderWindow* _wnd;
 	Estalactita* _estala;
-	Obstacles* _ptero;
+	Pterodactile* _ptero;
 	Mike* _mike;
 	Item* _chicken;
 	Menu* _cursor;
