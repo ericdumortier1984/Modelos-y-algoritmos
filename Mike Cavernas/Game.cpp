@@ -21,11 +21,9 @@ Game::Game()
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_cursor = new Menu();
-	_start = new Menu();
-	_game_over = new Menu();
 
-	_gameStarted = false;
 	_restartGame = false;
+	_gameOver = false;
 	_youWin = false;
 
 	_musicPrincipal.openFromFile("Asset/Audio/Musica_principal.ogg");
@@ -70,6 +68,39 @@ Game::Game()
 	_pointsText.setString("POINTS: 0");
 	_pointsText.setPosition(650.0f, 0.0f);
 
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_winText.setFont(_font);
+	_winText.setCharacterSize(40);
+	_winText.setFillColor(Color::White);
+	_winText.setString("YOU WIN");
+	_winText.setPosition(550.0f, 100.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_loseText.setFont(_font);
+	_loseText.setCharacterSize(40);
+	_loseText.setFillColor(Color::White);
+	_loseText.setString("GAME OVER");
+	_loseText.setPosition(550.0f, 100.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_signTextOne.setFont(_font);
+	_signTextOne.setCharacterSize(11);
+	_signTextOne.setFillColor(Color::Black);
+	_signTextOne.setString("TAKE FIVE CHICKEN");
+	_signTextOne.setPosition(110.0f, 510.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_signTextTwo.setFont(_font);
+	_signTextTwo.setCharacterSize(11);
+	_signTextTwo.setFillColor(Color::Black);
+	_signTextTwo.setString("GET THE KEY");
+	_signTextTwo.setPosition(120.0f, 540.0f);
+
+	_startTx.loadFromFile("Asset/Images/Start.png");
+	_startTx.setSmooth(true);
+	_startButton.setTexture(_startTx);
+	_startButton.setPosition(250.0f, 100.0f);
+	
 	_pathTx.loadFromFile("Asset/Images/RockPath.png");
 	_path.setTexture(_pathTx);
 	_path.setPosition(0.0f, 190.0f);
@@ -89,6 +120,13 @@ Game::Game()
 	_levelTx.loadFromFile("Asset/Images/Level.png");
 	_level.setTexture(_levelTx);
 	_level.setPosition(200.0f, 290.0f);
+
+	_mikeWinnerTx.loadFromFile("Asset/Images/MIke_winner.png");
+	_mikeWinner.setTexture(_mikeWinnerTx);
+
+	_signTx.loadFromFile("Asset/Images/Sign.png");
+	_sign.setTexture(_signTx);
+	_sign.setPosition(100.0f, 490.0f);
 }
 
 Game::~Game() 
@@ -99,8 +137,6 @@ Game::~Game()
 	delete _estala;
 	delete _ptero;
 	delete _cursor;
-	delete _game_over;
-	delete _start;
 	delete _wnd;
 }
 
@@ -122,7 +158,7 @@ void Game::ProcessEvents()
 		}
 		if (evt.type == Event::MouseButtonPressed) {
 			if (evt.mouseButton.button == Mouse::Left) {
-				if (!_gameStarted && _start->GetStartPressed(evt.mouseButton.x, evt.mouseButton.y)) {
+				if (!_gameStarted && GetStartPressed(evt.mouseButton.x, evt.mouseButton.y)) {
 					_gameStarted = true;
 					_wnd->setMouseCursorVisible(false);
 					_musicPrincipal.stop();
@@ -131,12 +167,24 @@ void Game::ProcessEvents()
 				}
 			}
 		}
+		if (evt.type == Event::KeyPressed) {
+			if (evt.key.code == Keyboard::P) {
+				GamePause();
+			}
+		}
+		if (evt.type == Event::KeyPressed) {
+			if (evt.key.code == Keyboard::R) {
+				RestartGame();
+			}
+		}
+		
 	}
 }
 
 void Game::Update(float deltaTime)
 {
 
+	//Movimientos
 	if (Keyboard::isKeyPressed(Keyboard::D)) {
 		if (_mike->GetPosition().x >= 750.0f)
 		    _mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
@@ -175,6 +223,21 @@ void Game::Update(float deltaTime)
 	_mike->Update(deltaTime);
 	_mike->UpdateOrientation();
 	_chicken->Update(deltaTime);
+
+	//Funciones
+	if (_gameStarted) {
+		if (_mike->GetLifes() == 0) {
+			_musicLevel.stop();
+			_musicGameOver.play();
+			GameOver();
+			RestartGame();
+		}
+		else if (_mike->GetPoints() == 100) {
+			_musicLevel.stop();
+			YouWin();
+			RestartGame();
+		}
+	}
 }
 
 void Game::CheckCollision() 
@@ -189,7 +252,7 @@ void Game::CheckCollision()
 			}
 		}
 
-		Vector2f pteroPos = _ptero->GetPosition();
+	Vector2f pteroPos = _ptero->GetPosition();
 		if (_ptero->isActive()) {
 			if (_mike->GetPricked(pteroPos.x, pteroPos.y)) {
 				_doh.play();
@@ -199,8 +262,8 @@ void Game::CheckCollision()
 		}
 	
 	Vector2f chickenPos = _chicken->GetPosition();
-	if (_chicken->IsActive()) {
-		if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
+	    if (_chicken->IsActive()) {
+		   if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
 			_woohoo.play();
 			_mike->PointUp();
 			RespawnChicken();
@@ -226,7 +289,7 @@ void Game::RespawnEstala()
 void Game::RespawnPtero()
 {
 
-	_ptero->SetPosition(Vector2f(630.0f, 300.0f));
+	_ptero->SetPosition(Vector2f(830.0f, 300.0f));
 	_ptero->SetVelocity(Vector2f(20.0f, 0.0f));
 }
 
@@ -235,10 +298,6 @@ int Game::UpdateLifes()
 
 	int _mikeLifes = _mike->GetLifes();
 	_lifesText.setString("MIKE: " + to_string(_mikeLifes));
-
-	if (_mikeLifes <= 0) {
-		RestartGame();
-	}
 
 	return _mikeLifes;
 }
@@ -249,11 +308,14 @@ int Game::UpdatePoints()
 	int _mikePoints = _mike->GetPoints();
 	_pointsText.setString("POINTS: " + to_string(_mikePoints));
 
-	if (_mikePoints == 100) {
-		WinGame();
-	}
-
 	return _mikePoints;
+}
+
+bool Game::GetStartPressed(float x, float y)
+{
+
+	FloatRect bounds_startButton = _startButton.getGlobalBounds();
+	return bounds_startButton.contains(x, y);
 }
 
 void Game::Go() 
@@ -286,18 +348,33 @@ void Game::RestartGame()
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_musicLevel.stop();
-	_musicGameOver.play();
 	
 	CheckCollision();
 }
 
-void Game::WinGame()
+void Game::GamePause()
+{
+
+	if (_gameStarted) {
+		_gameStarted = false;
+		_musicLevel.stop();
+	}
+	else {
+		_gameStarted = true;
+		_musicLevel.play();
+	}
+}
+
+void Game::GameOver()
+{
+
+	_gameOver = true;
+}
+
+void Game::YouWin()
 {
 
 	_youWin = true;
-
-	_musicLevel.stop();
-
 }
 
 void Game::Draw() 
@@ -308,11 +385,8 @@ void Game::Draw()
 	if (!_gameStarted) {
 		_wnd->draw(_landscape);
 		_wnd->draw(_titleText);
-		_start->Draw(_wnd);
+		_wnd->draw(_startButton);
 		_cursor->Draw(_wnd);
-	}
-	else if (_youWin) {
-		_wnd->draw(_landscape);
 	}
 	else {
 		_wnd->clear(Color::Cyan);
@@ -320,12 +394,21 @@ void Game::Draw()
 		_wnd->draw(_path);
 		_wnd->draw(_level);
 		_wnd->draw(_stair);
+		_wnd->draw(_sign);
 		_wnd->draw(_lifesText);
 		_wnd->draw(_pointsText);
+		_wnd->draw(_signTextOne);
+		_wnd->draw(_signTextTwo);
 		_estala->Draw(_wnd);
 		_ptero->Draw(_wnd);
 		_chicken->Draw(_wnd);
 		_mike->Draw(_wnd);
+		if (_youWin && !_gameStarted) {
+			_wnd->draw(_winText);
+		}
+		if (_gameOver && !_gameStarted) {
+			_wnd->draw(_loseText);
+		}
 	}
 
 	_wnd->display();

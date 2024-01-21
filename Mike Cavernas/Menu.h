@@ -4,8 +4,8 @@ class Menu
 {
 private:
 
-	Sprite _cursorSp, _startSp, _game_overSp;
-	Texture _cursorTx, _startTx, _game_overTx;
+	Sprite _cursorSp;
+	Texture _cursorTx;
 public:
 
 	Menu();
@@ -14,6 +14,4 @@ public:
 	void Draw(RenderWindow* _wnd);
 	void CursorSetPosition(float x, float y);
 	Vector2f CursorGetPosition();
-
-	bool GetStartPressed(float x, float y);
 };
