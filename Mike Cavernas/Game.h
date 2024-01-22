@@ -39,8 +39,6 @@ private:
 	void GameOver();
 	void YouWin();
 
-	Text ShowMessage(String _message);
-
 	int UpdateLifes();
 	int UpdatePoints();
 

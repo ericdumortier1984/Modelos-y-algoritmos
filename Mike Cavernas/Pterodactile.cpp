@@ -5,6 +5,7 @@ Pterodactile::Pterodactile()
 
 	_pteroTx.loadFromFile("Asset/Images/Ptero.png");
 	_pteroSp.setTexture(_pteroTx);
+	_pteroSp.setOrigin(_pteroTx.getSize().x / 2, _pteroTx.getSize().y / 2);
 
 	_position.x = 0.0f;
 	_position.y = 0.0f;

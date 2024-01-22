@@ -11,6 +11,7 @@ private:
 	int _points;
 
 	bool _isOnGround;
+
 	float x;
 	float y;
 
@@ -39,6 +40,7 @@ public:
 
 	bool GetPricked(float x, float y);
 	bool GetItem(float x, float y);
+
 	int GetLifes();
 	int GetPoints();
 };

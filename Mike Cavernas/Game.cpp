@@ -52,7 +52,8 @@ Game::Game()
 	_titleText.setCharacterSize(50);
 	_titleText.setFillColor(Color::Black);
 	_titleText.setString("MIKE CAVERNAS");
-	_titleText.setPosition(250.0f, 100.0f);
+	_titleText.setOrigin(_titleText.getLocalBounds().width / 2, 0);
+	_titleText.setPosition(400.0f, 100.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_lifesText.setFont(_font);
@@ -97,9 +98,9 @@ Game::Game()
 	_signTextTwo.setPosition(120.0f, 540.0f);
 
 	_startTx.loadFromFile("Asset/Images/Start.png");
-	_startTx.setSmooth(true);
 	_startButton.setTexture(_startTx);
-	_startButton.setPosition(250.0f, 100.0f);
+	_startButton.setOrigin(_startButton.getLocalBounds().width / 2, 0);
+	_startButton.setPosition(400.0f, 100.0f);
 	
 	_pathTx.loadFromFile("Asset/Images/RockPath.png");
 	_path.setTexture(_pathTx);
@@ -115,7 +116,8 @@ Game::Game()
 
 	_stairTx.loadFromFile("Asset/Images/Stair_wood.png");
 	_stair.setTexture(_stairTx);
-	_stair.setPosition(250.0f, 390.0f);
+	_stair.setPosition(300.0f, 390.0f);
+	_stair.setOrigin(_stairTx.getSize().x / 2, 0);
 
 	_levelTx.loadFromFile("Asset/Images/Level.png");
 	_level.setTexture(_levelTx);
@@ -177,7 +179,6 @@ void Game::ProcessEvents()
 				RestartGame();
 			}
 		}
-		
 	}
 }
 
@@ -186,23 +187,25 @@ void Game::Update(float deltaTime)
 
 	//Movimientos
 	if (Keyboard::isKeyPressed(Keyboard::D)) {
-		if (_mike->GetPosition().x >= 750.0f)
-		    _mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
-		    _mike->SetVelocity(Vector2f(100.0f, 0.0f));
+		if (_mike->GetPosition().x >= 750.0f) 
+			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
+			_mike->SetVelocity(Vector2f(100.0f, 0.0f));
 	}
     else if (Keyboard::isKeyPressed(Keyboard::A)) {
-		if (_mike->GetPosition().x <= 50.0f)
+		if (_mike->GetPosition().x <= 50.0f) 
 			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
 			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::W)) {
-		if (_mike->GetPosition().x >= 255.0f && _mike->GetPosition().x <= 260.0f) 
+		if (_mike->GetPosition().x >= 295.0f && _mike->GetPosition().x <= 305.0f) 
 			_mike->SetVelocity(Vector2f(0.0f, -50.0f));
+		if (_mike->GetPosition().y <= 300.0f)
+			_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::S)) {
-		if (_mike->GetPosition().y >= 500.0f)
+		if (_mike->GetPosition().y >= 500.0f) 
 			_mike->SetPosition(Vector2f(_mike->GetPosition().x, 500.0f));
-		    _mike->SetVelocity(Vector2f(0.0f, 50.0f));
+			_mike->SetVelocity(Vector2f(0.0f, 50.0f));
 	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
@@ -232,7 +235,7 @@ void Game::Update(float deltaTime)
 			GameOver();
 			RestartGame();
 		}
-		else if (_mike->GetPoints() == 100) {
+		else if (_mike->GetPoints() == 1000) {
 			_musicLevel.stop();
 			YouWin();
 			RestartGame();
@@ -243,7 +246,7 @@ void Game::Update(float deltaTime)
 void Game::CheckCollision() 
 {
 
-	Vector2f estalaPos = _estala->GetPosition();
+	    Vector2f estalaPos = _estala->GetPosition();
 		if (_estala->isActive()) {
 			if (_mike->GetPricked(estalaPos.x, estalaPos.y)) {
 				_doh.play();
@@ -252,7 +255,7 @@ void Game::CheckCollision()
 			}
 		}
 
-	Vector2f pteroPos = _ptero->GetPosition();
+	    Vector2f pteroPos = _ptero->GetPosition();
 		if (_ptero->isActive()) {
 			if (_mike->GetPricked(pteroPos.x, pteroPos.y)) {
 				_doh.play();
@@ -261,14 +264,14 @@ void Game::CheckCollision()
 			}
 		}
 	
-	Vector2f chickenPos = _chicken->GetPosition();
+	    Vector2f chickenPos = _chicken->GetPosition();
 	    if (_chicken->IsActive()) {
 		   if (_mike->GetItem(chickenPos.x, chickenPos.y)) {
-			_woohoo.play();
-			_mike->PointUp();
-			RespawnChicken();
-		}
-	}
+			   _woohoo.play();
+			   _mike->PointUp();
+			   RespawnChicken();
+		   }
+	    }
 }
 
 void Game::RespawnChicken()

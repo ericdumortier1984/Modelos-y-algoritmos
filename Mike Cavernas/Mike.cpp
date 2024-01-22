@@ -38,6 +38,7 @@ void Mike::Update(float deltaTime)
 
 void Mike::UpdateOrientation()
 {
+
 	if (_velocity.x > 0) {
 		_mikeSp.setScale(1, 1);
 	}
