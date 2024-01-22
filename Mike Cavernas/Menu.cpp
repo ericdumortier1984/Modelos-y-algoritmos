@@ -2,7 +2,7 @@
 
 Menu::Menu()
 {
-	_cursorTx.loadFromFile("Asset/Images/Cursor.png");
+	_cursorTx.loadFromFile("Asset/Images/Cursor_hammer.png");
 	_cursorTx.setSmooth(true);
 	_cursorSp.setTexture(_cursorTx);
 	Vector2u size = _cursorTx.getSize();

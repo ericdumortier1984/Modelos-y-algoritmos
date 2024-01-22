@@ -85,17 +85,17 @@ Game::Game()
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_signTextOne.setFont(_font);
-	_signTextOne.setCharacterSize(11);
+	_signTextOne.setCharacterSize(12);
 	_signTextOne.setFillColor(Color::Black);
 	_signTextOne.setString("TAKE FIVE CHICKEN");
-	_signTextOne.setPosition(110.0f, 510.0f);
+	_signTextOne.setPosition(115.0f, 490.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_signTextTwo.setFont(_font);
-	_signTextTwo.setCharacterSize(11);
+	_signTextTwo.setCharacterSize(12);
 	_signTextTwo.setFillColor(Color::Black);
-	_signTextTwo.setString("GET THE KEY");
-	_signTextTwo.setPosition(120.0f, 540.0f);
+	_signTextTwo.setString("THEN GET THE KEY");
+	_signTextTwo.setPosition(120.0f, 510.0f);
 
 	_startTx.loadFromFile("Asset/Images/Start.png");
 	_startButton.setTexture(_startTx);
@@ -123,12 +123,9 @@ Game::Game()
 	_level.setTexture(_levelTx);
 	_level.setPosition(200.0f, 290.0f);
 
-	_mikeWinnerTx.loadFromFile("Asset/Images/MIke_winner.png");
-	_mikeWinner.setTexture(_mikeWinnerTx);
-
-	_signTx.loadFromFile("Asset/Images/Sign.png");
+	_signTx.loadFromFile("Asset/Images/Sign_2.png");
 	_sign.setTexture(_signTx);
-	_sign.setPosition(100.0f, 490.0f);
+	_sign.setPosition(80.0f, 470.0f);
 }
 
 Game::~Game() 
@@ -190,11 +187,15 @@ void Game::Update(float deltaTime)
 		if (_mike->GetPosition().x >= 750.0f) 
 			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
 			_mike->SetVelocity(Vector2f(100.0f, 0.0f));
+			if (_mike->GetPosition().y >= 300.0f && _mike->GetPosition().y <= 498)
+				_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
     else if (Keyboard::isKeyPressed(Keyboard::A)) {
 		if (_mike->GetPosition().x <= 50.0f) 
 			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
 			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
+			if (_mike->GetPosition().y >= 300.0f && _mike->GetPosition().y <= 498.0f)
+				_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::W)) {
 		if (_mike->GetPosition().x >= 295.0f && _mike->GetPosition().x <= 305.0f) 
