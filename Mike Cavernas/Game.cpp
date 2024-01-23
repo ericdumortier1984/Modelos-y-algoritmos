@@ -19,6 +19,8 @@ Game::Game()
 
 	_chicken = new Item();
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
+	_key = new Item();
+	_key->SetKeyPosition(Vector2f(300.0f, 300.0f));
 
 	_cursor = new Menu();
 
@@ -207,6 +209,9 @@ void Game::Update(float deltaTime)
 		if (_mike->GetPosition().y >= 500.0f) 
 			_mike->SetPosition(Vector2f(_mike->GetPosition().x, 500.0f));
 			_mike->SetVelocity(Vector2f(0.0f, 50.0f));
+	}
+	else if (_mike->GetPosition().x >= 0.0f && _mike->GetPosition().x <= 800.0f && _mike->GetPosition().y <= 350.0f) {
+		_mike->SetPosition(Vector2f(_mike->GetPosition().x, 500.0f));
 	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));
@@ -406,6 +411,7 @@ void Game::Draw()
 		_estala->Draw(_wnd);
 		_ptero->Draw(_wnd);
 		_chicken->Draw(_wnd);
+		_key->Draw(_wnd);
 		_mike->Draw(_wnd);
 		if (_youWin && !_gameStarted) {
 			_wnd->draw(_winText);

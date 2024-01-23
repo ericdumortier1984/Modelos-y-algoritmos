@@ -10,10 +10,9 @@ private:
 	int _lifes;
 	int _points;
 
-	bool _isOnGround;
-
 	float x;
 	float y;
+	float _gravity;
 
 	Vector2f _position;
 	Vector2f _velocity;

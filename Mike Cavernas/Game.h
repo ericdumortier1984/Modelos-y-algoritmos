@@ -14,6 +14,7 @@ private:
 	Pterodactile* _ptero;
 	Mike* _mike;
 	Item* _chicken;
+	Item* _key;
 	Menu* _cursor;
 
 	Sprite _cave, _path, _landscape, _stair, _level, _mikeWinner, _sign, _startButton;
