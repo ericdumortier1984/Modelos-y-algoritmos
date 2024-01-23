@@ -210,8 +210,8 @@ void Game::Update(float deltaTime)
 			_mike->SetPosition(Vector2f(_mike->GetPosition().x, 500.0f));
 			_mike->SetVelocity(Vector2f(0.0f, 50.0f));
 	}
-	else if (_mike->GetPosition().x >= 0.0f && _mike->GetPosition().x <= 800.0f && _mike->GetPosition().y <= 350.0f) {
-		_mike->SetPosition(Vector2f(_mike->GetPosition().x, 500.0f));
+	else if ((_mike->GetPosition().x >= 0.0f && _mike->GetPosition().x <= 300.0f && _mike->GetPosition().y <= 500.0f) || (_mike->GetPosition().x >= 400.0f && _mike->GetPosition().x <= 800.0f && _mike->GetPosition().y <= 500.0f)) {
+		_mike->AddAcceleration(Vector2f(0.0f, 150.0f));
 	}
 	else {
 		_mike->SetVelocity(Vector2f(0.0f, 0.0f));

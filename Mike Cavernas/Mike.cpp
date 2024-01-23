@@ -16,7 +16,6 @@ Mike::Mike(int lifes, int points)
 	_velocity.y = 0.0f;
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
-	_gravity = 0.0000098f;
 }
 
 Mike::~Mike() 
@@ -32,7 +31,7 @@ void Mike::Update(float deltaTime)
 	_position.x += _velocity.x * deltaTime;
 	_position.y += _velocity.y * deltaTime;
 	_velocity.x += _acceleration.x * deltaTime;
-	_velocity.y += _gravity * deltaTime;
+	_velocity.y += _acceleration.y * deltaTime;
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
 }
