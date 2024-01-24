@@ -133,6 +133,13 @@ bool Mike::GetItem(float x, float y)
 	return bounds.contains(x, y);
 }
 
+bool Mike::GetKey(float x, float y)
+{
+
+	FloatRect bounds = _mikeSp.getGlobalBounds();
+	return bounds.contains(x, y);
+}
+
 int Mike::GetLifes() 
 {
 

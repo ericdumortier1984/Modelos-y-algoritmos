@@ -10,8 +10,9 @@ Game::Game()
 	_wnd->setMouseCursorVisible(false);
 
 	_estala = new Estalactita;
-	_ptero = new Pterodactile;
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
+
+	_ptero = new Pterodactile;
 	_ptero->SetPosition(Vector2f(830.0f, 230.0f));
 
 	_mike = new Mike(3, 0);
@@ -19,8 +20,9 @@ Game::Game()
 
 	_chicken = new Item();
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
-	_key = new Item();
-	_key->SetKeyPosition(Vector2f(300.0f, 300.0f));
+
+	_key = new Key();
+	_key->SetPosition(Vector2f(300.0f, 350.0f));
 
 	_cursor = new Menu();
 
@@ -70,6 +72,20 @@ Game::Game()
 	_pointsText.setFillColor(Color::Black);
 	_pointsText.setString("POINTS: 0");
 	_pointsText.setPosition(650.0f, 0.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_restartText.setFont(_font);
+	_restartText.setCharacterSize(20);
+	_restartText.setFillColor(Color::Black);
+	_restartText.setString("PRESS R TO RESTART");
+	_restartText.setPosition(150.0f, 0.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_pauseText.setFont(_font);
+	_pauseText.setCharacterSize(20);
+	_pauseText.setFillColor(Color::Black);
+	_pauseText.setString("PRESS P TO PAUSE");
+	_pauseText.setPosition(400.0f, 0.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_winText.setFont(_font);
@@ -134,6 +150,7 @@ Game::~Game()
 {
 
 	delete _mike;
+	delete _key;
 	delete _chicken;
 	delete _estala;
 	delete _ptero;
@@ -232,6 +249,11 @@ void Game::Update(float deltaTime)
 	_mike->Update(deltaTime);
 	_mike->UpdateOrientation();
 	_chicken->Update(deltaTime);
+	_key->Update(deltaTime);
+
+	if (_mike->GetPoints() == 1000) {
+		_key->SetKeyVisible(true);
+	}
 
 	//Funciones
 	if (_gameStarted) {
@@ -241,7 +263,7 @@ void Game::Update(float deltaTime)
 			GameOver();
 			RestartGame();
 		}
-		else if (_mike->GetPoints() == 1000) {
+		else if (_mike->GetKey(_key->GetPosition().x, _key->GetPosition().y)) {
 			_musicLevel.stop();
 			YouWin();
 			RestartGame();
@@ -278,6 +300,13 @@ void Game::CheckCollision()
 			   RespawnChicken();
 		   }
 	    }
+
+		Vector2f keyPos = _key->GetPosition();
+		if (_key->IsKeyActive()) {
+			if (_mike->GetKey(keyPos.x, keyPos.y)) {
+				RespawnKey();
+			}
+		}
 }
 
 void Game::RespawnChicken()
@@ -300,6 +329,12 @@ void Game::RespawnPtero()
 
 	_ptero->SetPosition(Vector2f(830.0f, 300.0f));
 	_ptero->SetVelocity(Vector2f(20.0f, 0.0f));
+}
+
+void Game::RespawnKey()
+{
+
+	_key->SetPosition(Vector2f(830.0f, 300.0f));
 }
 
 int Game::UpdateLifes() 
@@ -406,12 +441,16 @@ void Game::Draw()
 		_wnd->draw(_sign);
 		_wnd->draw(_lifesText);
 		_wnd->draw(_pointsText);
+		_wnd->draw(_restartText);
+		_wnd->draw(_pauseText);
 		_wnd->draw(_signTextOne);
 		_wnd->draw(_signTextTwo);
 		_estala->Draw(_wnd);
 		_ptero->Draw(_wnd);
 		_chicken->Draw(_wnd);
-		_key->Draw(_wnd);
+		if (_mike->GetPoints() >= 1000) {
+			_key->Draw(_wnd);
+		}
 		_mike->Draw(_wnd);
 		if (_youWin && !_gameStarted) {
 			_wnd->draw(_winText);

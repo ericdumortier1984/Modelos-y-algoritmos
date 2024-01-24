@@ -38,6 +38,7 @@ public:
 
 	bool GetPricked(float x, float y);
 	bool GetItem(float x, float y);
+	bool GetKey(float x, float y);
 
 	int GetLifes();
 	int GetPoints();

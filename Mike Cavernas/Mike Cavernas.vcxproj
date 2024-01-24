@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Estalactita.h" />
+    <ClInclude Include="Key.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Mike.h" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Estalactita.cpp" />
+    <ClCompile Include="Key.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Mike Cavernas.cpp" />

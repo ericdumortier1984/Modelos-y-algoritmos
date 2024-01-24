@@ -3,6 +3,7 @@
 #include "Estalactita.h"
 #include "Mike.h"
 #include "Item.h"
+#include "Key.h"
 #include "Menu.h"
 
 class Game 
@@ -14,7 +15,7 @@ private:
 	Pterodactile* _ptero;
 	Mike* _mike;
 	Item* _chicken;
-	Item* _key;
+	Key* _key;
 	Menu* _cursor;
 
 	Sprite _cave, _path, _landscape, _stair, _level, _mikeWinner, _sign, _startButton;
@@ -26,7 +27,7 @@ private:
 	Sound _woohoo, _doh;
 
 	Font _font;
-	Text _lifesText, _pointsText, _titleText, _winText, _loseText, _signTextOne, _signTextTwo;
+	Text _lifesText, _pointsText, _titleText, _winText, _loseText, _signTextOne, _signTextTwo, _pauseText, _restartText;
 	
 	void ProcessEvents();
 	void Update(float deltaTime);
@@ -35,6 +36,7 @@ private:
 	void RespawnChicken();
 	void RespawnEstala();
 	void RespawnPtero();
+	void RespawnKey();
 	void RestartGame();
 	void GamePause();
 	void GameOver();
