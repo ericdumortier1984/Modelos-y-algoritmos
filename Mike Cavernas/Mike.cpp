@@ -6,7 +6,7 @@ Mike::Mike(int lifes, int points)
 	_mikeTx.loadFromFile("Asset/Images/Mike.png");
 	_mikeSp.setTexture(_mikeTx);
 	_mikeSp.setOrigin(_mikeTx.getSize().x / 2, 0);
-
+	
 	_lifes = lifes;
 	_points = points;
 

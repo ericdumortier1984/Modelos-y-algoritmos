@@ -41,6 +41,8 @@ private:
 	void GamePause();
 	void GameOver();
 	void YouWin();
+	void ShowGameOverScreen();
+	void ShowWinnerScreen();
 
 	int UpdateLifes();
 	int UpdatePoints();

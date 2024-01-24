@@ -88,20 +88,6 @@ Game::Game()
 	_pauseText.setPosition(400.0f, 0.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
-	_winText.setFont(_font);
-	_winText.setCharacterSize(40);
-	_winText.setFillColor(Color::White);
-	_winText.setString("YOU WIN");
-	_winText.setPosition(550.0f, 100.0f);
-
-	_font.loadFromFile("Asset/Font/junegull.ttf");
-	_loseText.setFont(_font);
-	_loseText.setCharacterSize(40);
-	_loseText.setFillColor(Color::White);
-	_loseText.setString("GAME OVER");
-	_loseText.setPosition(550.0f, 100.0f);
-
-	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_signTextOne.setFont(_font);
 	_signTextOne.setCharacterSize(12);
 	_signTextOne.setFillColor(Color::Black);
@@ -251,20 +237,17 @@ void Game::Update(float deltaTime)
 	_chicken->Update(deltaTime);
 	_key->Update(deltaTime);
 
+	//Funciones
 	if (_mike->GetPoints() == 1000) {
 		_key->SetKeyVisible(true);
 	}
 
-	//Funciones
 	if (_gameStarted) {
 		if (_mike->GetLifes() == 0) {
-			_musicLevel.stop();
-			_musicGameOver.play();
 			GameOver();
 			RestartGame();
 		}
 		else if (_mike->GetKey(_key->GetPosition().x, _key->GetPosition().y)) {
-			_musicLevel.stop();
 			YouWin();
 			RestartGame();
 		}
@@ -413,12 +396,69 @@ void Game::GameOver()
 {
 
 	_gameOver = true;
+	_musicPrincipal.stop();
+	_musicLevel.stop();
+	_musicGameOver.play();
+	ShowGameOverScreen();
+}
+
+void Game::ShowGameOverScreen()
+{
+
+	RenderWindow _gameOver_wnd(VideoMode(800, 600), "GAME OVER");
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_loseText.setFont(_font);
+	_loseText.setCharacterSize(40);
+	_loseText.setFillColor(Color::White);
+	_loseText.setString("GAME OVER");
+	_loseText.setPosition(550.0f, 100.0f);
+
+	while (_gameOver_wnd.isOpen()) {
+		Event event;
+		while (_gameOver_wnd.pollEvent(event)) {
+			if (event.type == Event::Closed) {
+				_gameOver_wnd.close();
+			}
+		}
+		_gameOver_wnd.clear(Color::Black);
+		_gameOver_wnd.draw(_loseText);
+		_gameOver_wnd.display();
+	}
 }
 
 void Game::YouWin()
 {
 
 	_youWin = true;
+	_musicPrincipal.stop();
+	_musicLevel.stop();
+	ShowWinnerScreen();
+}
+
+void Game::ShowWinnerScreen()
+{
+
+	RenderWindow _winner_wnd(VideoMode(800, 600), "YOU WIN");
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_winText.setFont(_font);
+	_winText.setCharacterSize(40);
+	_winText.setFillColor(Color::White);
+	_winText.setString("YOU WIN");
+	_winText.setPosition(550.0f, 100.0f);
+
+	while (_winner_wnd.isOpen()) {
+		Event e;
+		while (_winner_wnd.pollEvent(e)) {
+			if (e.type == Event::Closed) {
+				_winner_wnd.close();
+			}
+		}
+		_winner_wnd.clear(Color::Black);
+		_winner_wnd.draw(_winText);
+		_winner_wnd.display();
+	}
 }
 
 void Game::Draw() 
@@ -452,12 +492,6 @@ void Game::Draw()
 			_key->Draw(_wnd);
 		}
 		_mike->Draw(_wnd);
-		if (_youWin && !_gameStarted) {
-			_wnd->draw(_winText);
-		}
-		if (_gameOver && !_gameStarted) {
-			_wnd->draw(_loseText);
-		}
 	}
 
 	_wnd->display();
