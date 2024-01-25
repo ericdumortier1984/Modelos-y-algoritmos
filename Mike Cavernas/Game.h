@@ -18,10 +18,10 @@ private:
 	Key* _key;
 	Menu* _cursor;
 
-	Sprite _cave, _path, _landscape, _stair, _level, _mikeWinner, _sign, _startButton;
-	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx, _mikeWinnerTx, _signTx, _startTx;
+	Sprite _cave, _path, _landscape, _stair, _level, _mikeWinner, _sign, _startButton, _gameOverSign;
+	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx, _mikeWinnerTx, _signTx, _startTx, _gameOverSignTx;
 
-	Music _musicPrincipal, _musicLevel, _musicGameOver;
+	Music _musicPrincipal, _musicLevel, _musicGameOver, _musicWinner;
 
 	SoundBuffer _woohooBf, _dohBf;
 	Sound _woohoo, _doh;

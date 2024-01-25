@@ -22,7 +22,7 @@ Game::Game()
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_key = new Key();
-	_key->SetPosition(Vector2f(300.0f, 350.0f));
+	_key->SetPosition(Vector2f(350.0f, 370.0f));
 
 	_cursor = new Menu();
 
@@ -42,6 +42,10 @@ Game::Game()
 	_musicGameOver.openFromFile("Asset/Audio/Musica_game_over.ogg");
 	_musicGameOver.setLoop(true);
 	_musicGameOver.setVolume(75);
+
+	_musicWinner.openFromFile("");
+	_musicWinner.setLoop(true);
+	_musicWinner.setVolume(75);
 
 	_woohooBf.loadFromFile("Asset/Audio/Woo_hoo.wav");
 	_woohoo.setBuffer(_woohooBf);
@@ -105,7 +109,7 @@ Game::Game()
 	_startButton.setTexture(_startTx);
 	_startButton.setOrigin(_startButton.getLocalBounds().width / 2, 0);
 	_startButton.setPosition(400.0f, 100.0f);
-	
+
 	_pathTx.loadFromFile("Asset/Images/RockPath.png");
 	_path.setTexture(_pathTx);
 	_path.setPosition(0.0f, 190.0f);
@@ -187,7 +191,7 @@ void Game::ProcessEvents()
 void Game::Update(float deltaTime)
 {
 
-	//Movimientos
+	//Movimientos de personajes y obstaculos
 	if (Keyboard::isKeyPressed(Keyboard::D)) {
 		if (_mike->GetPosition().x >= 750.0f) 
 			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
@@ -221,24 +225,30 @@ void Game::Update(float deltaTime)
 	}
 
 	_estala->SetVelocity(Vector2f(0.0f, 150.0f));
-	_estala->Update(deltaTime);
 	if (_estala->GetPosition().y > 600) {
 		_estala->SetPosition(Vector2f(rand() % 700, -30.0f));
 	}
-
+	else if (_mike->GetPoints() >= 500) {
+		_estala->SetVelocity(Vector2f(0.0f, 250.0f));
+	}
+	else if (_mike->GetPoints() >= 900) {
+		_estala->SetVelocity(Vector2f(0.0f, 350.0f));
+	}
+	
 	_ptero->SetVelocity(Vector2f(-150.0f, 00.0f));
-	_ptero->Update(deltaTime);
 	if (_ptero->GetPosition().x < 0.0f) {
 		_ptero->SetPosition(Vector2f(830.0f, 300.0f));
 	}
-
+	
 	_mike->Update(deltaTime);
 	_mike->UpdateOrientation();
+	_estala->Update(deltaTime);
+	_ptero->Update(deltaTime);
 	_chicken->Update(deltaTime);
 	_key->Update(deltaTime);
 
-	//Funciones
-	if (_mike->GetPoints() == 1000) {
+	//Condiciones del juego
+	if (_mike->GetPoints() >= 1000) {
 		_key->SetKeyVisible(true);
 	}
 
@@ -247,7 +257,7 @@ void Game::Update(float deltaTime)
 			GameOver();
 			RestartGame();
 		}
-		else if (_mike->GetKey(_key->GetPosition().x, _key->GetPosition().y)) {
+		else if (_key->IsKeyActive() && _mike->GetKey(_key->GetPosition().x, _key->GetPosition().y)) {
 			YouWin();
 			RestartGame();
 		}
@@ -295,7 +305,7 @@ void Game::CheckCollision()
 void Game::RespawnChicken()
 {
 
-	float _randomX = rand() % 700;
+	float _randomX = rand() % 650;
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 }
 
@@ -407,12 +417,18 @@ void Game::ShowGameOverScreen()
 
 	RenderWindow _gameOver_wnd(VideoMode(800, 600), "GAME OVER");
 
+	_gameOverSignTx.loadFromFile("Asset/Images/Game_over.png");
+	_gameOverSign.setTexture(_gameOverSignTx);
+	_gameOverSign.setOrigin(_gameOverSign.getLocalBounds().width / 2, 0);
+	_gameOverSign.setPosition(400.0f, 200.0f);
+
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_loseText.setFont(_font);
 	_loseText.setCharacterSize(40);
 	_loseText.setFillColor(Color::White);
-	_loseText.setString("GAME OVER");
-	_loseText.setPosition(550.0f, 100.0f);
+	_loseText.setString("PRESS ESCAPE TO BACK TO MAIN MENU");
+	_loseText.setOrigin(_loseText.getLocalBounds().width / 2, 0);
+	_loseText.setPosition(400.0f, 100.0f);
 
 	while (_gameOver_wnd.isOpen()) {
 		Event event;
@@ -420,9 +436,15 @@ void Game::ShowGameOverScreen()
 			if (event.type == Event::Closed) {
 				_gameOver_wnd.close();
 			}
+			if (event.type == Event::KeyPressed) {
+				if (event.key.code == Keyboard::Escape) {
+					_gameOver_wnd.close();
+				}
+			}
 		}
 		_gameOver_wnd.clear(Color::Black);
 		_gameOver_wnd.draw(_loseText);
+		_gameOver_wnd.draw(_gameOverSign);
 		_gameOver_wnd.display();
 	}
 }
@@ -433,6 +455,7 @@ void Game::YouWin()
 	_youWin = true;
 	_musicPrincipal.stop();
 	_musicLevel.stop();
+	_musicWinner.play();
 	ShowWinnerScreen();
 }
 
@@ -445,14 +468,20 @@ void Game::ShowWinnerScreen()
 	_winText.setFont(_font);
 	_winText.setCharacterSize(40);
 	_winText.setFillColor(Color::White);
-	_winText.setString("YOU WIN");
-	_winText.setPosition(550.0f, 100.0f);
+	_winText.setString("PRESS ESCAPE TO BACK TO MAIN MENU");
+	_winText.setOrigin(_winText.getLocalBounds().width / 2, 0);
+	_winText.setPosition(400.0f, 100.0f);
 
 	while (_winner_wnd.isOpen()) {
 		Event e;
 		while (_winner_wnd.pollEvent(e)) {
-			if (e.type == Event::Closed) {
+			if (e.type == Event::Closed) { 
 				_winner_wnd.close();
+			}
+			if (e.type == Event::KeyPressed) {
+				if (e.key.code == Keyboard::Escape) {
+					_winner_wnd.close();
+				}
 			}
 		}
 		_winner_wnd.clear(Color::Black);

@@ -1,21 +1,21 @@
 ﻿  Game.cpp
 C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(5,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
 C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(6,20): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(131,40): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(128,40): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(168,64): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(168,47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(172,76): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(172,57): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(233,40): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(165,64): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(165,47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(169,76): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(169,57): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(229,40): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
               T=float
           ]
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(306,17): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(313,17): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(361,8): warning C4101: 'deltaTime': variable local sin referencia
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(308,17): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(315,17): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(363,8): warning C4101: 'deltaTime': variable local sin referencia
   Mike Cavernas.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Debug\Mike Cavernas.exe
