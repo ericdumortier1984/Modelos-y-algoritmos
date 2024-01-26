@@ -22,7 +22,7 @@ Game::Game()
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_key = new Key();
-	_key->SetPosition(Vector2f(350.0f, 370.0f));
+	_key->SetPosition(Vector2f(370.0f, 350));
 
 	_cursor = new Menu();
 
@@ -57,8 +57,8 @@ Game::Game()
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_titleText.setFont(_font);
-	_titleText.setCharacterSize(50);
-	_titleText.setFillColor(Color::Black);
+	_titleText.setCharacterSize(100);
+	_titleText.setFillColor(Color::White);
 	_titleText.setString("MIKE CAVERNAS");
 	_titleText.setOrigin(_titleText.getLocalBounds().width / 2, 0);
 	_titleText.setPosition(400.0f, 100.0f);
@@ -108,7 +108,7 @@ Game::Game()
 	_startTx.loadFromFile("Asset/Images/Start.png");
 	_startButton.setTexture(_startTx);
 	_startButton.setOrigin(_startButton.getLocalBounds().width / 2, 0);
-	_startButton.setPosition(400.0f, 100.0f);
+	_startButton.setPosition(400.0f, 200.0f);
 
 	_pathTx.loadFromFile("Asset/Images/RockPath.png");
 	_path.setTexture(_pathTx);
@@ -248,7 +248,7 @@ void Game::Update(float deltaTime)
 	_key->Update(deltaTime);
 
 	//Condiciones del juego
-	if (_mike->GetPoints() >= 1000) {
+	if (_mike->GetPoints() >= 100) {
 		_key->SetKeyVisible(true);
 	}
 
@@ -417,6 +417,9 @@ void Game::ShowGameOverScreen()
 
 	RenderWindow _gameOver_wnd(VideoMode(800, 600), "GAME OVER");
 
+	_loseBackgroundTx.loadFromFile("Asset/Images/Lose_background.png");
+	_loseBackground.setTexture(_loseBackgroundTx);
+
 	_gameOverSignTx.loadFromFile("Asset/Images/Game_over.png");
 	_gameOverSign.setTexture(_gameOverSignTx);
 	_gameOverSign.setOrigin(_gameOverSign.getLocalBounds().width / 2, 0);
@@ -425,8 +428,8 @@ void Game::ShowGameOverScreen()
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_loseText.setFont(_font);
 	_loseText.setCharacterSize(40);
-	_loseText.setFillColor(Color::White);
-	_loseText.setString("PRESS ESCAPE TO BACK TO MAIN MENU");
+	_loseText.setFillColor(Color::Red);
+	_loseText.setString("PRESS ESCAPE TO RETURN TO MAIN MENU");
 	_loseText.setOrigin(_loseText.getLocalBounds().width / 2, 0);
 	_loseText.setPosition(400.0f, 100.0f);
 
@@ -442,7 +445,8 @@ void Game::ShowGameOverScreen()
 				}
 			}
 		}
-		_gameOver_wnd.clear(Color::Black);
+		_gameOver_wnd.clear();
+		_gameOver_wnd.draw(_loseBackground);
 		_gameOver_wnd.draw(_loseText);
 		_gameOver_wnd.draw(_gameOverSign);
 		_gameOver_wnd.display();
@@ -464,13 +468,33 @@ void Game::ShowWinnerScreen()
 
 	RenderWindow _winner_wnd(VideoMode(800, 600), "YOU WIN");
 
+	_winBackgroundTx.loadFromFile("Asset/Images/Win_background.png");
+	_winBackground.setTexture(_winBackgroundTx);
+
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_winText.setFont(_font);
 	_winText.setCharacterSize(40);
-	_winText.setFillColor(Color::White);
-	_winText.setString("PRESS ESCAPE TO BACK TO MAIN MENU");
+	_winText.setFillColor(Color::Red);
+	_winText.setString("PRESS ESCAPE TO RETURN TO MAIN MENU");
 	_winText.setOrigin(_winText.getLocalBounds().width / 2, 0);
-	_winText.setPosition(400.0f, 100.0f);
+	_winText.setPosition(400.0f, 170.0f);
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_winnerText.setFont(_font);
+	_winnerText.setCharacterSize(60);
+	_winnerText.setFillColor(Color::Black);
+	_winnerText.setString("YOU MADE IT");
+	_winnerText.setOrigin(_winText.getLocalBounds().width / 2, 0);
+	_winnerText.setPosition(600.0f, 50.0f);
+
+	int final_score = UpdatePoints();
+
+	_hiScoreText.setFont(_font);
+	_hiScoreText.setCharacterSize(40);
+	_hiScoreText.setFillColor(Color::Black);
+	_hiScoreText.setString("Hi Score: " + to_string(final_score));
+	_hiScoreText.setOrigin(_hiScoreText.getLocalBounds().width / 2, 0);
+	_hiScoreText.setPosition(420.0f, 120.0f);
 
 	while (_winner_wnd.isOpen()) {
 		Event e;
@@ -485,7 +509,10 @@ void Game::ShowWinnerScreen()
 			}
 		}
 		_winner_wnd.clear(Color::Black);
+		_winner_wnd.draw(_winBackground);
 		_winner_wnd.draw(_winText);
+		_winner_wnd.draw(_winnerText);
+		_winner_wnd.draw(_hiScoreText);
 		_winner_wnd.display();
 	}
 }
@@ -517,7 +544,7 @@ void Game::Draw()
 		_estala->Draw(_wnd);
 		_ptero->Draw(_wnd);
 		_chicken->Draw(_wnd);
-		if (_mike->GetPoints() >= 1000) {
+		if (_mike->GetPoints() >= 100) {
 			_key->Draw(_wnd);
 		}
 		_mike->Draw(_wnd);
