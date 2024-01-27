@@ -43,7 +43,7 @@ Game::Game()
 	_musicGameOver.setLoop(true);
 	_musicGameOver.setVolume(75);
 
-	_musicWinner.openFromFile("");
+	_musicWinner.openFromFile("Asset/Audio/Musica_ganador.ogg");
 	_musicWinner.setLoop(true);
 	_musicWinner.setVolume(75);
 
@@ -110,6 +110,11 @@ Game::Game()
 	_startButton.setOrigin(_startButton.getLocalBounds().width / 2, 0);
 	_startButton.setPosition(400.0f, 200.0f);
 
+	_infoTx.loadFromFile("Asset/Images/Info.png");
+	_infoButton.setTexture(_infoTx);
+	_infoButton.setOrigin(_infoButton.getLocalBounds().width / 2, 0);
+	_infoButton.setPosition(50.0f, 0.0f);
+
 	_pathTx.loadFromFile("Asset/Images/RockPath.png");
 	_path.setTexture(_pathTx);
 	_path.setPosition(0.0f, 190.0f);
@@ -166,11 +171,20 @@ void Game::ProcessEvents()
 		}
 		if (evt.type == Event::MouseButtonPressed) {
 			if (evt.mouseButton.button == Mouse::Left) {
+				if (!_gameStarted && GetInfoPressed(evt.mouseButton.x, evt.mouseButton.y)) {
+					_wnd->setMouseCursorVisible(false);
+					ShowInfoScreen();
+				}
+			}
+		}
+		if (evt.type == Event::MouseButtonPressed) {
+			if (evt.mouseButton.button == Mouse::Left) {
 				if (!_gameStarted && GetStartPressed(evt.mouseButton.x, evt.mouseButton.y)) {
 					_gameStarted = true;
 					_wnd->setMouseCursorVisible(false);
 					_musicPrincipal.stop();
 					_musicGameOver.stop();
+					_musicWinner.stop();
 					_musicLevel.play();
 				}
 			}
@@ -355,6 +369,13 @@ bool Game::GetStartPressed(float x, float y)
 	return bounds_startButton.contains(x, y);
 }
 
+bool Game::GetInfoPressed(float x, float y)
+{
+
+	FloatRect bounds_infoButton = _infoButton.getGlobalBounds();
+	return bounds_infoButton.contains(x, y);
+}
+
 void Game::Go() 
 {
 
@@ -410,6 +431,26 @@ void Game::GameOver()
 	_musicLevel.stop();
 	_musicGameOver.play();
 	ShowGameOverScreen();
+}
+
+void Game::ShowInfoScreen()
+{
+
+	RenderWindow _info_wnd(VideoMode(800, 600),"INFO");
+
+	while (_info_wnd.isOpen()) {
+		Event ev;
+		while (_info_wnd.pollEvent(ev)) {
+			if (ev.type == Event::Closed) {
+				_info_wnd.close();
+			}
+			if (ev.key.code == Keyboard::Escape) {
+				_info_wnd.close();
+			}
+		}
+	}
+	_info_wnd.clear();
+	_info_wnd.display();
 }
 
 void Game::ShowGameOverScreen()
@@ -525,6 +566,7 @@ void Game::Draw()
 	if (!_gameStarted) {
 		_wnd->draw(_landscape);
 		_wnd->draw(_titleText);
+		_wnd->draw(_infoButton);
 		_wnd->draw(_startButton);
 		_cursor->Draw(_wnd);
 	}

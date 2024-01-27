@@ -18,8 +18,8 @@ private:
 	Key* _key;
 	Menu* _cursor;
 
-	Sprite _cave, _path, _landscape, _stair, _level, _winBackground, _loseBackground, _sign, _startButton, _gameOverSign;
-	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx, _winBackgroundTx, _loseBackgroundTx, _signTx, _startTx, _gameOverSignTx;
+	Sprite _cave, _path, _landscape, _stair, _level, _winBackground, _loseBackground, _sign, _startButton, _infoButton, _gameOverSign;
+	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx, _winBackgroundTx, _loseBackgroundTx, _signTx, _startTx, _infoTx, _gameOverSignTx;
 
 	Music _musicPrincipal, _musicLevel, _musicGameOver, _musicWinner;
 
@@ -41,6 +41,7 @@ private:
 	void GamePause();
 	void GameOver();
 	void YouWin();
+	void ShowInfoScreen();
 	void ShowGameOverScreen();
 	void ShowWinnerScreen();
 
@@ -50,6 +51,7 @@ private:
 	float _randomX;
 
 	bool GetStartPressed(float x, float y);
+	bool GetInfoPressed(float x, float y);
 	bool _gameStarted;
 	bool _restartGame;
 	bool _gameOver;
