@@ -18,8 +18,8 @@ private:
 	Key* _key;
 	Menu* _cursor;
 
-	Sprite _cave, _path, _landscape, _stair, _level, _winBackground, _loseBackground, _sign, _startButton, _infoButton, _gameOverSign;
-	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx, _winBackgroundTx, _loseBackgroundTx, _signTx, _startTx, _infoTx, _gameOverSignTx;
+	Sprite _cave, _path, _landscape, _stair, _level, _infoBackground, _winBackground, _loseBackground, _sign, _startButton, _infoButton, _gameOverSign;
+	Texture _caveTx, _pathTx, _landscapeTx, _stairTx, _levelTx, _infoBackgroundTx, _winBackgroundTx, _loseBackgroundTx, _signTx, _startTx, _infoTx, _gameOverSignTx;
 
 	Music _musicPrincipal, _musicLevel, _musicGameOver, _musicWinner;
 
@@ -27,7 +27,7 @@ private:
 	Sound _woohoo, _doh;
 
 	Font _font;
-	Text _lifesText, _pointsText, _titleText, _winText, _winnerText, _hiScoreText, _loseText, _signTextOne, _signTextTwo, _pauseText, _restartText;
+	Text _text, _lifesText, _pointsText, _titleText, _winText, _loseText, _returnText, _winnerText, _hiScoreText, _signTextOne, _signTextTwo, _pauseText, _restartText;
 	
 	void ProcessEvents();
 	void Update(float deltaTime);

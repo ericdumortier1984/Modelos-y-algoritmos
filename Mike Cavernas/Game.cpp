@@ -438,6 +438,33 @@ void Game::ShowInfoScreen()
 
 	RenderWindow _info_wnd(VideoMode(800, 600),"INFO");
 
+	_infoBackgroundTx.loadFromFile("Asset/Images/Info_background.png");
+	_infoBackground.setTexture(_infoBackgroundTx);
+	_infoBackground.setPosition(-100.0f, 0.0f);
+
+	vector<Text> moveTexts;
+	vector<string> instructions = { "MATERIA: MODELOS Y ALGORITMOS", "", "MOVES OF MIKE", "FORWARD: KEY D", "BACKWARD: KEY A", "UP: KEY W", "DOWN: KEY S", "", "GAME FUNCTIONS", "PAUSE GAME: KEY P", "RESTART GAME: KEY R"};
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+
+	for (int i = 0; i < instructions.size(); i++) {
+	
+		_text.setFont(_font);
+		_text.setCharacterSize(40);
+		_text.setString(instructions[i]);
+		_text.setFillColor(Color::Black);
+		_text.setPosition(200.0f, 0.0f + i * 50);
+		moveTexts.push_back(_text);
+	}
+
+	_font.loadFromFile("Asset/Font/junegull.ttf");
+	_returnText.setFont(_font);
+	_returnText.setCharacterSize(40);
+	_returnText.setFillColor(Color::Red);
+	_returnText.setString("PRESS ESCAPE TO RETURN TO MAIN MENU");
+	_returnText.setOrigin(_returnText.getLocalBounds().width / 2, 0);
+	_returnText.setPosition(400.0f, 550.0f);
+
 	while (_info_wnd.isOpen()) {
 		Event ev;
 		while (_info_wnd.pollEvent(ev)) {
@@ -448,9 +475,16 @@ void Game::ShowInfoScreen()
 				_info_wnd.close();
 			}
 		}
+		_info_wnd.clear();
+		_info_wnd.draw(_infoBackground);
+
+		for (const auto& _text : moveTexts) {
+			_info_wnd.draw(_text);
+		}
+
+		_info_wnd.draw(_returnText);
+		_info_wnd.display();
 	}
-	_info_wnd.clear();
-	_info_wnd.display();
 }
 
 void Game::ShowGameOverScreen()
@@ -525,7 +559,7 @@ void Game::ShowWinnerScreen()
 	_winnerText.setCharacterSize(60);
 	_winnerText.setFillColor(Color::Black);
 	_winnerText.setString("YOU MADE IT");
-	_winnerText.setOrigin(_winText.getLocalBounds().width / 2, 0);
+	_winnerText.setOrigin(_returnText.getLocalBounds().width / 2, 0);
 	_winnerText.setPosition(600.0f, 50.0f);
 
 	int final_score = UpdatePoints();
