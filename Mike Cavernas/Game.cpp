@@ -262,7 +262,7 @@ void Game::Update(float deltaTime)
 	_key->Update(deltaTime);
 
 	//Condiciones del juego
-	if (_mike->GetPoints() >= 100) {
+	if (_mike->GetPoints() >= 1000) {
 		_key->SetKeyVisible(true);
 	}
 
@@ -319,7 +319,7 @@ void Game::CheckCollision()
 void Game::RespawnChicken()
 {
 
-	float _randomX = rand() % 650;
+	float _randomX = rand() % 700;
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 }
 
@@ -620,7 +620,7 @@ void Game::Draw()
 		_estala->Draw(_wnd);
 		_ptero->Draw(_wnd);
 		_chicken->Draw(_wnd);
-		if (_mike->GetPoints() >= 100) {
+		if (_mike->GetPoints() >= 1000) {
 			_key->Draw(_wnd);
 		}
 		_mike->Draw(_wnd);
