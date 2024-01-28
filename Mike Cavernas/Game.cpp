@@ -443,7 +443,7 @@ void Game::ShowInfoScreen()
 	_infoBackground.setPosition(-100.0f, 0.0f);
 
 	vector<Text> moveTexts;
-	vector<string> instructions = { "MATERIA: MODELOS Y ALGORITMOS", "", "MOVES OF MIKE", "FORWARD: KEY D", "BACKWARD: KEY A", "UP: KEY W", "DOWN: KEY S", "", "GAME FUNCTIONS", "PAUSE GAME: KEY P", "RESTART GAME: KEY R"};
+	vector<string> instructions = { "MATERIA: MAVI I", "", "MOVES OF MIKE", "FORWARD: KEY D", "BACKWARD: KEY A", "UP: KEY W", "DOWN: KEY S", "", "GAME FUNCTIONS", "PAUSE GAME: KEY P", "RESTART GAME: KEY R"};
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 
@@ -453,7 +453,7 @@ void Game::ShowInfoScreen()
 		_text.setCharacterSize(40);
 		_text.setString(instructions[i]);
 		_text.setFillColor(Color::Black);
-		_text.setPosition(200.0f, 0.0f + i * 50);
+		_text.setPosition(250.0f, 0.0f + i * 50);
 		moveTexts.push_back(_text);
 	}
 
