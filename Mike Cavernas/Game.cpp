@@ -559,8 +559,8 @@ void Game::ShowWinnerScreen()
 	_winnerText.setCharacterSize(60);
 	_winnerText.setFillColor(Color::Black);
 	_winnerText.setString("YOU MADE IT");
-	_winnerText.setOrigin(_returnText.getLocalBounds().width / 2, 0);
-	_winnerText.setPosition(600.0f, 50.0f);
+	_winnerText.setOrigin(_winnerText.getLocalBounds().width / 2, 0);
+	_winnerText.setPosition(400.0f, 50.0f);
 
 	int final_score = UpdatePoints();
 
