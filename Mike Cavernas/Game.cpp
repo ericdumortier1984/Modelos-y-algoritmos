@@ -95,14 +95,14 @@ Game::Game()
 	_signTextOne.setFont(_font);
 	_signTextOne.setCharacterSize(12);
 	_signTextOne.setFillColor(Color::Black);
-	_signTextOne.setString("TAKE FIVE CHICKEN");
+	_signTextOne.setString("GET  1000  POINTS");
 	_signTextOne.setPosition(115.0f, 490.0f);
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 	_signTextTwo.setFont(_font);
 	_signTextTwo.setCharacterSize(12);
 	_signTextTwo.setFillColor(Color::Black);
-	_signTextTwo.setString("THEN GET THE KEY");
+	_signTextTwo.setString("THEN  GET THE  KEY");
 	_signTextTwo.setPosition(120.0f, 510.0f);
 
 	_startTx.loadFromFile("Asset/Images/Start.png");
