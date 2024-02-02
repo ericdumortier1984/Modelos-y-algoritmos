@@ -267,13 +267,16 @@ void Game::Update(float deltaTime)
 	}
 
 	if (_gameStarted) {
+		if (_mike->GetLifes() == 1) {
+			_musicLevel.setPitch(2);
+		}
 		if (_mike->GetLifes() == 0) {
 			GameOver();
 			RestartGame();
 		}
-		else if (_key->IsKeyActive() && _mike->GetKey(_key->GetPosition().x, _key->GetPosition().y)) {
-			YouWin();
-			RestartGame();
+	    if (_key->IsKeyActive() && _mike->GetKey(_key->GetPosition().x, _key->GetPosition().y)) {
+			 YouWin();
+			 RestartGame();
 		}
 	}
 }
@@ -406,6 +409,7 @@ void Game::RestartGame()
 	_chicken->SetPosition(Vector2f(_randomX, 520.0f));
 
 	_musicLevel.stop();
+	_musicLevel.setPitch(1);
 	
 	CheckCollision();
 }
