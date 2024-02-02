@@ -6,7 +6,7 @@ Game::Game()
 	_randomX = rand() % 700;
 
 	_wnd = new RenderWindow(VideoMode(800, 600), "Mike Cavernas");
-	_wnd->setFramerateLimit(60);
+	_wnd->setFramerateLimit(30);
 	_wnd->setMouseCursorVisible(false);
 
 	_estala = new Estalactita;
