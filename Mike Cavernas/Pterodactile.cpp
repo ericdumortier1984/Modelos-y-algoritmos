@@ -24,6 +24,7 @@ void Pterodactile::Update(float deltaTime)
 {
 
 	_pteroSp.setPosition(_position);
+
 	_position.x += _velocity.x * deltaTime;
 	_position.y += _velocity.y * deltaTime;
 	_velocity.x += _acceleration.x * deltaTime;

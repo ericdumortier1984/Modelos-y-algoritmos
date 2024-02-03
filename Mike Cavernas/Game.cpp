@@ -386,7 +386,7 @@ void Game::Go()
 	clock.restart();
 	float deltaTime;
 	while (_wnd->isOpen()) {
-		float deltaTime = clock.restart().asSeconds();
+		deltaTime = clock.restart().asSeconds();
 		ProcessEvents();
 		Update(deltaTime);
 		CheckCollision();
