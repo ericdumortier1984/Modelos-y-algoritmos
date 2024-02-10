@@ -1,7 +1,6 @@
 #include "Stadx.h"
 
-class Item
-{
+class Item {
 private:
 
 	Sprite _chickenSp;

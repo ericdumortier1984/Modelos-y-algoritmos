@@ -1,7 +1,6 @@
 #include "Stadx.h"
 
-class Estalactita
-{
+class Estalactita {
 private:
 
 	Sprite _estalaSp;

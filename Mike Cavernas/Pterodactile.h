@@ -1,7 +1,6 @@
 #include "Stadx.h"
 
-class Pterodactile 
-{
+class Pterodactile {
 private:
 
 	Sprite _pteroSp;

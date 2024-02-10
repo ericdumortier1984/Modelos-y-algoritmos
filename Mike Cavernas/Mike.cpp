@@ -10,6 +10,7 @@ Mike::Mike(int lifes, int points)
 	_lifes = lifes;
 	_points = points;
 
+	_gravity = 0.0f;
 	_position.x = 0.0f;
 	_position.y = 0.0f;
 	_velocity.x = 0.0f;
@@ -27,13 +28,28 @@ void Mike::Update(float deltaTime)
 {
 
 	_mikeSp.setPosition(_position);
-
 	_position.x += _velocity.x * deltaTime;
 	_position.y += _velocity.y * deltaTime;
 	_velocity.x += _acceleration.x * deltaTime;
 	_velocity.y += _acceleration.y * deltaTime;
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
+	_gravity = 0.5f;
+
+	if (_isJumping)
+	{
+
+		_velocity.y += _gravity;
+		_mikeSp.move(0.0f, _velocity.y);
+
+		if (_mikeSp.getPosition().y >= 500.0f)
+		{
+
+			_mikeSp.setPosition(_mikeSp.getPosition().x, 500.0f);
+			_isJumping = false;  
+			_velocity.y = -40.0f;
+		}
+	}
 }
 
 void Mike::UpdateOrientation()
@@ -80,6 +96,15 @@ void Mike::PointUp()
 
 	if (GetItem(x, y)) {
 		_points += 50;
+	}
+}
+
+void Mike::Jump()
+{
+
+	if (!_isJumping) {
+		_isJumping = true;
+		_velocity.y = -40.0f;
 	}
 }
 
@@ -138,6 +163,12 @@ bool Mike::GetKey(float x, float y)
 
 	FloatRect bounds = _mikeSp.getGlobalBounds();
 	return bounds.contains(x, y);
+}
+
+bool Mike::IsJumping()
+{
+
+	return _isJumping;
 }
 
 int Mike::GetLifes() 

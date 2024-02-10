@@ -1,19 +1,23 @@
-﻿  Mike.cpp
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Mike.cpp(8,40): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+﻿  Game.cpp
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(5,12): warning C4244: 'argumento': conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(6,20): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(133,40): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
           with
           [
               T=unsigned int
           ]
-  Pterodactile.cpp
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Pterodactile.cpp(8,68): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(170,64): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(170,47): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(174,75): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(174,56): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(182,76): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(182,57): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(250,40): warning C4244: 'argumento': conversión de 'int' a 'T'; posible pérdida de datos
           with
           [
-              T=unsigned int
+              T=float
           ]
-C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Pterodactile.cpp(8,42): warning C4244: 'argumento': conversión de 'T' a 'float'; posible pérdida de datos
-          with
-          [
-              T=unsigned int
-          ]
-  Generando código...
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(332,17): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(339,17): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Game.cpp(461,20): warning C4018: '<': no coinciden signed/unsigned
   Mike Cavernas.vcxproj -> C:\Users\gabri\Documents\ERIC CURSO\Tecnicatura en Videojuegos\MODELOS Y ALGORITMOS I\PROYECTOS\Proyecto 3.0\Modelos-y-algoritmos\Mike Cavernas\Debug\Mike Cavernas.exe

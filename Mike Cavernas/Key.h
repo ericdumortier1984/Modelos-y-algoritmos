@@ -1,7 +1,6 @@
 #include "Stadx.h"
 
-class Key
-{
+class Key {
 private:
 
 	Sprite _keySp;

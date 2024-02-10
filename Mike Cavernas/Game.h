@@ -6,8 +6,7 @@
 #include "Key.h"
 #include "Menu.h"
 
-class Game 
-{
+class Game {
 private:
 
 	RenderWindow* _wnd;

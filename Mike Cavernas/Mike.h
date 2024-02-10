@@ -1,7 +1,6 @@
 #include "Stadx.h"
 
-class Mike 
-{
+class Mike {
 private:
 
 	Sprite _mikeSp;
@@ -10,6 +9,9 @@ private:
 	int _lifes;
 	int _points;
 
+	bool _isJumping = false;
+
+	float _gravity;
 	float x;
 	float y;
 
@@ -27,6 +29,7 @@ public:
 	void Draw(RenderWindow* _wnd);
 	void Pricked();
 	void PointUp();
+	void Jump();
 	void SetPosition(Vector2f pos);
 	void SetVelocity(Vector2f vel);
 	void SetAcceleration(Vector2f acc);
@@ -39,6 +42,7 @@ public:
 	bool GetPricked(float x, float y);
 	bool GetItem(float x, float y);
 	bool GetKey(float x, float y);
+	bool IsJumping();
 
 	int GetLifes();
 	int GetPoints();

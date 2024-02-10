@@ -1,7 +1,6 @@
 #include "Stadx.h"
 
-class Menu
-{
+class Menu {
 private:
 
 	Sprite _cursorSp;
