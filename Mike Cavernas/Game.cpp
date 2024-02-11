@@ -206,30 +206,23 @@ void Game::Update(float deltaTime)
 {
 
 	//Movimientos de personajes y obstaculos
-	if (Keyboard::isKeyPressed(Keyboard::Space) == true) {
-		_mike->Jump();
-		if (_mike->GetPosition().x >= 750.0f)
-			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
-		if (_mike->GetPosition().x <= 50.0f)
-			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
-	}
-	else if (Keyboard::isKeyPressed(Keyboard::D) == true) {
+	 if (Keyboard::isKeyPressed(Keyboard::D) == true) {
 		if (_mike->GetPosition().x >= 750.0f) 
 			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
-			_mike->SetVelocity(Vector2f(100.0f, 0.0f));
+		_mike->AddAcceleration(Vector2f(75.0f, 0.0f));
 			if (_mike->GetPosition().y >= 300.0f && _mike->GetPosition().y <= 498)
 				_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
     else if (Keyboard::isKeyPressed(Keyboard::A) == true) {
 		if (_mike->GetPosition().x <= 50.0f) 
 			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
-			_mike->SetVelocity(Vector2f(-100.0f, 0.0f));
+			_mike->AddAcceleration(Vector2f(-75.0f, 0.0f));
 			if (_mike->GetPosition().y >= 300.0f && _mike->GetPosition().y <= 498.0f)
 				_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::W) == true) {
 		if (_mike->GetPosition().x >= 295.0f && _mike->GetPosition().x <= 305.0f) 
-			_mike->SetVelocity(Vector2f(0.0f, -50.0f));
+			_mike->AddAcceleration(Vector2f(0.0f, -50.0f));
 		if (_mike->GetPosition().y <= 300.0f)
 			_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
@@ -454,17 +447,17 @@ void Game::ShowInfoScreen()
 	_infoBackground.setPosition(-100.0f, 0.0f);
 
 	vector<Text> moveTexts;
-	vector<string> instructions = { "HELP MIKE TO WIN THE GAME", "BY GETTING THE KEY AFTER EARN 1000 POINTS", "", "MATERIA: MAVI I", "", "MOVES OF MIKE", "FORWARD : KEY D", "BACKWARD : KEY A", "UP : KEY W", "DOWN : KEY S", "JUMP : KEY SPACE", "", "GAME FUNCTIONS", "PAUSE GAME : KEY P", "RESTART GAME : KEY R"};
+	vector<string> instructions = { "MATERIA: MAVI I", "", "GAME INSTRUCTIONS", "HELP MIKE TO WIN THE GAME", "BY GETTING THE KEY AFTER EARN 1000 POINTS", "", "MOVES OF MIKE", "FORWARD : KEY D", "BACKWARD : KEY A", "UP : KEY W", "DOWN : KEY S", "JUMP : KEY SPACE", "", "GAME FUNCTIONS", "PAUSE GAME : KEY P", "RESTART GAME : KEY R"};
 
 	_font.loadFromFile("Asset/Font/junegull.ttf");
 
 	for (int i = 0; i < instructions.size(); i++) {
 	
 		_text.setFont(_font);
-		_text.setCharacterSize(20);
+		_text.setCharacterSize(25);
 		_text.setString(instructions[i]);
 		_text.setFillColor(Color::Black);
-		_text.setPosition(300.0f, 100.0f + i * 25);
+		_text.setPosition(200.0f, 80.0f + i * 25);
 		moveTexts.push_back(_text);
 	}
 
