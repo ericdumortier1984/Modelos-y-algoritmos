@@ -12,7 +12,6 @@ private:
 	float x;
 	float y;
 	float _gravity;
-	float _jumpHeight;
 
 	bool _isJumping = false;
 
@@ -22,7 +21,7 @@ private:
 
 public:
 
-	Mike(int lifes, int points, float jumpHeight);
+	Mike(int lifes, int points);
 	~Mike();
 
 	void Update(float deltaTime);

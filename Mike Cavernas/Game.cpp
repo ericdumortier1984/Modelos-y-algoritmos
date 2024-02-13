@@ -15,7 +15,7 @@ Game::Game()
 	_ptero = new Pterodactile;
 	_ptero->SetPosition(Vector2f(830.0f, 350.0f));
 
-	_mike = new Mike(3, 0, -300.0);
+	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
 	_chicken = new Item();
@@ -215,7 +215,7 @@ void Game::Update(float deltaTime)
 	 else if (Keyboard::isKeyPressed(Keyboard::D) == true) {
 		if (_mike->GetPosition().x >= 750.0f) 
 			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
-		_mike->AddAcceleration(Vector2f(75.0f, 0.0f));
+		    _mike->AddAcceleration(Vector2f(75.0f, 0.0f));
 			if (_mike->GetPosition().y >= 300.0f && _mike->GetPosition().y <= 498)
 				_mike->SetVelocity(Vector2f(0.0f, 0.0f));
 	}
@@ -408,7 +408,7 @@ void Game::RestartGame()
 	_gameStarted = false;
 	_restartGame = true;
 
-	_mike = new Mike(3, 0, -300.0);
+	_mike = new Mike(3, 0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
 	_ptero->SetPosition(Vector2f(830.0f, 200.0f));

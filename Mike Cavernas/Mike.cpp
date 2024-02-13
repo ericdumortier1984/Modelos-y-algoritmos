@@ -1,6 +1,6 @@
 #include "Mike.h"
 
-Mike::Mike(int lifes, int points, float jumpHeight)
+Mike::Mike(int lifes, int points)
 {
 
 	_mikeSp = new Sprite;
@@ -11,7 +11,6 @@ Mike::Mike(int lifes, int points, float jumpHeight)
 	
 	_lifes = lifes;
 	_points = points;
-	_jumpHeight = jumpHeight;
 
 	_position.x = 0.0f;
 	_position.y = 0.0f;
@@ -19,7 +18,7 @@ Mike::Mike(int lifes, int points, float jumpHeight)
 	_velocity.y = 0.0f;
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
-	_gravity = 0.098f;
+	_gravity = 0.0f;
 }
 
 Mike::~Mike() 
@@ -39,15 +38,22 @@ void Mike::Update(float deltaTime)
 	_velocity.y += _acceleration.y * deltaTime;
 	_acceleration.x = 0.0f;
 	_acceleration.y = 0.0f;
+	_gravity = 0.0f;
+
+	if (Keyboard::isKeyPressed(Keyboard::Space) && !_isJumping) {
+		_isJumping = true;
+		_velocity.y = -10.0f;
+	}
 
 	if (_isJumping) {
-		_velocity.y += 2.0 * _gravity * _jumpHeight;
-		_mikeSp->move(0.0f, _velocity.y);
+		_velocity.y += 0.5f;
+		_position.y += _velocity.y;
 
-		if (_mikeSp->getPosition().y >= 500.0f)
-			_mikeSp->setPosition(_mikeSp->getPosition().x, 500.0f);
-		_isJumping = false;
-		_velocity.y = 0.0f;
+		if (_position.y >= 500.0f) {
+			_position.y = 500.0f;
+			_isJumping = false;
+			_velocity.y = -10.0f;
+		}
 	}
 }
 
