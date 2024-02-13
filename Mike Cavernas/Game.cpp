@@ -13,9 +13,9 @@ Game::Game()
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
 
 	_ptero = new Pterodactile;
-	_ptero->SetPosition(Vector2f(830.0f, 230.0f));
+	_ptero->SetPosition(Vector2f(830.0f, 350.0f));
 
-	_mike = new Mike(3, 0);
+	_mike = new Mike(3, 0, -300.0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 
 	_chicken = new Item();
@@ -206,7 +206,13 @@ void Game::Update(float deltaTime)
 {
 
 	//Movimientos de personajes y obstaculos
-	 if (Keyboard::isKeyPressed(Keyboard::D) == true) {
+	if (Keyboard::isKeyPressed(Keyboard::Space) && _mike->IsJumping()) {
+		if (_mike->GetPosition().x >= 750.0f)
+			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
+		if (_mike->GetPosition().x <= 50.0f)
+			_mike->SetPosition(Vector2f(50.0f, _mike->GetPosition().y));
+	}
+	 else if (Keyboard::isKeyPressed(Keyboard::D) == true) {
 		if (_mike->GetPosition().x >= 750.0f) 
 			_mike->SetPosition(Vector2f(750.0f, _mike->GetPosition().y));
 		_mike->AddAcceleration(Vector2f(75.0f, 0.0f));
@@ -251,7 +257,7 @@ void Game::Update(float deltaTime)
 	
 	_ptero->SetVelocity(Vector2f(-150.0f, 00.0f));
 	if (_ptero->GetPosition().x < 0.0f) {
-		_ptero->SetPosition(Vector2f(830.0f, 300.0f));
+		_ptero->SetPosition(Vector2f(830.0f, 350.0f));
 	}
 	
 	_mike->Update(deltaTime);
@@ -337,7 +343,7 @@ void Game::RespawnEstala()
 void Game::RespawnPtero()
 {
 
-	_ptero->SetPosition(Vector2f(830.0f, 300.0f));
+	_ptero->SetPosition(Vector2f(830.0f, 350.0f));
 	_ptero->SetVelocity(Vector2f(20.0f, 0.0f));
 }
 
@@ -402,7 +408,7 @@ void Game::RestartGame()
 	_gameStarted = false;
 	_restartGame = true;
 
-	_mike = new Mike(3, 0);
+	_mike = new Mike(3, 0, -300.0);
 	_mike->SetPosition(Vector2f(30.0f, 500.0f));
 	_estala->SetPosition(Vector2f(_randomX, -30.0f));
 	_ptero->SetPosition(Vector2f(830.0f, 200.0f));

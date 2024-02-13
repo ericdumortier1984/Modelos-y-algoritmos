@@ -3,14 +3,18 @@
 class Mike {
 private:
 
-	Sprite _mikeSp;
-	Texture _mikeTx;
+	Sprite* _mikeSp;
+	Texture* _mikeTx;
 
 	int _lifes;
 	int _points;
 
 	float x;
 	float y;
+	float _gravity;
+	float _jumpHeight;
+
+	bool _isJumping = false;
 
 	Vector2f _position;
 	Vector2f _velocity;
@@ -18,7 +22,7 @@ private:
 
 public:
 
-	Mike(int lifes, int points);
+	Mike(int lifes, int points, float jumpHeight);
 	~Mike();
 
 	void Update(float deltaTime);
@@ -38,6 +42,7 @@ public:
 	bool GetPricked(float x, float y);
 	bool GetItem(float x, float y);
 	bool GetKey(float x, float y);
+	bool IsJumping();
 
 	int GetLifes();
 	int GetPoints();
