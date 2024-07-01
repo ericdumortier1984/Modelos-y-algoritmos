@@ -3,7 +3,8 @@
 
 using namespace sf;
 
-class SaloonWindow {
+class SaloonWindow 
+{
 private:
 	Vector2i _position;
 public:

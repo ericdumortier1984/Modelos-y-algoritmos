@@ -1,6 +1,7 @@
 #include "InstructionScreen.h"
 
-InstructionScreen::InstructionScreen() {
+InstructionScreen::InstructionScreen() 
+{
 	
 	_font.loadFromFile("Assets/font/RioGrande.ttf");
 	_gameNameText.setFont(_font);
@@ -45,33 +46,39 @@ InstructionScreen::InstructionScreen() {
 	_startGameText.setPosition(500, 400);
 }
 
-void InstructionScreen::Show(RenderWindow* _wnd) {
+void InstructionScreen::Show(RenderWindow &wnd) 
+{
 	_startGame = false;
-	Event evt;
-	while (_wnd->isOpen()) {
-		while (_wnd->pollEvent(evt)) {
-			switch (evt.type) {
+	Event e;
+	while (wnd.isOpen())
+	{
+		while (wnd.pollEvent(e))
+		{
+			switch (e.type)
+			{
 			case Event::Closed:
-				_wnd->close();
+				wnd.close();
 			case Event::MouseMoved:
-				playerSprite.setPosition(evt.mouseMove.x, evt.mouseMove.y);
+				playerSprite.setPosition(e.mouseMove.x, e.mouseMove.y);
 			case Event::MouseButtonPressed:
-				if (evt.mouseButton.button == Mouse::Button::Left) {
+				if (e.mouseButton.button == Mouse::Button::Left)
+				{
 					_startGame = true;
 				}
 			}
 			
-			_wnd->clear();
-			_wnd->draw(playerSprite);
-			_wnd->draw(_gameNameText);
-			_wnd->draw(_instructionText1);
-			_wnd->draw(_instructionText2);
-			_wnd->draw(_instructionText3);
-			_wnd->draw(_instructionText4);
-			_wnd->draw(_startGameText);
-			_wnd->display();
+			wnd.clear();
+			wnd.draw(playerSprite);
+			wnd.draw(_gameNameText);
+			wnd.draw(_instructionText1);
+			wnd.draw(_instructionText2);
+			wnd.draw(_instructionText3);
+			wnd.draw(_instructionText4);
+			wnd.draw(_startGameText);
+			wnd.display();
 		}
-		if (_startGame) {
+		if (_startGame) 
+		{
 			break;
 		}
 	}

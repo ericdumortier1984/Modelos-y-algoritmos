@@ -1,11 +1,10 @@
 #include "Game.h"
 
-Game::Game() {
+Game::Game() 
+{
 	_wnd = new RenderWindow(VideoMode(780, 438, 32), "Wild Gunman");
 	_inst_Screen = new InstructionScreen();
 	_player = new Player();
-	_enemy = new Enemy[20];
-	_innocent = new Innocent[20];
 
 	// Variables de inicio //
 	_wnd->setMouseCursorVisible(false);
@@ -53,9 +52,11 @@ Game::Game() {
 	_textFinalScore.setFillColor(Color::Yellow);
 }
 
-void Game::Loop() {
-	_inst_Screen->Show(_wnd); // Primero va la pantalla de inicio //
-	while (_wnd->isOpen()) {
+void Game::Loop() 
+{
+	_inst_Screen->Show(*_wnd); // Primero va la pantalla de inicio 
+	while (_wnd->isOpen()) 
+	{
 		EventsUpdate();
 		GameUpdate();
 		Draw();
@@ -88,110 +89,84 @@ void Game::EventsUpdate() {
 	}
 }
 
-void Game::GameUpdate() {
-	if (_GameOver || _YouWin) {
+void Game::GameUpdate() 
+{
+	if (_GameOver || _YouWin) 
+	{
 		return; // Si es Game Over o You Win, listo! //
 	}
-	for (int i = 0; i < 20; i++) {
-		_enemy[i].EnemyUpdate(_wnd);
-		_innocent[i].InnocentUpdate(_wnd);
-
-		if (_enemy[i].IsInGame()) {
-			if (_ShotClock.getElapsedTime().asSeconds() >= _ShotTime && _enemy[i].Shoot()) {
-				ShotAtPlayer();
-				_ShotClock.restart();
-			}
-		}
-		
-		if (_score == 10) {
-			_YouWin = true;
-			FinalScore();
-		}
-		if (_lifes == 0) {
-			_GameOver = true;
-			FinalScore();
-		}
+	if (_score == 10) 
+	{
+	    _YouWin = true;
+	    FinalScore();
+	}
+	if (_lifes == 0)
+	{
+	    _GameOver = true;
+		FinalScore();
 	}
 }
 
+void Game::InitSaloonWindows() 
+{
+	// Crear y configurar las ventanas del salón
+	_saloonWindows.emplace_back(100, 100);
+	_saloonWindows.emplace_back(400, 100);
+	_saloonWindows.emplace_back(100, 300);
+	_saloonWindows.emplace_back(400, 300);
+}
 
-void Game::LifeUpdate() {
+void Game::LifeUpdate() 
+{
 	_textLifes.setString("Lifes: " + to_string(_lifes));
 }
 
-void Game::ScoreUpdate() {
+void Game::ScoreUpdate() 
+{
 	_textScore.setString("Score: " + to_string(_score));
 }
 
-void Game::FinalScore() {
+void Game::FinalScore() 
+{
 	_textFinalScore.setString("Final Score: " + to_string ((_score - (3 - _lifes)) * 10));
 }
 
-void Game::CheckCollision() {
+void Game::CheckCollision()
+{
 	Vector2f playerPos = _player->Getpos();
-
-	for (int i = 0; i < 20; i++) {
-			if (_enemy[i].IsInGame()) {
-				if (_enemy[i].IsAbove(playerPos.x, playerPos.y)) {
-					_enemy[i].Die();
-					_score++;
-
-					ScoreUpdate();
-					LifeUpdate();
-					break;
-			    } 
-		    }
-
-		if (_innocent[i].IsInGame()) {
-			if (_innocent[i].IsAbove(playerPos.x, playerPos.y)) {
-				_innocent[i].ShootAtInnocent();
-				_lifes-- && _score--;
-
-				ScoreUpdate();
-				LifeUpdate();
-				break;
-			}
-		}
-		
-	}
-	
 }
 
-void Game::ShotAtPlayer() {
+void Game::ShotAtPlayer() 
+{
     _ShowBang = true;
 	_lifes-- && _score--;
 	LifeUpdate();
 	ScoreUpdate();
 }
 
-void Game::Draw() {
+void Game::Draw() 
+{
 	_wnd->clear();
-
-	for (int i = 0; i < 20; i++) {
-		if (_enemy[i].IsInGame()) {
-			_enemy[i].Draw(_wnd);
-		}
-		if (_innocent[i].IsInGame()) {
-			_innocent[i].Draw(_wnd);
-		}
-	}
-
 	_wnd->draw(_backScreen_Sp);
 	_player->Draw(_wnd);
-
-	if (_ShowBang) {
+	
+	if (_ShowBang) 
+	{
 		_wnd->draw(_bang);
-		if (_ShotClock.getElapsedTime().asSeconds() >= _ShotTime) {
+		if (_ShotClock.getElapsedTime().asSeconds() >= _ShotTime) 
+		{
 			_ShowBang = false; // Ocultar el efecto después de un tiempo determinado
 		}
 	}
 
-	if (_GameOver) {
+	if (_GameOver)
+	{
 		_wnd->draw(_textGameOver);
 		_wnd->draw(_textFinalScore);
 		_wnd->setMouseCursorVisible(true);
 	}
-	else if (_YouWin) {
+	else if (_YouWin)
+	{
 		_wnd->draw(_textWin);
 		_wnd->draw(_textFinalScore);
 	}
@@ -201,7 +176,8 @@ void Game::Draw() {
 	_wnd->display();
 }
 
-void Game::RestartGame() {
+void Game::RestartGame()
+{
 	// Restablecemos variables del juego //
 	_wnd->setMouseCursorVisible(false);
 	_score = 0;
@@ -213,20 +189,14 @@ void Game::RestartGame() {
 	_ShotClock.restart();
 
 	// Reiniciamos la posicion y el estado de los enemigos //
-	for (int i = 0; i < 20; i++) {
-			_enemy[i].Reset(_wnd);
-			_enemy[i].EnemyUpdate(_wnd);
-			_innocent[i].Reset(_wnd);
-			_innocent[i].InnocentUpdate(_wnd);
-	}
+
 	ScoreUpdate();
 	LifeUpdate();
 	FinalScore();
 }
 
-Game::~Game() {
-	delete[] _innocent;
-	delete[] _enemy;
+Game::~Game() 
+{
 	delete _player;
 	delete _wnd;
 }

@@ -1,23 +1,33 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
 
 using namespace sf;
+using namespace std;
 
-class Enemy {
+class Enemy
+{
 protected:
-	Sprite _sprite;
-	Texture _tx, _tx2, _tx3;
+
+	Sprite* _sprite;
+	Texture* _texture;
+	Vector2f _position;
 	Clock _clock;
+	int _typeEnemy;
 	bool _isAlive;
 	bool _isVisible;
 	float timeVisible;
 	float timeNotVisible;
-	Vector2f enemyPositions[5]; // Arreglo para almacenar las diferentes posiciones del enemigo //
+
 public:
+
 	Enemy();
-	void Draw(RenderWindow* _wnd);
-	void EnemyUpdate(RenderWindow* _wnd);
-	void Reset(RenderWindow* _wnd);
+	~Enemy();
+	void Draw(RenderWindow& wnd);
+	void EnemyUpdate(RenderWindow& wnd);
+	void Reset(RenderWindow& wnd);
+	void InitEnemies(); // Inicia los enemigos
+	void SetTexture(const string& texturePath);
 	float GetVisibleTime();
 	bool IsAlive();
 	bool IsInGame();

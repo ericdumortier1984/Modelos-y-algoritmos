@@ -2,18 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "Enemy.h"
-#include "Innocent.h"
 #include "InstructionScreen.h"
+#include "SaloonWindow.h"
+#include <vector>
+
 
 using namespace sf;
 using namespace std;
 
-class Game {
+class Game
+{
 private:
 	RenderWindow* _wnd;
 	Player* _player;
-	Enemy* _enemy;
-	Innocent* _innocent;
+	vector<Enemy> _enemies;
+	vector<SaloonWindow> _saloonWindows;
 	InstructionScreen* _inst_Screen;
 	Sprite _backScreen_Sp;
 	Texture _backScreen_Tx;
@@ -35,6 +38,7 @@ public:
 	void Loop();
 	void EventsUpdate();
 	void GameUpdate();
+	void InitSaloonWindows();
 	void CheckCollision();
 	void ShotAtPlayer();
 	void Draw();
