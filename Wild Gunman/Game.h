@@ -9,7 +9,7 @@ class Game // Definición de la clase Game
 private: // Miembros privados, accesibles solo dentro de la clase
 
 	// Arreglo de posiciones de las ventanas y la puerta del saloon
-	const Vector2f windowSaloonPos[5] =
+	Vector2f windowSaloonPos[5] =
 	{
 	Vector2f(140.0, 150.0), // Ventana 1
 	Vector2f(600.0, 150.0), // Ventana 2
