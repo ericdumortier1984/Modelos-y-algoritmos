@@ -1,14 +1,18 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "Include&using.h"
 
-using namespace sf;
-
-class Player {
+class Player
+{
 protected:
-	Sprite playerSprite;
-	Texture playerTexture;
+
+	Sprite* sprite;
+	Texture* texture;
+
 public:
+
 	Player();
+	~Player();
+
 	void Draw(RenderWindow* _wnd);
 	void SetPosition(float x, float y);
 	Vector2f Getpos();

@@ -1,37 +1,29 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include <string>
+#include "Include&using.h"
 
-using namespace sf;
-using namespace std;
-
-class Enemy
+class Enemy 
 {
-protected:
+private:
 
-	Sprite* _sprite;
-	Texture* _texture;
-	Vector2f _position;
-	Clock _clock;
-	int _typeEnemy;
-	bool _isAlive;
-	bool _isVisible;
-	float timeVisible;
-	float timeNotVisible;
+	Sprite* sprite;
+	Texture* texture;
+	Vector2f position;
+	bool isInnocent;
 
 public:
 
-	Enemy();
+	Enemy(const string& texturePath, const Vector2f& pos, bool innocent);
 	~Enemy();
-	void Draw(RenderWindow& wnd);
-	void EnemyUpdate(RenderWindow& wnd);
-	void Reset(RenderWindow& wnd);
-	void InitEnemies(); // Inicia los enemigos
-	void SetTexture(const string& texturePath);
-	float GetVisibleTime();
-	bool IsAlive();
-	bool IsInGame();
-	bool IsAbove(float x, float y);
-	bool Shoot();
-	bool Die();
+
+	void Draw(RenderWindow* _wnd);
+
+	const Vector2f& GetPosition() const 
+	{
+		return sprite->getPosition();
+	}
+
+	bool IsInnocent() const 
+	{
+		return isInnocent;
+	}
 };

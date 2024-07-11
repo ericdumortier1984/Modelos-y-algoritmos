@@ -2,8 +2,7 @@
 
 using namespace sf;
 
-int main() 
-{
+int main() {
 	Game myGame;
 	myGame.Loop();
 

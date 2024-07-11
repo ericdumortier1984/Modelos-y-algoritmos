@@ -2,44 +2,43 @@
 
 Game::Game() 
 {
-	_wnd = new RenderWindow(VideoMode(780, 438, 32), "Wild Gunman");
-	_inst_Screen = new InstructionScreen();
-	_player = new Player();
 
-	// Variables de inicio //
+	_wnd = new RenderWindow(VideoMode(800, 600), "Wild Gunman");
+	_fps = 60;
+	_wnd->setFramerateLimit(_fps);
 	_wnd->setMouseCursorVisible(false);
+
+	_inst_Screen = new InstructionScreen;
+	crosshair = new Player;
+	
+	// Variables de inicio //
 	_score = 0, _lifes = 3;
 	_GameOver = false;
 	_YouWin = false;
 	_ShowBang = false;
-	_ShotTime = 8.0f;
-	_ShotClock.restart();
 
 	// Cargamos textura saloon //
-	_backScreen_Tx.loadFromFile("Assets/imagenes/saloon.png");
-	_backScreen_Sp.setTexture(_backScreen_Tx);
-
-	// Cargamos textura del disparo enemigo //
-	_bang_Tx.loadFromFile("Assets/imagenes/Bang.png");
-	_bang.setTexture(_bang_Tx);
-	_bang.setScale(0.15f, 0.15f);
-	_bang.setPosition(150, 150);
+	saloonTexture = new Texture;
+	saloon = new Sprite;
+	saloonTexture->loadFromFile("Assets/imagenes/saloon.png");
+	saloon->setTexture(*saloonTexture);
+	saloon->setPosition(0.0, 100.0);
 
 	// Cargamos fuentes //
 	_font.loadFromFile("Assets/font/RioGrande.ttf");
 	_textScore.setFont(_font);
 	_textScore.setString("Score: 0");
 	_textScore.setFillColor(Color::Magenta);
-	_textScore.setPosition(0, 400);
+	_textScore.setPosition(20, 550);
 	_textLifes.setFont(_font);
 	_textLifes.setString("Lifes: 3");
 	_textLifes.setFillColor(Color::Magenta);
-	_textLifes.setPosition(350, 400);
+	_textLifes.setPosition(650, 550);
 	_textGameOver.setFont(_font);
 	_textGameOver.setString("GameOver");
 	_textGameOver.setFillColor(Color::Black);
 	_textGameOver.setCharacterSize(42);
-	_textGameOver.setPosition(300, 10);
+	_textGameOver.setPosition(300, 500);
 	_textWin.setFont(_font);
 	_textWin.setString("You Win ENTER para reiniciar");
 	_textWin.setCharacterSize(32);
@@ -48,40 +47,54 @@ Game::Game()
 	_textFinalScore.setFont(_font);
 	_textFinalScore.setString("Final Score: ");
 	_textFinalScore.setCharacterSize(50);
-	_textFinalScore.setPosition(230, 80);
+	_textFinalScore.setPosition(230, 550);
 	_textFinalScore.setFillColor(Color::Yellow);
+
+	InitEnemies();
 }
 
 void Game::Loop() 
 {
-	_inst_Screen->Show(*_wnd); // Primero va la pantalla de inicio 
+
+	_inst_Screen->Show(_wnd); // Primero va la pantalla de inicio //
+
 	while (_wnd->isOpen()) 
 	{
-		EventsUpdate();
-		GameUpdate();
-		Draw();
+		Events();
+		GameOverConditions();
+		DrawGame();
 	}
 }
 
-void Game::EventsUpdate() {
+void Game::Events() 
+{
+
 	Event evt;
-	while (_wnd->pollEvent(evt)) {
-		switch (evt.type) {
+	while (_wnd->pollEvent(evt)) 
+	{
+		switch (evt.type) 
+		{
 		case Event::Closed:
 			_wnd->close();
 			break;
 		case Event::MouseMoved:
-			_player->SetPosition(evt.mouseMove.x, evt.mouseMove.y);
+			crosshair->SetPosition(evt.mouseMove.x, evt.mouseMove.y);
 			break;
 		case Event::MouseButtonPressed:
-			if (evt.mouseButton.button == Mouse::Button::Left) {
+			if (evt.mouseButton.button == Mouse::Button::Left) 
+			{
 				CheckCollision();
 			}
 			break;
 		case Event::KeyPressed:
-			if (evt.key.code == Keyboard::Enter && _YouWin) {
-					RestartGame();
-				}
+			if (evt.key.code == Keyboard::Escape)
+			{
+				_wnd->close();
+			}
+			if (evt.key.code == Keyboard::Enter && _YouWin)
+			{
+				RestartGame();
+			}
 			break;
 		default:
 			break;
@@ -89,34 +102,35 @@ void Game::EventsUpdate() {
 	}
 }
 
-void Game::GameUpdate() 
+void Game::InitEnemies()
 {
-	if (_GameOver || _YouWin) 
+
+	enemies.push_back(new Enemy("Assets/imagenes/Innocent.png", windowSaloonPos[0], true));
+	enemies.push_back(new Enemy("Assets/imagenes/Enemy1.png", windowSaloonPos[1], false));
+	enemies.push_back(new Enemy("Assets/imagenes/Enemy2.png", windowSaloonPos[2], false));
+	enemies.push_back(new Enemy("Assets/imagenes/Enemy3.png", windowSaloonPos[3], false));
+}
+
+void Game::GameOverConditions() 
+{
+	if (_GameOver || _YouWin)
 	{
 		return; // Si es Game Over o You Win, listo! //
-	}
-	if (_score == 10) 
-	{
-	    _YouWin = true;
-	    FinalScore();
-	}
-	if (_lifes == 0)
-	{
-	    _GameOver = true;
-		FinalScore();
+		
+		if (_score == 10)
+		{
+			_YouWin = true;
+			FinalScore();
+		}
+		if (_lifes == 0) 
+		{
+			_GameOver = true;
+			FinalScore();
+		}
 	}
 }
 
-void Game::InitSaloonWindows() 
-{
-	// Crear y configurar las ventanas del salón
-	_saloonWindows.emplace_back(100, 100);
-	_saloonWindows.emplace_back(400, 100);
-	_saloonWindows.emplace_back(100, 300);
-	_saloonWindows.emplace_back(400, 300);
-}
-
-void Game::LifeUpdate() 
+void Game::LifeUpdate()
 {
 	_textLifes.setString("Lifes: " + to_string(_lifes));
 }
@@ -131,12 +145,15 @@ void Game::FinalScore()
 	_textFinalScore.setString("Final Score: " + to_string ((_score - (3 - _lifes)) * 10));
 }
 
-void Game::CheckCollision()
+void Game::CheckCollision() 
 {
-	Vector2f playerPos = _player->Getpos();
+	Vector2f playerPos = crosshair->Getpos();
+
+	ScoreUpdate();
+	LifeUpdate();
 }
 
-void Game::ShotAtPlayer() 
+void Game::ShotAtPlayer()
 {
     _ShowBang = true;
 	_lifes-- && _score--;
@@ -144,28 +161,25 @@ void Game::ShotAtPlayer()
 	ScoreUpdate();
 }
 
-void Game::Draw() 
+void Game::DrawGame()
 {
 	_wnd->clear();
-	_wnd->draw(_backScreen_Sp);
-	_player->Draw(_wnd);
-	
-	if (_ShowBang) 
-	{
-		_wnd->draw(_bang);
-		if (_ShotClock.getElapsedTime().asSeconds() >= _ShotTime) 
-		{
-			_ShowBang = false; // Ocultar el efecto después de un tiempo determinado
-		}
-	}
 
-	if (_GameOver)
+	for (Enemy* _enemies : enemies)
+	{
+		_enemies->Draw(_wnd);
+	}
+	_wnd->draw(*saloon);
+	crosshair->Draw(_wnd);
+	
+	if (_GameOver) 
 	{
 		_wnd->draw(_textGameOver);
 		_wnd->draw(_textFinalScore);
 		_wnd->setMouseCursorVisible(true);
 	}
-	else if (_YouWin)
+
+	else if (_YouWin) 
 	{
 		_wnd->draw(_textWin);
 		_wnd->draw(_textFinalScore);
@@ -185,11 +199,7 @@ void Game::RestartGame()
 	_GameOver = false;
 	_YouWin = false;
 	_ShowBang = false;
-	_ShotTime = 10.0f;
-	_ShotClock.restart();
-
-	// Reiniciamos la posicion y el estado de los enemigos //
-
+	
 	ScoreUpdate();
 	LifeUpdate();
 	FinalScore();
@@ -197,6 +207,9 @@ void Game::RestartGame()
 
 Game::~Game() 
 {
-	delete _player;
+
+	delete crosshair;
+	delete saloon;
+	delete saloonTexture;
 	delete _wnd;
 }

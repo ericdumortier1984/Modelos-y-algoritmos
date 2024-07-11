@@ -1,49 +1,52 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "Include&using.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "InstructionScreen.h"
-#include "SaloonWindow.h"
-#include <vector>
+#include "Enemy.h"
 
-
-using namespace sf;
-using namespace std;
-
-class Game
+class Game 
 {
 private:
+
+	const Vector2f windowSaloonPos[5] =
+	{
+	Vector2f(140.0, 150.0), // Ventana 1
+	Vector2f(600.0, 150.0), // Ventana 2
+	Vector2f(120.0, 350.0), // Ventana 3
+	Vector2f(620.0, 350.0), // Ventana 4
+	Vector2f(370.0, 350.0), // Puerta
+	};
 	RenderWindow* _wnd;
-	Player* _player;
-	vector<Enemy> _enemies;
-	vector<SaloonWindow> _saloonWindows;
+	Player* crosshair;
+	vector<Enemy*> enemies;
 	InstructionScreen* _inst_Screen;
-	Sprite _backScreen_Sp;
-	Texture _backScreen_Tx;
-	Sprite _bang;
-	Texture _bang_Tx;
+	Sprite* saloon;
+	Texture* saloonTexture;
+
 	Text _textScore, _textLifes, _textGameOver, _textWin, _textFinalScore;
 	Font _font;
-	int _score, _lifes;
+
+	int _score, _lifes, _fps;
+
 	bool _GameOver; 
 	bool _YouWin;
 	bool _ShowBang;
+	
+public:
+
+	Game();
+	~Game();
+
+	void Loop();
+	void Events();
+	void GameOverConditions();
+	void CheckCollision();
+	void ShotAtPlayer();
+	void InitEnemies();
+	void DrawGame();
+	void RestartGame();
 	void ScoreUpdate();
 	void LifeUpdate();
 	void FinalScore();
-	float _ShotTime;
-	Clock _ShotClock;
-public:
-	Game();
-	void Loop();
-	void EventsUpdate();
-	void GameUpdate();
-	void InitSaloonWindows();
-	void CheckCollision();
-	void ShotAtPlayer();
-	void Draw();
-	void RestartGame();
-	~Game();
-
 };
 
