@@ -23,6 +23,7 @@ private: // Miembros privados, accesibles solo dentro de la clase
 	InstructionScreen* _inst_Screen; // Puntero al objeto InstructionScreen
 	Sprite* saloon; // Sprite del saloon
 	Texture* saloonTexture; // Textura del saloon
+	Clock clock;
 
 	Text _textScore, _textLifes, _textGameOver, _textWin, _textFinalScore; // Objetos Text para mostrar información en pantalla
 	Font _font; // Fuente utilizada para los textos

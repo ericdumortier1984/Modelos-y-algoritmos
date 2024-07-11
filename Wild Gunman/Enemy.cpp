@@ -8,9 +8,8 @@ Enemy::Enemy(const string& texturePath, const Vector2f& pos, bool innocent) // C
 	texture = new Texture;
 	texture->loadFromFile(texturePath); // Carga la textura del enemigo desde el archivo
 	sprite->setTexture(*texture); // Asigna la textura al sprite
-	sprite->setPosition(position); // Establece la posición inicial del enemigo
+	sprite->setPosition(pos); // Establece la posición inicial del enemigo
 	isInnocent = innocent; // Establece si el enemigo es inocente o no
-	Vector2f position = pos;
 	enemyVisible = false;
 	elapsedTimeOnScreen = seconds(0);
 }

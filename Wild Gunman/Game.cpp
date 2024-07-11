@@ -113,11 +113,36 @@ void Game::Events() // Función para manejar los eventos del juego
 void Game::InitEnemies() // Función para inicializar los enemigos
 {
 
+	bool posNOT[5] = {false, false, false, false, false}; // Arreglo para indicar si una posición está ocupada
 	// Crea y agrega los enemigos al vector
-	enemies.push_back(new Enemy("Assets/imagenes/Innocent.png", windowSaloonPos[0], true));
-	enemies.push_back(new Enemy("Assets/imagenes/Enemy1.png", windowSaloonPos[1], false));
-	enemies.push_back(new Enemy("Assets/imagenes/Enemy2.png", windowSaloonPos[2], false));
-	enemies.push_back(new Enemy("Assets/imagenes/Enemy3.png", windowSaloonPos[3], false));
+	for (int i = 0; i < 4; i++)
+	{
+		int randomPos;
+		do 
+		{
+			randomPos = rand() % 5; // Selecciona una posición aleatoria
+		} while (posNOT[randomPos]); // Verifica que la posición no esté ocupada
+		{
+			if (randomPos == 0)
+			{
+				enemies.push_back(new Enemy("Assets/imagenes/Innocent.png", windowSaloonPos[0], true));
+			}
+			else if (randomPos == 1)
+			{
+				enemies.push_back(new Enemy("Assets/imagenes/Enemy1.png", windowSaloonPos[1], false));
+			}
+			else if (randomPos == 2)
+			{
+				enemies.push_back(new Enemy("Assets/imagenes/Enemy2.png", windowSaloonPos[2], false));
+			}
+			else if (randomPos == 3)
+			{
+				enemies.push_back(new Enemy("Assets/imagenes/Enemy3.png", windowSaloonPos[3], false));
+			}
+			else
+				posNOT[randomPos] = true; // Marca la posición como ocupada
+		}
+	}
 }
 
 void Game::GameOverConditions() // Función para verificar las condiciones de fin de juego
@@ -179,9 +204,13 @@ void Game::DrawGame() // Función para dibujar los elementos del juego
 	_wnd->clear();
 
 	// Dibuja los enemigos
-	for (Enemy* _enemies : enemies)
+	for (Enemy* enemy : enemies)
 	{
-		_enemies->Draw(_wnd);
+		if (enemy->UpdateEnemy(clock.restart()))
+		{
+			enemy->setVisible(true);
+			enemy->Draw(_wnd);
+		}
 	}
 	
 	_wnd->draw(*saloon); // Dibuja el saloon
