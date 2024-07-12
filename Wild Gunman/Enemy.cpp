@@ -63,3 +63,14 @@ bool Enemy::UpdateEnemy(Time t)
 		return true;
 	}
 }
+
+bool Enemy::CheckCollision(Vector2f playerPos)
+{
+	FloatRect playerRect(playerPos.x, playerPos.y, 32, 32); // Suponemos que la mira tiene un tamaño de 32x32
+	FloatRect enemyRect = sprite->getGlobalBounds();
+	if (playerRect.intersects(enemyRect))
+	{
+		return true;
+	}
+	return false;
+}

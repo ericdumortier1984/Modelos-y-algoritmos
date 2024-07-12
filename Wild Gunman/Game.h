@@ -3,6 +3,7 @@
 #include "Player.h" // Incluye el archivo de encabezado de la clase Player
 #include "InstructionScreen.h" // Incluye el archivo de encabezado de la clase InstructionScreen
 #include "Enemy.h" // Incluye el archivo de encabezado de la clase Enemy
+#include "AudioManager.h"
 
 class Game // Definición de la clase Game
 {
@@ -24,6 +25,8 @@ private: // Miembros privados, accesibles solo dentro de la clase
 	Sprite* saloon; // Sprite del saloon
 	Texture* saloonTexture; // Textura del saloon
 	Clock clock;
+
+	AudioManager audioManager;
 
 	Text _textScore, _textLifes, _textGameOver, _textWin, _textFinalScore; // Objetos Text para mostrar información en pantalla
 	Font _font; // Fuente utilizada para los textos

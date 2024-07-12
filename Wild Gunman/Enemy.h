@@ -23,4 +23,5 @@ public: // Miembros públicos, accesibles desde cualquier parte del programa
 	const Vector2f& GetPosition() const {return sprite->getPosition();} // Obtiene la posición del enemigo
 	bool IsInnocent() const {return isInnocent;} // Obtiene si el enemigo es inocente o no
 	bool UpdateEnemy(Time t);
+	bool CheckCollision(Vector2f playerPos);
 };

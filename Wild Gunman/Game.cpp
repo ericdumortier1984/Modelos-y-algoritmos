@@ -9,6 +9,8 @@ Game::Game() // Constructor de la clase Game
 	_wnd->setFramerateLimit(_fps);
 	_wnd->setMouseCursorVisible(false);
 
+	audioManager.InitAudio();
+
 	// Crea los objetos pantalla de inicio y el crosshair
 	_inst_Screen = new InstructionScreen;
 	crosshair = new Player;
@@ -19,9 +21,6 @@ Game::Game() // Constructor de la clase Game
 	_YouWin = false;
 	_ShowBang = false;
 	
-	// Inicializa los enemigos
-	InitEnemies();
-
 	// Carga la textura y el sprite del saloon
 	saloonTexture = new Texture;
 	saloon = new Sprite;
@@ -55,6 +54,7 @@ Game::Game() // Constructor de la clase Game
 	_textFinalScore.setPosition(230, 550);
 	_textFinalScore.setFillColor(Color::Yellow);
 
+	InitEnemies();
 }
 
 void Game::Loop() // Función principal del bucle del juego
@@ -62,7 +62,7 @@ void Game::Loop() // Función principal del bucle del juego
 
 	_inst_Screen->Show(_wnd); // Muestra la pantalla de instrucciones
 
-	while (_wnd->isOpen()) // Entra en el bucle principal del juego
+	while (_wnd->isOpen() && !_GameOver) // Entra en el bucle principal del juego
 	{
 		DrawGame(); // Dibuja los elementos del juego
 		Events(); // Maneja los eventos del juego
@@ -90,6 +90,7 @@ void Game::Events() // Función para manejar los eventos del juego
 		case Event::MouseButtonPressed:
 			if (evt.mouseButton.button == Mouse::Button::Left) 
 			{
+				audioManager.PlayGunShot();
 				CheckCollision(); // Verifica las colisiones al hacer clic
 			}
 			break;

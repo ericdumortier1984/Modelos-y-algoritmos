@@ -50,6 +50,8 @@ InstructionScreen::InstructionScreen() // Constructor de la clase InstructionScr
 	_startGameText.setFillColor(Color::Green);
 	_startGameText.setCharacterSize(20);
 	_startGameText.setPosition(500, 400);
+
+	audioManager.InitAudio();
 }
 
 void InstructionScreen::Show(RenderWindow* _wnd) // Función para mostrar la pantalla de instrucciones
@@ -70,6 +72,7 @@ void InstructionScreen::Show(RenderWindow* _wnd) // Función para mostrar la pant
 			case Event::MouseButtonPressed: // Si se presiona un botón del mouse
 				if (evt.mouseButton.button == Mouse::Button::Left) // Si se presiona el botón izquierdo
 				{
+					audioManager.PlayGunShot();
 					_startGame = true; // Establece la bandera de inicio de juego en true
 				}
 			}
