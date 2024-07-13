@@ -11,6 +11,7 @@ Enemy::Enemy(const string& texturePath, const Vector2f& pos, bool innocent) // C
 	sprite->setPosition(pos); // Establece la posición inicial del enemigo
 	isInnocent = innocent; // Establece si el enemigo es inocente o no
 	enemyVisible = false;
+	enemyOnscreen = seconds(5.0f);
 	elapsedTimeOnScreen = seconds(0);
 }
 
@@ -52,6 +53,7 @@ bool Enemy::UpdateEnemy(Time t)
 {
 
 	elapsedTimeOnScreen = elapsedTimeOnScreen + t;
+
 	if (elapsedTimeOnScreen > enemyOnscreen)
 	{
 		enemyVisible = false;
@@ -64,13 +66,3 @@ bool Enemy::UpdateEnemy(Time t)
 	}
 }
 
-bool Enemy::CheckCollision(Vector2f playerPos)
-{
-	FloatRect playerRect(playerPos.x, playerPos.y, 32, 32); // Suponemos que la mira tiene un tamaño de 32x32
-	FloatRect enemyRect = sprite->getGlobalBounds();
-	if (playerRect.intersects(enemyRect))
-	{
-		return true;
-	}
-	return false;
-}

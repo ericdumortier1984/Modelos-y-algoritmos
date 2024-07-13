@@ -114,35 +114,40 @@ void Game::Events() // Función para manejar los eventos del juego
 void Game::InitEnemies() // Función para inicializar los enemigos
 {
 
-	bool posNOT[5] = {false, false, false, false, false}; // Arreglo para indicar si una posición está ocupada
-	// Crea y agrega los enemigos al vector
-	for (int i = 0; i < 4; i++)
+	bool posNOT[5] = { false, false, false, false, false };
+	int randomPos;
+	string texturePath;
+	bool innocent;
+
+	// Selecciona una textura y posición aleatoria
+	do
 	{
-		int randomPos;
-		do 
+		randomPos = rand() % 5;
+		int randomTexture = rand() % 4;
+		if (randomTexture == 0)
 		{
-			randomPos = rand() % 5; // Selecciona una posición aleatoria
-		} while (posNOT[randomPos]); // Verifica que la posición no esté ocupada
-		{
-			if (randomPos == 0)
-			{
-				enemies.push_back(new Enemy("Assets/imagenes/Innocent.png", windowSaloonPos[0], true));
-			}
-			else if (randomPos == 1)
-			{
-				enemies.push_back(new Enemy("Assets/imagenes/Enemy1.png", windowSaloonPos[1], false));
-			}
-			else if (randomPos == 2)
-			{
-				enemies.push_back(new Enemy("Assets/imagenes/Enemy2.png", windowSaloonPos[2], false));
-			}
-			else if (randomPos == 3)
-			{
-				enemies.push_back(new Enemy("Assets/imagenes/Enemy3.png", windowSaloonPos[3], false));
-			}
-			else
-				posNOT[randomPos] = true; // Marca la posición como ocupada
+			texturePath = "Assets/imagenes/Innocent.png";
+			innocent = true;
 		}
+		else if (randomTexture == 1)
+		{
+			texturePath = "Assets/imagenes/Enemy1.png";
+			innocent = false;
+		}
+		else if (randomTexture == 2)
+		{
+			texturePath = "Assets/imagenes/Enemy2.png";
+			innocent = false;
+		}
+		else
+		{
+			texturePath = "Assets/imagenes/Enemy3.png";
+			innocent = false;
+		}
+	} while (posNOT[randomPos]);
+	{
+		enemies.push_back(new Enemy(texturePath, windowSaloonPos[randomPos], innocent));
+		posNOT[randomPos] = true;
 	}
 }
 
@@ -204,13 +209,18 @@ void Game::DrawGame() // Función para dibujar los elementos del juego
 {
 	_wnd->clear();
 
-	// Dibuja los enemigos
-	for (Enemy* enemy : enemies)
+	// Dibuja el enemigo actual
+	if (enemiesCounter < enemies.size() && enemies[enemiesCounter]->UpdateEnemy(clock.restart()))
 	{
-		if (enemy->UpdateEnemy(clock.restart()))
+		enemies[enemiesCounter]->Draw(_wnd);
+	}
+	else
+	{
+		InitEnemies(); // Crea más enemigos
+		enemiesCounter++;
+		if (enemiesCounter >= enemies.size())
 		{
-			enemy->setVisible(true);
-			enemy->Draw(_wnd);
+			enemiesCounter = 0;
 		}
 	}
 	

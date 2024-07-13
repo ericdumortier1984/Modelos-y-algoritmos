@@ -18,12 +18,16 @@ private: // Miembros privados, accesibles solo dentro de la clase
 	Vector2f(620.0, 350.0), // Ventana 4
 	Vector2f(370.0, 350.0), // Puerta
 	};
+
 	RenderWindow* _wnd; // Puntero a la ventana de renderizado
+
 	Player* crosshair; // Puntero al objeto Player (mira del jugador)
 	vector<Enemy*> enemies; // Vector de punteros a objetos Enemy (enemigos)
 	InstructionScreen* _inst_Screen; // Puntero al objeto InstructionScreen
 	Sprite* saloon; // Sprite del saloon
 	Texture* saloonTexture; // Textura del saloon
+
+	Time gameTime, delayOfEnemies;
 	Clock clock;
 
 	AudioManager audioManager;
@@ -31,7 +35,7 @@ private: // Miembros privados, accesibles solo dentro de la clase
 	Text _textScore, _textLifes, _textGameOver, _textWin, _textFinalScore; // Objetos Text para mostrar información en pantalla
 	Font _font; // Fuente utilizada para los textos
 
-	int _score, _lifes, _fps; // Variables para almacenar el puntaje, vidas y FPS
+	int _score, _lifes, _fps, enemiesCounter; // Variables para almacenar el puntaje, vidas y FPS
 
 	bool _GameOver; // Bandera para indicar si el juego ha terminado
 	bool _YouWin; // Bandera para indicar si el jugador ha ganado
