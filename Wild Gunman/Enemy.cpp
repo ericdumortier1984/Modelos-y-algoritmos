@@ -11,7 +11,7 @@ Enemy::Enemy(const string& texturePath, const Vector2f& pos, bool innocent) // C
 	sprite->setPosition(pos); // Establece la posición inicial del enemigo
 	isInnocent = innocent; // Establece si el enemigo es inocente o no
 	enemyVisible = false;
-	enemyOnscreen = seconds(5.0f);
+	enemyOnscreen = seconds(3.0f);
 	elapsedTimeOnScreen = seconds(0);
 }
 
@@ -64,5 +64,19 @@ bool Enemy::UpdateEnemy(Time t)
 		enemyVisible = true;
 		return true;
 	}
+}
+
+bool Enemy::IsAbove(float x, float y)
+{
+
+	FloatRect enemy_bounds = sprite->getGlobalBounds();
+	return enemy_bounds.contains(x, y);
+}
+
+bool Enemy::Die()
+{
+
+	enemyVisible = false;
+	return enemyVisible;
 }
 

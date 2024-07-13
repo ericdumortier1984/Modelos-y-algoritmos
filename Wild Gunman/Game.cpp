@@ -100,7 +100,7 @@ void Game::Events() // Función para manejar los eventos del juego
 			{
 				_wnd->close(); // Cierra la ventana al presionar Esc
 			}
-			if (evt.key.code == Keyboard::Enter && _YouWin)
+			if (evt.key.code == Keyboard::Enter && _YouWin || _GameOver)
 			{
 				RestartGame(); // Reinicia el juego al presionar Enter cuando se gana
 			}
@@ -154,22 +154,30 @@ void Game::InitEnemies() // Función para inicializar los enemigos
 void Game::GameOverConditions() // Función para verificar las condiciones de fin de juego
 {
 	
-	// Si el juego ha terminado, no se hace nada más
-	if (_GameOver || _YouWin) 
+	// Verifica si el jugador ha ganado
+	if (_score >= 10)
 	{
-		return; 
-		
-		// Verifica si el jugador ha ganado o perdido
-		if (_score == 10) 
+		_YouWin = true;
+		_GameOver = true;
+	}
+	// Verifica si el jugador ha perdido
+	else if (_lifes <= 0)
+	{
+		_GameOver = true;
+	}
+
+	// Actualiza el estado del juego
+	if (_GameOver)
+	{
+		if (_YouWin)
 		{
-			_YouWin = true;
-			FinalScore();
+			_wnd->draw(_textWin);
 		}
-		if (_lifes == 0) 
+		else
 		{
-			_GameOver = true;
-			FinalScore();
+			_wnd->draw(_textGameOver);
 		}
+		FinalScore();
 	}
 }
 
@@ -190,11 +198,34 @@ void Game::FinalScore() // Función para mostrar el puntaje final
 
 void Game::CheckCollision() // Función para verificar las colisiones
 {
+	
 	Vector2f playerPos = crosshair->Getpos();
 
-	// Actualiza el puntaje y las vidas
-	ScoreUpdate();
-	LifeUpdate();
+	for (int i = 0; i < enemies.size(); i++) // Recorre el vector de enemigos
+	{
+		if (enemies[i]->IsAbove(playerPos.x, playerPos.y)) // Verifica si el jugador hizo clic sobre un enemigo
+		{
+			if (enemies[i]->IsInnocent())
+			{
+				// Si el enemigo es inocente, resta un punto y una vida
+				_score--;
+				_lifes--;
+				LifeUpdate();
+				ScoreUpdate();
+			}
+			else
+			{
+			    // Si el enemigo no es inocente, suma un punto
+				_score++;
+				ScoreUpdate();
+			}
+
+			enemies.erase(enemies.begin() + i); // Elimina al enemigo del vector
+			audioManager.PlayGunShot(); // Reproduce el sonido de disparo
+
+			break; // Salimos del bucle, ya que solo puede haber un enemigo por clic
+		}
+	}
 }
 
 void Game::ShotAtPlayer() // Función para manejar los disparos al jugador
