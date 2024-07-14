@@ -26,6 +26,8 @@ private: // Miembros privados, accesibles solo dentro de la clase
 	InstructionScreen* _inst_Screen; // Puntero al objeto InstructionScreen
 	Sprite* saloon; // Sprite del saloon
 	Texture* saloonTexture; // Textura del saloon
+	Sprite* wildGunman;
+	Texture* wildGunmanTexture;
 
 	Time gameTime, delayOfEnemies;
 	Clock clock;

@@ -6,8 +6,14 @@ class AudioManager
 private:
 	// Declaración de los objetos de sonido y música
 	Sound gunShotSound;
+	Sound menuSound;
+	Sound youWinSound;
+	Sound youLoseSound;
 
 	SoundBuffer gunShotBuffer;
+	SoundBuffer menuSoundBuffer;
+	SoundBuffer youWinBuffer;
+	SoundBuffer youLoseBuffer;
 
 	Music music;
 public:
@@ -16,4 +22,7 @@ public:
 	
 	// Funciones para reproducir los diferentes sonidos
 	void PlayGunShot();
+	void PlayMenuMusic();
+	void PlayWin();
+	void PlayLose();
 };

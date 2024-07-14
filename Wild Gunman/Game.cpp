@@ -28,6 +28,12 @@ Game::Game() // Constructor de la clase Game
 	saloon->setTexture(*saloonTexture);
 	saloon->setPosition(0.0, 100.0);
 
+	wildGunmanTexture = new Texture;
+	wildGunman = new Sprite;
+	wildGunmanTexture->loadFromFile("Assets/imagenes/gunman_texto.png");
+	wildGunman->setTexture(*wildGunmanTexture);
+	wildGunman->setPosition(310.0, 25.0);
+
 	// Carga las fuentes y configura los textos
 	_font.loadFromFile("Assets/font/RioGrande.ttf");
 	_textScore.setFont(_font);
@@ -60,8 +66,8 @@ Game::Game() // Constructor de la clase Game
 void Game::Loop() // Función principal del bucle del juego
 {
 
+	audioManager.PlayMenuMusic();
 	_inst_Screen->Show(_wnd); // Muestra la pantalla de instrucciones
-
 	while (_wnd->isOpen() && !_GameOver) // Entra en el bucle principal del juego
 	{
 		DrawGame(); // Dibuja los elementos del juego
@@ -159,26 +165,18 @@ void Game::GameOverConditions() // Función para verificar las condiciones de fin
 	{
 		_YouWin = true;
 		_GameOver = true;
+		audioManager.PlayWin();
+		_wnd->draw(_textWin);
 	}
 	// Verifica si el jugador ha perdido
 	else if (_lifes <= 0)
 	{
 		_GameOver = true;
+		audioManager.PlayLose();
+		_wnd->draw(_textGameOver);
 	}
 
-	// Actualiza el estado del juego
-	if (_GameOver)
-	{
-		if (_YouWin)
-		{
-			_wnd->draw(_textWin);
-		}
-		else
-		{
-			_wnd->draw(_textGameOver);
-		}
-		FinalScore();
-	}
+	FinalScore();
 }
 
 void Game::LifeUpdate() // Función para actualizar las vidas
@@ -239,6 +237,7 @@ void Game::ShotAtPlayer() // Función para manejar los disparos al jugador
 void Game::DrawGame() // Función para dibujar los elementos del juego
 {
 	_wnd->clear();
+	_wnd->draw(*wildGunman);
 
 	// Dibuja el enemigo actual
 	if (enemiesCounter < enemies.size() && enemies[enemiesCounter]->UpdateEnemy(clock.restart()))
@@ -300,6 +299,8 @@ Game::~Game() // Destructor de la clase Game
 {
 
 	// Libera la memoria ocupada por los objetos
+	delete wildGunman;
+	delete wildGunmanTexture;
 	delete crosshair;
 	delete saloon;
 	delete saloonTexture;
